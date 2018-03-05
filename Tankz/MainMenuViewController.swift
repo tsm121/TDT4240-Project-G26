@@ -25,6 +25,8 @@ class MainMenuViewController: UIViewController {
         super.viewWillAppear(animated)
         //Hide navigation bar from MainMenuViewController
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        //Remove subviews from stack
+        self.navigationController?.popToRootViewController(animated: false)
 
     }
 

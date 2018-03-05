@@ -69,7 +69,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Exit game"/>
                                 <connections>
-                                    <segue destination="D9A-YS-uel" kind="show" id="NIf-HQ-LTt"/>
+                                    <segue destination="D9A-YS-uel" kind="show" identifier="exitGameSegue" animates="NO" id="NIf-HQ-LTt"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -79,7 +79,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B8E-V6-Tyc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="868.51574212893559" y="2053.5999999999999"/>
+            <point key="canvasLocation" x="894" y="2044"/>
         </scene>
         <!--Game Lobby View Controller-->
         <scene sceneID="xZO-2E-HTE">
@@ -111,7 +111,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u5u-aG-k7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="869" y="1134"/>
+            <point key="canvasLocation" x="894" y="1134"/>
         </scene>
         <!--Join Game View Controller-->
         <scene sceneID="wUl-wB-dbf">
