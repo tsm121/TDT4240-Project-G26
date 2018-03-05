@@ -10,6 +10,8 @@ import UIKit
 
 class GameLobbyViewController: UIViewController {
 
+    let multiplayerManager = MultiplayerManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
