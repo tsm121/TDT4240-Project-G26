@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="D9A-YS-uel">
-    <device id="retina4_7" orientation="landscape">
+    <device id="retina5_5" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -9,59 +9,87 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="WarWound.otf">
+            <string>WarWound</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Main Menu View Controller-->
         <scene sceneID="gbo-Rf-n9x">
             <objects>
                 <viewController id="MSC-9b-YLM" customClass="MainMenuViewController" customModule="Tankz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CWc-av-hXC">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13h-ju-WiR">
-                                <rect key="frame" x="294" y="210" width="80" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Scoreboard"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13h-ju-WiR">
+                                <rect key="frame" x="293" y="227" width="150" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Scoreboard">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" white="0.3478732638888889" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlS-k2-noY">
-                                <rect key="frame" x="298.5" y="172" width="71" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Join game"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlS-k2-noY">
+                                <rect key="frame" x="293" y="187" width="150" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Join game">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <segue destination="lRx-7X-hLK" kind="show" identifier="joinGameSegue" id="lbd-O2-kn7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ikZ-Rq-tTL">
-                                <rect key="frame" x="289" y="134" width="88" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Create game"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Tankz " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vt6-gS-Piu">
+                                <rect key="frame" x="283" y="51" width="171" height="53"/>
+                                <fontDescription key="fontDescription" name="WarWound" family="War Wound" pointSize="50"/>
+                                <color key="textColor" red="0.30588235294117649" green="0.38823529411764707" blue="0.29803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ikZ-Rq-tTL">
+                                <rect key="frame" x="293" y="147" width="150" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Create game">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <segue destination="usC-V1-22A" kind="show" identifier="createGameSegue" id="IsV-7P-a5j"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tankz" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vt6-gS-Piu">
-                                <rect key="frame" x="311" y="20" width="45" height="20.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ikZ-Rq-tTL" firstAttribute="centerX" secondItem="CWc-av-hXC" secondAttribute="centerX" id="09V-ke-DRT"/>
+                            <constraint firstItem="PlS-k2-noY" firstAttribute="centerX" secondItem="CWc-av-hXC" secondAttribute="centerX" id="27v-yO-Cgk"/>
+                            <constraint firstItem="13h-ju-WiR" firstAttribute="centerX" secondItem="CWc-av-hXC" secondAttribute="centerX" id="2dz-8h-CAw"/>
+                            <constraint firstItem="vt6-gS-Piu" firstAttribute="centerY" secondItem="CWc-av-hXC" secondAttribute="centerY" constant="-130" id="4gU-Vd-3lA" userLabel="Tankz.centerY = centerY - 100"/>
+                            <constraint firstItem="ikZ-Rq-tTL" firstAttribute="centerY" secondItem="CWc-av-hXC" secondAttribute="centerY" constant="-40" id="54n-Mb-gV0"/>
+                            <constraint firstItem="PlS-k2-noY" firstAttribute="centerY" secondItem="CWc-av-hXC" secondAttribute="centerY" id="HGr-Mn-kKy"/>
+                            <constraint firstItem="13h-ju-WiR" firstAttribute="centerY" secondItem="CWc-av-hXC" secondAttribute="centerY" constant="40" id="Ijn-nf-Ydp"/>
+                            <constraint firstItem="vt6-gS-Piu" firstAttribute="centerX" secondItem="CWc-av-hXC" secondAttribute="centerX" id="eOr-jQ-joD"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="J2c-Ja-6wO"/>
                     </view>
                     <navigationItem key="navigationItem" id="q9R-br-efc"/>
+                    <connections>
+                        <outlet property="createGameBtn" destination="ikZ-Rq-tTL" id="t7e-rl-ygM"/>
+                        <outlet property="joinGameBtn" destination="PlS-k2-noY" id="Dz1-oG-THa"/>
+                        <outlet property="scoreboardBtn" destination="13h-ju-WiR" id="ji4-l3-SZR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6T1-I9-ajx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="471" y="222"/>
+            <point key="canvasLocation" x="470.91454272863569" y="221.59999999999999"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="VlA-3k-qfo">
             <objects>
                 <viewController id="f3q-Dh-8gc" customClass="GameViewController" customModule="Tankz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dUg-iJ-sHi">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aeq-q2-daS">
@@ -86,7 +114,7 @@
             <objects>
                 <viewController id="usC-V1-22A" customClass="GameLobbyViewController" customModule="Tankz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EUp-ct-p3c">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lobby" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xfr-9v-jNw">
@@ -118,7 +146,7 @@
             <objects>
                 <viewController id="lRx-7X-hLK" customClass="JoinGameViewController" customModule="Tankz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dOT-pK-XGW">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4NS-J5-2yo">
@@ -144,7 +172,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="D9A-YS-uel" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WGc-7K-Alf">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="32"/>
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -158,6 +186,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="aHV-xo-nWr"/>
+        <segue reference="IsV-7P-a5j"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -9,11 +9,26 @@
 import UIKit
 
 class MainMenuViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.assignbackground()
+
 
         // Do any additional setup after loading the view.
+    }
+    
+    func assignbackground(){
+        let background = UIImage(named: "MainMenuBackground.png")
+        
+        var imageView : UIImageView!
+        imageView = UIImageView(frame: view.bounds)
+        imageView.contentMode =  UIViewContentMode.scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = background
+        imageView.center = view.center
+        view.addSubview(imageView)
+        self.view.sendSubview(toBack: imageView)
     }
 
     override func didReceiveMemoryWarning() {
