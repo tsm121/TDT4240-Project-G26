@@ -28,6 +28,12 @@ class GameViewController: UIViewController {
         }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //Hide navigation bar from MainMenuViewController
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
