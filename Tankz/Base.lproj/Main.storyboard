@@ -116,10 +116,10 @@
             </objects>
             <point key="canvasLocation" x="869" y="1134"/>
         </scene>
-        <!--View Controller-->
+        <!--Scoreboard View Controller-->
         <scene sceneID="FJO-z2-Dpi">
             <objects>
-                <viewController id="7RH-Jh-Bit" sceneMemberID="viewController">
+                <viewController id="7RH-Jh-Bit" customClass="ScoreboardViewController" customModule="Tankz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="at0-yW-lYk">
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
