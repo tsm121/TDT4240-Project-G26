@@ -19,6 +19,7 @@
 		1B6E2392204DA55D00138EDA /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E2391204DA55D00138EDA /* MainMenuViewController.swift */; };
 		1B6E2394204DA91C00138EDA /* JoinGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E2393204DA91C00138EDA /* JoinGameViewController.swift */; };
 		1B6E2399204DC46200138EDA /* WarWound.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1B6E2398204DC46200138EDA /* WarWound.otf */; };
+		1BD8A5AD204EA7CD00104DEC /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8A5AC204EA7CD00104DEC /* GameTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		1B6E2391204DA55D00138EDA /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		1B6E2393204DA91C00138EDA /* JoinGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGameViewController.swift; sourceTree = "<group>"; };
 		1B6E2398204DC46200138EDA /* WarWound.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = WarWound.otf; sourceTree = "<group>"; };
+		1BD8A5AC204EA7CD00104DEC /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 		1B328A32204D71C500B77F10 /* Tankz */ = {
 			isa = PBXGroup;
 			children = (
+				1BD8A5AC204EA7CD00104DEC /* GameTableViewCell.swift */,
 				1B328A33204D71C500B77F10 /* AppDelegate.swift */,
 				1B328A35204D71C500B77F10 /* GameScene.sks */,
 				1B328A37204D71C500B77F10 /* Actions.sks */,
@@ -168,6 +171,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BD8A5AD204EA7CD00104DEC /* GameTableViewCell.swift in Sources */,
 				1B328A3A204D71C500B77F10 /* GameScene.swift in Sources */,
 				1B6E2392204DA55D00138EDA /* MainMenuViewController.swift in Sources */,
 				1B6E2390204DA52200138EDA /* GameLobbyViewController.swift in Sources */,
