@@ -14,6 +14,7 @@ class GameLobbyViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        view.accessibilityIdentifier = "gameLobbyView"
     }
 
     override func didReceiveMemoryWarning() {
