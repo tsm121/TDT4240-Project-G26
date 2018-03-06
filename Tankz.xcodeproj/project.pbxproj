@@ -20,6 +20,7 @@
 		1B6E2394204DA91C00138EDA /* JoinGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E2393204DA91C00138EDA /* JoinGameViewController.swift */; };
 		1B6E2399204DC46200138EDA /* WarWound.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1B6E2398204DC46200138EDA /* WarWound.otf */; };
 		1BD8A5AD204EA7CD00104DEC /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8A5AC204EA7CD00104DEC /* GameTableViewCell.swift */; };
+		1BD8A5AF204ED62A00104DEC /* LobbyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8A5AE204ED62A00104DEC /* LobbyTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		1B6E2393204DA91C00138EDA /* JoinGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGameViewController.swift; sourceTree = "<group>"; };
 		1B6E2398204DC46200138EDA /* WarWound.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = WarWound.otf; sourceTree = "<group>"; };
 		1BD8A5AC204EA7CD00104DEC /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
+		1BD8A5AE204ED62A00104DEC /* LobbyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 		1B328A32204D71C500B77F10 /* Tankz */ = {
 			isa = PBXGroup;
 			children = (
+				1BD8A5AE204ED62A00104DEC /* LobbyTableViewCell.swift */,
 				1BD8A5AC204EA7CD00104DEC /* GameTableViewCell.swift */,
 				1B328A33204D71C500B77F10 /* AppDelegate.swift */,
 				1B328A35204D71C500B77F10 /* GameScene.sks */,
@@ -177,6 +180,7 @@
 				1B6E2390204DA52200138EDA /* GameLobbyViewController.swift in Sources */,
 				1B328A3C204D71C500B77F10 /* GameViewController.swift in Sources */,
 				1B6E2394204DA91C00138EDA /* JoinGameViewController.swift in Sources */,
+				1BD8A5AF204ED62A00104DEC /* LobbyTableViewCell.swift in Sources */,
 				1B328A34204D71C500B77F10 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
