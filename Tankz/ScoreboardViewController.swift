@@ -8,14 +8,42 @@
 
 import UIKit
 
-class ScoreboardViewController: UIViewController {
-
+class ScoreboardViewController: UIViewController, UITableViewDataSource {
+    @IBOutlet weak var scoreboardTable: UITableView!
+    private var playerScores: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.scoreboardTable.dataSource = self
+        
+        playerScores.append("8")
+        playerScores.append("7")
+        playerScores.append("3")
+        playerScores.append("2")
+        playerScores.append("5")
+        
         // Do any additional setup after loading the view.
     }
-
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return playerScores.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = scoreboardTable.dequeueReusableCell(withIdentifier: "playerScoreCell") as! ScoreTableViewCell
+    
+    cell.opponentNameLabel.text = "xXDestroyerOfWorldzXx"
+    cell.scoreLabel.text = "42"
+    
+    return cell
+    
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
