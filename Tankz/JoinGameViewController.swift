@@ -10,13 +10,17 @@ import UIKit
 
 class JoinGameViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var unHostBtn: UIButton!
+    @IBOutlet weak var hostBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var refreshBtn: UIButton!
     
-    private var data: [String] = []
+    public var data: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //Test data
         data.append("Vald Bagina")
         data.append("xXPussySlayerXx")
         data.append("ibeatanorexia311")
@@ -34,6 +38,19 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func unHostAction(_ sender: Any) {
+    }
+    
+    @IBAction func hostAction(_ sender: Any) {
+    }
+    
+    //Action for refreshing listView based on availiable hosts
+    @IBAction func refreshListView(_ sender: Any) {
+        let alertController = UIAlertController(title: "RefreshBtn", message: "You pressed the refresh button", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+        alertController.addAction(alertAction)
+        present(alertController, animated: true, completion: nil)
+    }
     //Number of section in the tableView
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -47,29 +64,23 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //Get reusable cell with ID and cast as GameTableViewCell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier") as! GameTableViewCell //1.
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier") as! GameTableViewCell
         
-        let text = data[indexPath.row] //2.
+        let text = data[indexPath.row]
         cell.hostNameLabel.text = text
         cell.numPlayersLabel.text = "x/2"
         if indexPath.row % 2 == 0 {
-            cell.contentView.backgroundColor = UIColor.red
+            cell.contentView.backgroundColor = UIColor(named: "militaryGreenDark")
         }else {
-            cell.contentView.backgroundColor = UIColor.lightGray
+            cell.contentView.backgroundColor = UIColor(named: "militaryGreenLight")
         }
         
-        return cell //4.
+        return cell
     }
     
+    //Action based on user selection in tableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let alertController = UIAlertController(title: "Hint", message: "You have selected row \(indexPath.row).", preferredStyle: .alert)
-        
-        let alertAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-        
-        alertController.addAction(alertAction)
-        
-        present(alertController, animated: true, completion: nil)
+        performSegue(withIdentifier: "connectToGameSegue", sender: self)
     }
 
     override func didReceiveMemoryWarning() {
