@@ -14,6 +14,7 @@ class MainMenuViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        view.accessibilityIdentifier = "mainMenuView"
     }
 
     override func didReceiveMemoryWarning() {

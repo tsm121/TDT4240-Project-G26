@@ -32,6 +32,7 @@ class GameViewController: UIViewController {
             view.showsNodeCount = false
             view.showsPhysics = true
         }
+        view.accessibilityIdentifier = "gameView"
     }
 
     override var shouldAutorotate: Bool {

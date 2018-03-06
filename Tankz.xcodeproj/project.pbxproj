@@ -21,7 +21,23 @@
 		5BD23C47204ECB9200223D09 /* TankFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD23C46204ECB9200223D09 /* TankFactory.swift */; };
 		5BD23C49204ECD4700223D09 /* AmmoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD23C48204ECD4700223D09 /* AmmoFactory.swift */; };
 		5BD23C4B204ECF8800223D09 /* MapFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD23C4A204ECF8800223D09 /* MapFactory.swift */; };
+		916FC9E8204EC12D00855660 /* ScoreboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916FC9E7204EC12D00855660 /* ScoreboardViewController.swift */; };
+		5BD23C35204DB76400223D09 /* TankzUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD23C34204DB76400223D09 /* TankzUITests.swift */; };
+		5BD23C3F204DC19700223D09 /* XCUIApplication+JoinGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD23C3E204DC19700223D09 /* XCUIApplication+JoinGame.swift */; };
+		5BD23C41204E9D9200223D09 /* XCUIApplication+MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD23C40204E9D9200223D09 /* XCUIApplication+MainMenu.swift */; };
+		5BD23C43204EA0A200223D09 /* XCUIApplication+Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD23C42204EA0A200223D09 /* XCUIApplication+Game.swift */; };
+		5BD23C45204EA36D00223D09 /* XCUIApplication+GameLobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD23C44204EA36D00223D09 /* XCUIApplication+GameLobby.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5BD23C37204DB76400223D09 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B328A28204D71C400B77F10 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B328A2F204D71C500B77F10;
+			remoteInfo = Tankz;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1B328A30204D71C500B77F10 /* Tankz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tankz.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,10 +56,25 @@
 		5BD23C46204ECB9200223D09 /* TankFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TankFactory.swift; sourceTree = "<group>"; };
 		5BD23C48204ECD4700223D09 /* AmmoFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmmoFactory.swift; sourceTree = "<group>"; };
 		5BD23C4A204ECF8800223D09 /* MapFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFactory.swift; sourceTree = "<group>"; };
+		916FC9E7204EC12D00855660 /* ScoreboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreboardViewController.swift; sourceTree = "<group>"; };
+		5BD23C32204DB76400223D09 /* TankzUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TankzUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5BD23C34204DB76400223D09 /* TankzUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TankzUITests.swift; sourceTree = "<group>"; };
+		5BD23C36204DB76400223D09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5BD23C3E204DC19700223D09 /* XCUIApplication+JoinGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+JoinGame.swift"; sourceTree = "<group>"; };
+		5BD23C40204E9D9200223D09 /* XCUIApplication+MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+MainMenu.swift"; sourceTree = "<group>"; };
+		5BD23C42204EA0A200223D09 /* XCUIApplication+Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Game.swift"; sourceTree = "<group>"; };
+		5BD23C44204EA36D00223D09 /* XCUIApplication+GameLobby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+GameLobby.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1B328A2D204D71C500B77F10 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5BD23C2F204DB76400223D09 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -57,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				1B328A32204D71C500B77F10 /* Tankz */,
+				5BD23C33204DB76400223D09 /* TankzUITests */,
 				1B328A31204D71C500B77F10 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				1B328A30204D71C500B77F10 /* Tankz.app */,
+				5BD23C32204DB76400223D09 /* TankzUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,6 +115,7 @@
 				5BD23C48204ECD4700223D09 /* AmmoFactory.swift */,
 				1B328A3D204D71C500B77F10 /* Main.storyboard */,
 				1B6E2393204DA91C00138EDA /* JoinGameViewController.swift */,
+				916FC9E7204EC12D00855660 /* ScoreboardViewController.swift */,
 				1B6E2391204DA55D00138EDA /* MainMenuViewController.swift */,
 				1B6E238F204DA52200138EDA /* GameLobbyViewController.swift */,
 				1B328A40204D71C500B77F10 /* Assets.xcassets */,
@@ -89,6 +123,19 @@
 				1B328A45204D71C500B77F10 /* Info.plist */,
 			);
 			path = Tankz;
+			sourceTree = "<group>";
+		};
+		5BD23C33204DB76400223D09 /* TankzUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5BD23C34204DB76400223D09 /* TankzUITests.swift */,
+				5BD23C36204DB76400223D09 /* Info.plist */,
+				5BD23C3E204DC19700223D09 /* XCUIApplication+JoinGame.swift */,
+				5BD23C44204EA36D00223D09 /* XCUIApplication+GameLobby.swift */,
+				5BD23C40204E9D9200223D09 /* XCUIApplication+MainMenu.swift */,
+				5BD23C42204EA0A200223D09 /* XCUIApplication+Game.swift */,
+			);
+			path = TankzUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -111,6 +158,24 @@
 			productReference = 1B328A30204D71C500B77F10 /* Tankz.app */;
 			productType = "com.apple.product-type.application";
 		};
+		5BD23C31204DB76400223D09 /* TankzUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5BD23C3B204DB76400223D09 /* Build configuration list for PBXNativeTarget "TankzUITests" */;
+			buildPhases = (
+				5BD23C2E204DB76400223D09 /* Sources */,
+				5BD23C2F204DB76400223D09 /* Frameworks */,
+				5BD23C30204DB76400223D09 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5BD23C38204DB76400223D09 /* PBXTargetDependency */,
+			);
+			name = TankzUITests;
+			productName = TankzUITests;
+			productReference = 5BD23C32204DB76400223D09 /* TankzUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -124,6 +189,11 @@
 					1B328A2F204D71C500B77F10 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+					};
+					5BD23C31204DB76400223D09 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 1B328A2F204D71C500B77F10;
 					};
 				};
 			};
@@ -141,6 +211,7 @@
 			projectRoot = "";
 			targets = (
 				1B328A2F204D71C500B77F10 /* Tankz */,
+				5BD23C31204DB76400223D09 /* TankzUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -158,6 +229,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5BD23C30204DB76400223D09 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -167,6 +245,7 @@
 			files = (
 				5BD23C4B204ECF8800223D09 /* MapFactory.swift in Sources */,
 				5BD23C47204ECB9200223D09 /* TankFactory.swift in Sources */,
+				916FC9E8204EC12D00855660 /* ScoreboardViewController.swift in Sources */,
 				1B328A3A204D71C500B77F10 /* GameScene.swift in Sources */,
 				1B6E2392204DA55D00138EDA /* MainMenuViewController.swift in Sources */,
 				1B6E2390204DA52200138EDA /* GameLobbyViewController.swift in Sources */,
@@ -177,7 +256,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5BD23C2E204DB76400223D09 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5BD23C45204EA36D00223D09 /* XCUIApplication+GameLobby.swift in Sources */,
+				5BD23C3F204DC19700223D09 /* XCUIApplication+JoinGame.swift in Sources */,
+				5BD23C35204DB76400223D09 /* TankzUITests.swift in Sources */,
+				5BD23C43204EA0A200223D09 /* XCUIApplication+Game.swift in Sources */,
+				5BD23C41204E9D9200223D09 /* XCUIApplication+MainMenu.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5BD23C38204DB76400223D09 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1B328A2F204D71C500B77F10 /* Tankz */;
+			targetProxy = 5BD23C37204DB76400223D09 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		1B328A3D204D71C500B77F10 /* Main.storyboard */ = {
@@ -334,6 +433,34 @@
 			};
 			name = Release;
 		};
+		5BD23C39204DB76400223D09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TankzUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = TDT4240G26.TankzUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Tankz;
+			};
+			name = Debug;
+		};
+		5BD23C3A204DB76400223D09 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TankzUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = TDT4240G26.TankzUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Tankz;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -351,6 +478,15 @@
 			buildConfigurations = (
 				1B328A49204D71C500B77F10 /* Debug */,
 				1B328A4A204D71C500B77F10 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5BD23C3B204DB76400223D09 /* Build configuration list for PBXNativeTarget "TankzUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5BD23C39204DB76400223D09 /* Debug */,
+				5BD23C3A204DB76400223D09 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
