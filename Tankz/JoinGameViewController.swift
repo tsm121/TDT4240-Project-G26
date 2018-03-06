@@ -37,7 +37,7 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
         
         // Do any additional setup after loading the view.
     }
-    
+    //For demo purpose
     @IBAction func unHostAction(_ sender: Any) {
     }
     
