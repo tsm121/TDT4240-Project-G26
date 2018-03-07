@@ -117,14 +117,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uB1-aD-1dO">
-                                <rect key="frame" x="20" y="364" width="123" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Go to gameScene"/>
-                                <connections>
-                                    <segue destination="f3q-Dh-8gc" kind="show" identifier="startGameSegue" id="vuO-js-pWY"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eUB-lh-BvB">
                                 <rect key="frame" x="68" y="57" width="340" height="130"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -175,11 +167,28 @@
                                         <color key="backgroundColor" name="militaryGreenLight"/>
                                         <connections>
                                             <outlet property="playerNameLabel" destination="wHx-Re-YbW" id="ASn-r3-WvP"/>
+                                            <outlet property="readyStatusIcon" destination="OGV-I1-OSQ" id="Nek-K4-35N"/>
                                             <outlet property="readyStatusLabel" destination="glm-Gc-Xhj" id="sVZ-Yo-Sch"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Zf-he-YlX">
+                                <rect key="frame" x="109" y="330" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="READY"/>
+                                <connections>
+                                    <action selector="readyBtn:" destination="usC-V1-22A" eventType="touchUpInside" id="2on-Dx-n7L"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uB1-aD-1dO">
+                                <rect key="frame" x="593" y="364" width="123" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Go to gameScene"/>
+                                <connections>
+                                    <segue destination="f3q-Dh-8gc" kind="show" identifier="startGameSegue" id="vuO-js-pWY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" name="groundBrown"/>
                         <viewLayoutGuide key="safeArea" id="tqF-kW-cHj"/>
@@ -401,9 +410,6 @@
     <resources>
         <image name="checkmarkIcon" width="256" height="256"/>
         <image name="refreshIcon" width="48" height="48"/>
-        <namedColor name="groundBrown">
-            <color red="0.40400001406669617" green="0.33700001239776611" blue="0.29800000786781311" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="groundBrown">
             <color red="0.40400001406669617" green="0.33700001239776611" blue="0.29800000786781311" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
