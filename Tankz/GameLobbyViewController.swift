@@ -14,6 +14,10 @@ class GameLobbyViewController: UIViewController, UITableViewDataSource {
     let multiplayerManager = Multiplayer()
     
     private var lobbyUsers: [String] = []
+    
+    override func viewWillAppear(_ animated: Bool) {
+        Multiplayer.shared.advertiseAsHost()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,6 +29,10 @@ class GameLobbyViewController: UIViewController, UITableViewDataSource {
 
         // Do any additional setup after loading the view.
         view.accessibilityIdentifier = "gameLobbyView"
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        Multiplayer.shared.ceaseAdvertisingAsHost()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

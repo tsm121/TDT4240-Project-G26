@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
 class JoinGameViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -17,20 +18,19 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
     
     public var data: [String] = []
     
+    override func viewWillAppear(_ animated: Bool) {
+        Multiplayer.shared.lookForGames()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.accessibilityIdentifier = "joinGameView"
 
-        //Test data
-        data.append("Vald Bagina")
-        data.append("xXPussySlayerXx")
-        data.append("ibeatanorexia311")
-        data.append("YoMama8932")
-        data.append("Hairy Pickle")
-        data.append("Ronald McDonald")
-        data.append("Slaughterslut")
-        data.append("giant 8llllllD")
+        // Load data
+        data = Multiplayer.shared.getGames().map { game in game.displayName }
+        
+        
 
         
         //Set datasource and delegate for table
@@ -38,6 +38,10 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.delegate = self
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        Multiplayer.shared.ceaseLookingForGames()
     }
     //For demo purpose
     @IBAction func unHostAction(_ sender: Any) {
@@ -48,6 +52,7 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
     
     //Action for refreshing listView based on availiable hosts
     @IBAction func refreshListView(_ sender: Any) {
+        data = Multiplayer.shared.getGames().map { game in game.displayName }
         let alertController = UIAlertController(title: "RefreshBtn", message: "You pressed the refresh button", preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
         alertController.addAction(alertAction)
