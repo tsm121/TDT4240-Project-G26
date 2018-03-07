@@ -2,7 +2,7 @@
 //  TankzUITests.swift
 //  TankzUITests
 //
-//  Created by Martin Langmo Karlstrøm on 05.03.2018.
+//  Created by Martin Langmo Karlstrøm on 07.03.2018.
 //  Copyright © 2018 TDT4240-Group26. All rights reserved.
 //
 
@@ -25,49 +25,37 @@ class TankzUITests: XCTestCase {
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-        
         super.tearDown()
     }
     
+    func testExample() {
+        // Use recording to get started writing UI tests.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+    
     func testMainMenu() {
+        
         let app = XCUIApplication()
-        XCTAssertTrue(app.isDisplayingMainMenu)
+        
+        app/*@START_MENU_TOKEN@*/.otherElements["mainMenuView"].buttons["Create game"]/*[[".otherElements[\"mainMenuView\"].buttons[\"Create game\"]",".buttons[\"Create game\"]"],[[[-1,1],[-1,0]]],[1]]@END_MENU_TOKEN@*/.tap()
+        app.navigationBars["Tankz.GameLobbyView"].buttons["Back"].tap()
+        
+        app/*@START_MENU_TOKEN@*/.otherElements["mainMenuView"].buttons["Join game"]/*[[".otherElements[\"mainMenuView\"].buttons[\"Join game\"]",".buttons[\"Join game\"]"],[[[-1,1],[-1,0]]],[1]]@END_MENU_TOKEN@*/.tap()
+        app.navigationBars["Tankz.JoinGameView"].buttons["Back"].tap()
+        
+        
     }
     
     func testJoinGameView() {
-        let app = XCUIApplication()
-        app.buttons["Join game"].tap()
-        XCTAssertTrue(app.isDisplayingJoinGame)
-        app.buttons["Join Game"].tap()
-        XCTAssertTrue(app.isDisplayingGameLobby)
-        app.buttons["Back"].tap()
-        app.buttons["Back"].tap()
-        XCTAssertTrue(app.isDisplayingMainMenu)
+        
     }
     
     func testGameView() {
-        let app = XCUIApplication()
-        app.buttons["Join game"].tap()
-        app.buttons["Join Game"].tap()
-        app.buttons["Go to gameScene"].tap()
-        XCTAssertTrue(app.isDisplayingGame)
-        app.buttons["Exit game"].tap()
-        XCTAssertTrue(app.isDisplayingMainMenu)
         
     }
     
     func testLobbyView() {
-        let app = XCUIApplication()
-        app.buttons["Join game"].tap()
-        app.buttons["Join Game"].tap()
-        XCTAssertTrue(app.isDisplayingGameLobby)
-        app.buttons["Back"].tap()
-        app.buttons["Back"].tap()
-        XCTAssertTrue(app.isDisplayingMainMenu)
+        
     }
-    
-    
-    
-
     
 }

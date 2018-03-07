@@ -30,6 +30,10 @@ class TankFactory {
      - parameter tanktype: From enum in GameScene (.smallTank, .bigTank, .funnyTank).
      - returns: SKShapenode, the generated tank.
     */
+    
+    let name = "TankFactory Inc."
+    var iHaveMadeSoManyTanks = 0
+    
     public func makeTank(tanktype: TankType) -> SKShapeNode {
         var tank : SKShapeNode
         switch tanktype {
@@ -40,6 +44,10 @@ class TankFactory {
         case .funnyTank:
             tank = FunnyTank().tank
         }
+        
+        iHaveMadeSoManyTanks += 1
+        
+        
         
         // Physics on the tank body.
         tank.physicsBody?.affectedByGravity = true
