@@ -10,8 +10,10 @@ import UIKit
 
 class GameLobbyViewController: UIViewController, UITableViewDataSource {
 
+    @IBOutlet weak var lobbyTable: UITableView!
     let multiplayerManager = Multiplayer()
     
+    private var lobbyUsers: [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         
