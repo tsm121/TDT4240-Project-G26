@@ -20,7 +20,6 @@ class Multiplayer : NSObject {
         super.init()
     }
     
-    
     lazy var session : MCSession = {
         let session = MCSession(peer: self.peerID, securityIdentity: nil, encryptionPreference: .required)
         session.delegate = self as? MCSessionDelegate
@@ -60,7 +59,13 @@ class Multiplayer : NSObject {
         self.browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 5)
     }
     
-    /* Mark as ready to play. */
+    /* todo(thurs): Send some data to the host and vice verca. */
+    
+    /* todo(thurs): Mark as ready to play. */
+    
+    /* todo(thurs): Handle leaving a game. */
+    
+    /* todo(thurs): Handle host disconnecting. */
 }
 
 extension Multiplayer : MCSessionDelegate {
