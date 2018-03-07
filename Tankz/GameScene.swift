@@ -28,7 +28,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var tankFactory : TankFactory!
     private var mapFactory : MapFactory!
-    private var tank : SKShapeNode!
+    private var tank1 : SKShapeNode!
+    private var tank2 : SKShapeNode!
     private var map : SKShapeNode!
     private var height : CGFloat!
     private var width : CGFloat!
@@ -48,9 +49,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Generate a tank from the factory.
         tankFactory = TankFactory()
-        tank = tankFactory.makeTank(tanktype: .bigTank)
-        self.addChild(tank)
+        tank1 = tankFactory.makeTank(tanktype: .bigTank, tankName: "Player 1")
+        placeTank(tank: tank1)
+        tank2 = tankFactory.makeTank(tanktype: .smallTank, tankName: "Player 2")
+        placeTank(tank: tank2)
         
+        self.addChild(tank1)
+        self.addChild(tank2)
+        
+    }
+    
+    func placeTank(tank: SKShapeNode) {
+        if tankFactory.iHaveMadeSoManyTanks == 1 {
+            tank.position = CGPoint(x: 100 + tank.frame.width/2,y: 400 + tank.frame.height/2)
+        } else if tankFactory.iHaveMadeSoManyTanks == 2 {
+            tank.position = CGPoint(x: self.frame.width - 100 - tank.frame.width/2,y: 400 + tank.frame.height/2)
+        }
     }
     
     // Called before each frame is rendered
