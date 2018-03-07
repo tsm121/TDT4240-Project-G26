@@ -12,9 +12,24 @@ class MainMenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.assignbackground()
+
 
         // Do any additional setup after loading the view.
         view.accessibilityIdentifier = "mainMenuView"
+    }
+    
+    func assignbackground(){
+        let background = UIImage(named: "MainMenuBackground.png")
+        
+        var imageView : UIImageView!
+        imageView = UIImageView(frame: view.bounds)
+        imageView.contentMode =  UIViewContentMode.scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = background
+        imageView.center = view.center
+        view.addSubview(imageView)
+        self.view.sendSubview(toBack: imageView)
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,6 +41,8 @@ class MainMenuViewController: UIViewController {
         super.viewWillAppear(animated)
         //Hide navigation bar from MainMenuViewController
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        //Remove subviews from stack
+        self.navigationController?.popToRootViewController(animated: false)
 
     }
 
