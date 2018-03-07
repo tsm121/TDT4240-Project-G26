@@ -53,11 +53,11 @@ class MapFactory {
         // Set name of ground. For testing.
         switch MapType {
         case .flat:
-            ground.name = "FlatGround"
+            shapeNode.name = "FlatGround"
         case .flatty:
-            ground.name = "FlattyGround"
+            shapeNode.name = "FlattyGround"
         case .hills:
-            ground.name = "HillsGround"
+            shapeNode.name = "HillsGround"
         }
         
         return shapeNode

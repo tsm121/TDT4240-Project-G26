@@ -24,7 +24,6 @@ extension UIColor {
         r.getRed(&r2, green: &g2, blue: &b2, alpha: &a2)
         
         return r1 == r2 && g1 == g2 && b1 == b2 && a1 == a2
-        
     }
 }
 
