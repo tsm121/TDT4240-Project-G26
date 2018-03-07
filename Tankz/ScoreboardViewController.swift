@@ -1,19 +1,17 @@
 //
-//  JoinGameViewController.swift
+//  ScoreboardViewController.swift
 //  Tankz
 //
-//  Created by Thomas Markussen on 05/03/2018.
+//  Created by Nikolai on 06/03/2018.
 //  Copyright © 2018 TDT4240-Group26. All rights reserved.
 //
 
 import UIKit
 
-class JoinGameViewController: UIViewController {
+class ScoreboardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.accessibilityIdentifier = "joinGameView"
 
         // Do any additional setup after loading the view.
     }

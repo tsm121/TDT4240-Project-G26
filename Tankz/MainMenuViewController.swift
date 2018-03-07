@@ -14,6 +14,7 @@ class MainMenuViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        view.accessibilityIdentifier = "mainMenuView"
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,12 +26,14 @@ class MainMenuViewController: UIViewController {
         super.viewWillAppear(animated)
         //Hide navigation bar from MainMenuViewController
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         //Show navigation bar when leaving MainMenuViewController
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+
     }
     
     /*
