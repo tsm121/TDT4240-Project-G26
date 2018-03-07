@@ -10,15 +10,15 @@ import SpriteKit
 
 class MapFactory {
     
-    let skScene : SKScene
+    let width : CGFloat
     
-    init(skScene: SKScene) {
-        self.skScene = skScene
+    init(skSceneWidth: CGFloat) {
+        self.width = skSceneWidth
     }
     
     func makeMap(MapType: MapType) -> SKShapeNode {
         
-        let interval = [0, skScene.size.width*(1/5), skScene.size.width*(2/5), skScene.size.width*(3/5), skScene.size.width*(4/5), skScene.size.width]
+        let interval = [0, width*(1/5), width*(2/5), width*(3/5), width*(4/5), width]
         var points = [CGPoint(x: Int(interval[0]), y: randHeight(maptype: MapType)),
                       CGPoint(x: Int(interval[1]), y: randHeight(maptype: MapType)),
                       CGPoint(x: Int(interval[2]), y: randHeight(maptype: MapType)),

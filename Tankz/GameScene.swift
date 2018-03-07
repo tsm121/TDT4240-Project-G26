@@ -1,16 +1,23 @@
 //
-//  Pong 9000^69
+//  GameScene.swift
+//  Tankz
+//
+//  Created by Thomas Markussen on 05/03/2018.
+//  Copyright © 2018 TDT4240-Group26. All rights reserved.
 //
 
 import SpriteKit
 import GameplayKit
 
+
+// Tank types.
 enum TankType {
     case smallTank
     case bigTank
     case funnyTank
 }
 
+// Map types.
 enum MapType {
     case flat
     case flatty
@@ -34,13 +41,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.createArea()
         
         // Generate the world map.
-        mapFactory = MapFactory(skScene: self)
+        mapFactory = MapFactory(skSceneWidth: CGFloat(self.size.width))
         map = mapFactory.makeMap(MapType: .hills)
         self.addChild(map)
         
         
         // Generate a tank from the factory.
-        tankFactory = TankFactory(skScene: self)
+        tankFactory = TankFactory()
         tank = tankFactory.makeTank(tanktype: .smallTank)
         self.addChild(tank)
         
@@ -64,7 +71,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsBody?.linearDamping = CGFloat(0)
         self.physicsBody!.categoryBitMask = 0
         self.physicsBody?.isDynamic = false
-        
     }
     
     func touchDown(atPoint pos : CGPoint) {
