@@ -15,6 +15,10 @@
 		1B328A3F204D71C500B77F10 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B328A3D204D71C500B77F10 /* Main.storyboard */; };
 		1B328A41204D71C500B77F10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B328A40204D71C500B77F10 /* Assets.xcassets */; };
 		1B328A44204D71C500B77F10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B328A42204D71C500B77F10 /* LaunchScreen.storyboard */; };
+		1B3E7C7F204FF66000744D17 /* MapFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3E7C7B204FF66000744D17 /* MapFactory.swift */; };
+		1B3E7C80204FF66000744D17 /* AmmoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3E7C7C204FF66000744D17 /* AmmoFactory.swift */; };
+		1B3E7C81204FF66000744D17 /* ScoreboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3E7C7D204FF66000744D17 /* ScoreboardViewController.swift */; };
+		1B3E7C82204FF66000744D17 /* TankFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3E7C7E204FF66000744D17 /* TankFactory.swift */; };
 		1B6E2390204DA52200138EDA /* GameLobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E238F204DA52200138EDA /* GameLobbyViewController.swift */; };
 		1B6E2392204DA55D00138EDA /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E2391204DA55D00138EDA /* MainMenuViewController.swift */; };
 		1B6E2394204DA91C00138EDA /* JoinGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E2393204DA91C00138EDA /* JoinGameViewController.swift */; };
@@ -51,6 +55,10 @@
 		1B328A40204D71C500B77F10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B328A43204D71C500B77F10 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B328A45204D71C500B77F10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1B3E7C7B204FF66000744D17 /* MapFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapFactory.swift; sourceTree = "<group>"; };
+		1B3E7C7C204FF66000744D17 /* AmmoFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmmoFactory.swift; sourceTree = "<group>"; };
+		1B3E7C7D204FF66000744D17 /* ScoreboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardViewController.swift; sourceTree = "<group>"; };
+		1B3E7C7E204FF66000744D17 /* TankFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TankFactory.swift; sourceTree = "<group>"; };
 		1B6E238F204DA52200138EDA /* GameLobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLobbyViewController.swift; sourceTree = "<group>"; };
 		1B6E2391204DA55D00138EDA /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		1B6E2393204DA91C00138EDA /* JoinGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGameViewController.swift; sourceTree = "<group>"; };
@@ -88,8 +96,6 @@
 			isa = PBXGroup;
 			children = (
 				1B328A32204D71C500B77F10 /* Tankz */,
-				5BD23C33204DB76400223D09 /* TankzUITests */,
-				5BD23C7F204F2A4000223D09 /* TankzUnitTests */,
 				1B328A31204D71C500B77F10 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,8 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				1B328A30204D71C500B77F10 /* Tankz.app */,
-				5BD23C32204DB76400223D09 /* TankzUITests.xctest */,
-				5BD23C7E204F2A4000223D09 /* TankzUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -107,19 +111,19 @@
 		1B328A32204D71C500B77F10 /* Tankz */ = {
 			isa = PBXGroup;
 			children = (
+				1B328A37204D71C500B77F10 /* Actions.sks */,
+				1B328A33204D71C500B77F10 /* AppDelegate.swift */,
 				1BD8A5AE204ED62A00104DEC /* LobbyTableViewCell.swift */,
 				1BD8A5AC204EA7CD00104DEC /* GameTableViewCell.swift */,
-				1B328A33204D71C500B77F10 /* AppDelegate.swift */,
+				1B3E7C7C204FF66000744D17 /* AmmoFactory.swift */,
+				1B3E7C7B204FF66000744D17 /* MapFactory.swift */,
+				1B3E7C7D204FF66000744D17 /* ScoreboardViewController.swift */,
+				1B3E7C7E204FF66000744D17 /* TankFactory.swift */,
 				1B328A35204D71C500B77F10 /* GameScene.sks */,
-				1B328A37204D71C500B77F10 /* Actions.sks */,
 				1B328A39204D71C500B77F10 /* GameScene.swift */,
 				1B328A3B204D71C500B77F10 /* GameViewController.swift */,
-				5BD23C46204ECB9200223D09 /* TankFactory.swift */,
-				5BD23C4A204ECF8800223D09 /* MapFactory.swift */,
-				5BD23C48204ECD4700223D09 /* AmmoFactory.swift */,
 				1B328A3D204D71C500B77F10 /* Main.storyboard */,
 				1B6E2393204DA91C00138EDA /* JoinGameViewController.swift */,
-				916FC9E7204EC12D00855660 /* ScoreboardViewController.swift */,
 				1B6E2391204DA55D00138EDA /* MainMenuViewController.swift */,
 				1B6E238F204DA52200138EDA /* GameLobbyViewController.swift */,
 				1B328A40204D71C500B77F10 /* Assets.xcassets */,
@@ -173,7 +177,6 @@
 			);
 			name = TankzUITests;
 			productName = TankzUITests;
-			productReference = 5BD23C32204DB76400223D09 /* TankzUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		5BD23C7D204F2A4000223D09 /* TankzUnitTests */ = {
@@ -191,7 +194,6 @@
 			);
 			name = TankzUnitTests;
 			productName = TankzUnitTests;
-			productReference = 5BD23C7E204F2A4000223D09 /* TankzUnitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -275,13 +277,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B3E7C7F204FF66000744D17 /* MapFactory.swift in Sources */,
 				1BD8A5AD204EA7CD00104DEC /* GameTableViewCell.swift in Sources */,
+				1B3E7C80204FF66000744D17 /* AmmoFactory.swift in Sources */,
 				1B328A3A204D71C500B77F10 /* GameScene.swift in Sources */,
 				1B6E2392204DA55D00138EDA /* MainMenuViewController.swift in Sources */,
 				1B6E2390204DA52200138EDA /* GameLobbyViewController.swift in Sources */,
 				1B328A3C204D71C500B77F10 /* GameViewController.swift in Sources */,
+				1B3E7C81204FF66000744D17 /* ScoreboardViewController.swift in Sources */,
 				1B6E2394204DA91C00138EDA /* JoinGameViewController.swift in Sources */,
 				1BD8A5AF204ED62A00104DEC /* LobbyTableViewCell.swift in Sources */,
+				1B3E7C82204FF66000744D17 /* TankFactory.swift in Sources */,
 				1B328A34204D71C500B77F10 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,11 +296,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BD23C45204EA36D00223D09 /* XCUIApplication+GameLobby.swift in Sources */,
-				5BD23C3F204DC19700223D09 /* XCUIApplication+JoinGame.swift in Sources */,
-				5BD23C35204DB76400223D09 /* TankzUITests.swift in Sources */,
-				5BD23C43204EA0A200223D09 /* XCUIApplication+Game.swift in Sources */,
-				5BD23C41204E9D9200223D09 /* XCUIApplication+MainMenu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,10 +303,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BD23C8D204F2AE000223D09 /* AmmoFactoryTests.swift in Sources */,
-				5BD23C91204F2B2E00223D09 /* MapFactoryTests.swift in Sources */,
-				5BD23C81204F2A4000223D09 /* TankzUnitTests.swift in Sources */,
-				5BD23C8F204F2B0C00223D09 /* TankFactoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
