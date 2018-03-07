@@ -27,6 +27,10 @@
 		1BD8A5AF204ED62A00104DEC /* LobbyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8A5AE204ED62A00104DEC /* LobbyTableViewCell.swift */; };
 		5B81FEBF20501C9D00E9F68F /* TankzUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B81FEBE20501C9D00E9F68F /* TankzUITests.swift */; };
 		5B81FECD20501D4700E9F68F /* TankzUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B81FECC20501D4700E9F68F /* TankzUnitTests.swift */; };
+		5B81FED520502AEE00E9F68F /* XCUIApplication+GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B81FED420502AEE00E9F68F /* XCUIApplication+GameView.swift */; };
+		5B81FED720502B4C00E9F68F /* XCUIApplication+MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B81FED620502B4C00E9F68F /* XCUIApplication+MainMenu.swift */; };
+		5B81FEDB20502BA700E9F68F /* XCUIApplication+GameLobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B81FEDA20502BA700E9F68F /* XCUIApplication+GameLobby.swift */; };
+		5B81FEDD20502BD700E9F68F /* XCUIApplication+JoinGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B81FEDC20502BD700E9F68F /* XCUIApplication+JoinGame.swift */; };
 		91AEA831204ED69D00130575 /* ScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AEA830204ED69D00130575 /* ScoreTableViewCell.swift */; };
 		F94366EB204DB88800D224A3 /* Multiplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94366EA204DB88800D224A3 /* Multiplayer.swift */; };
 /* End PBXBuildFile section */
@@ -75,6 +79,10 @@
 		5B81FECA20501D4700E9F68F /* TankzUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TankzUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B81FECC20501D4700E9F68F /* TankzUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TankzUnitTests.swift; sourceTree = "<group>"; };
 		5B81FECE20501D4700E9F68F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B81FED420502AEE00E9F68F /* XCUIApplication+GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+GameView.swift"; sourceTree = "<group>"; };
+		5B81FED620502B4C00E9F68F /* XCUIApplication+MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+MainMenu.swift"; sourceTree = "<group>"; };
+		5B81FEDA20502BA700E9F68F /* XCUIApplication+GameLobby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+GameLobby.swift"; sourceTree = "<group>"; };
+		5B81FEDC20502BD700E9F68F /* XCUIApplication+JoinGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+JoinGame.swift"; sourceTree = "<group>"; };
 		91AEA830204ED69D00130575 /* ScoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTableViewCell.swift; sourceTree = "<group>"; };
 		F94366EA204DB88800D224A3 /* Multiplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiplayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -164,6 +172,10 @@
 			isa = PBXGroup;
 			children = (
 				5B81FEBE20501C9D00E9F68F /* TankzUITests.swift */,
+				5B81FED420502AEE00E9F68F /* XCUIApplication+GameView.swift */,
+				5B81FED620502B4C00E9F68F /* XCUIApplication+MainMenu.swift */,
+				5B81FEDC20502BD700E9F68F /* XCUIApplication+JoinGame.swift */,
+				5B81FEDA20502BA700E9F68F /* XCUIApplication+GameLobby.swift */,
 				5B81FEC020501C9D00E9F68F /* Info.plist */,
 			);
 			path = TankzUITests;
@@ -336,7 +348,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B81FEDB20502BA700E9F68F /* XCUIApplication+GameLobby.swift in Sources */,
+				5B81FED520502AEE00E9F68F /* XCUIApplication+GameView.swift in Sources */,
 				5B81FEBF20501C9D00E9F68F /* TankzUITests.swift in Sources */,
+				5B81FED720502B4C00E9F68F /* XCUIApplication+MainMenu.swift in Sources */,
+				5B81FEDD20502BD700E9F68F /* XCUIApplication+JoinGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
