@@ -24,19 +24,13 @@ struct PhysicsCategory {
  */
 class TankFactory {
     
-    private let skScene: SKScene
-    
-    init(skScene: SKScene) {
-        self.skScene = skScene
-    }
-    
     /**
     Makes the specified tank.
      
      - parameter tanktype: From enum in GameScene (.smallTank, .bigTank, .funnyTank).
      - returns: SKShapenode, the generated tank.
     */
-    func makeTank(tanktype: TankType) -> SKShapeNode {
+    public func makeTank(tanktype: TankType) -> SKShapeNode {
         var tank : SKShapeNode
         switch tanktype {
         case .smallTank:
@@ -57,7 +51,6 @@ class TankFactory {
         tank.physicsBody!.categoryBitMask = PhysicsCategory.Tank
         tank.physicsBody!.collisionBitMask = PhysicsCategory.Edge | PhysicsCategory.Projectile
         tank.physicsBody?.usesPreciseCollisionDetection = true
-        
         tank.position = CGPoint(x: 300 + tank.frame.width/2,y: 400 + tank.frame.height/2)
         return tank
     }
