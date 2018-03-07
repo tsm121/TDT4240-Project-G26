@@ -13,7 +13,7 @@ class GameLobbyViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var lobbyTable: UITableView!
     let multiplayerManager = Multiplayer()
     
-    private var lobbyUsers: [String] = []
+    private var lobbyUsers: [Player] = []
     
     override func viewWillAppear(_ animated: Bool) {
         Multiplayer.shared.advertiseAsHost()
@@ -23,13 +23,19 @@ class GameLobbyViewController: UIViewController, UITableViewDataSource {
         
         self.lobbyTable.dataSource = self
         
-        lobbyUsers.append("Player1")
-        lobbyUsers.append("Player2")
-        
+        //DemoUsers
+        lobbyUsers.append(Player(ID: "1234"))
+        lobbyUsers.append(Player(ID: "5678"))
 
         // Do any additional setup after loading the view.
         view.accessibilityIdentifier = "gameLobbyView"
     }
+    
+    @IBAction func readyBtn(_ sender: Any) {
+        self.lobbyUsers[0].setReadyStatus()
+        self.lobbyTable.reloadData()
+    }
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         Multiplayer.shared.ceaseAdvertisingAsHost()
@@ -46,10 +52,21 @@ class GameLobbyViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = lobbyTable.dequeueReusableCell(withIdentifier: "lobbyCell") as! LobbyTableViewCell
         
-        let text = lobbyUsers[indexPath.row]
-        cell.playerNameLabel.text = text
-        cell.readyStatusLabel.text = "Not ready"
-        cell.readyStatusLabel.textColor = UIColor(named: "militaryRed")
+        let user = lobbyUsers[indexPath.row]
+        let cellText: String
+        cell.playerNameLabel.text = user.getPlayerName()
+        
+        //Set a given status label from ready to not ready, or vica versa
+        if user.getReadyStatus() {
+            cellText = "Not ready"
+            cell.readyStatusLabel.textColor = UIColor(named: "militaryRed")
+        } else {
+            cellText = "Ready"
+            cell.readyStatusLabel.textColor = UIColor(named: "lightGreen")
+        }
+        
+        cell.readyStatusLabel.text = cellText
+        cell.readyStatusIcon.isHidden = user.getReadyStatus()
 
         return cell
     }
