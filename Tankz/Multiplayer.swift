@@ -41,6 +41,7 @@ class Multiplayer : NSObject {
     
     /* Look for games. */
     func lookForGames() {
+        self.games = [MCPeerID]()
         self.browser.delegate = self
         self.browser.startBrowsingForPeers()
     }

@@ -8,6 +8,7 @@
 
 import UIKit
 import MultipeerConnectivity
+import Foundation
 
 class JoinGameViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -17,6 +18,7 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var refreshBtn: UIButton!
     
     public var data: [String] = []
+    private var reloadGamesList: Timer? = nil
     
     override func viewWillAppear(_ animated: Bool) {
         Multiplayer.shared.lookForGames()
@@ -24,13 +26,11 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.accessibilityIdentifier = "joinGameView"
-
         // Load data
         data = Multiplayer.shared.getGames().map { game in game.displayName }
-        
-        
+        reloadGamesList = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(JoinGameViewController.refreshListView), userInfo: nil, repeats: true)
+        view.accessibilityIdentifier = "joinGameView"
+
 
         
         //Set datasource and delegate for table
@@ -41,7 +41,10 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        reloadGamesList?.invalidate()
+        reloadGamesList = nil
         Multiplayer.shared.ceaseLookingForGames()
+        
     }
     //For demo purpose
     @IBAction func unHostAction(_ sender: Any) {
@@ -50,13 +53,11 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func hostAction(_ sender: Any) {
     }
     
+
     //Action for refreshing listView based on availiable hosts
     @IBAction func refreshListView(_ sender: Any) {
-        data = Multiplayer.shared.getGames().map { game in game.displayName }
-        let alertController = UIAlertController(title: "RefreshBtn", message: "You pressed the refresh button", preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-        alertController.addAction(alertAction)
-        present(alertController, animated: true, completion: nil)
+        self.data = Multiplayer.shared.getGames().map { game in game.displayName }
+        self.tableView.reloadData()
     }
     //Number of section in the tableView
     func numberOfSections(in tableView: UITableView) -> Int {
