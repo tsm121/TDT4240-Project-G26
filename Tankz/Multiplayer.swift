@@ -7,10 +7,13 @@ import MultipeerConnectivity
  */
 class Multiplayer : NSObject {
     
+    
+
     private let type = "tankz"
     private let peerID = MCPeerID(displayName: UIDevice.current.name)
     private let browser : MCNearbyServiceBrowser
     private let advertiser : MCNearbyServiceAdvertiser
+    static let shared: Multiplayer = Multiplayer()
     var games = [MCPeerID]()
     
     override init () {
@@ -38,6 +41,8 @@ class Multiplayer : NSObject {
     
     /* Look for games. */
     func lookForGames() {
+        self.games = [MCPeerID]()
+        self.browser.delegate = self
         self.browser.startBrowsingForPeers()
     }
     
