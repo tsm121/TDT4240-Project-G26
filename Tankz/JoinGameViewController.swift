@@ -17,7 +17,7 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var refreshBtn: UIButton!
     
-    public var data: [String] = []
+    public var data: [MCPeerID] = []
     private var reloadGamesList: Timer? = nil
     
     override func viewWillAppear(_ animated: Bool) {
@@ -26,12 +26,11 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         // Load data
-        data = Multiplayer.shared.getGames().map { game in game.displayName }
+        refreshListView(self)
         reloadGamesList = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(JoinGameViewController.refreshListView), userInfo: nil, repeats: true)
         view.accessibilityIdentifier = "joinGameView"
-
-
         
         //Set datasource and delegate for table
         tableView.dataSource = self
@@ -56,7 +55,7 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
 
     //Action for refreshing listView based on availiable hosts
     @IBAction func refreshListView(_ sender: Any) {
-        self.data = Multiplayer.shared.getGames().map { game in game.displayName }
+        self.data = Multiplayer.shared.getGames()
         self.tableView.reloadData()
     }
     //Number of section in the tableView
@@ -74,8 +73,8 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
         //Get reusable cell with ID and cast as GameTableViewCell
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier") as! GameTableViewCell
         
-        let text = data[indexPath.row]
-        cell.hostNameLabel.text = text
+        let peerID = data[indexPath.row]
+        cell.hostNameLabel.text = peerID.displayName
         cell.numPlayersLabel.text = "x/2"
         if indexPath.row % 2 == 0 {
             cell.contentView.backgroundColor = UIColor(named: "militaryGreenDark")
