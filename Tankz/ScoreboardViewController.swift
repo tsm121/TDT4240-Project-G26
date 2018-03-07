@@ -10,18 +10,18 @@ import UIKit
 
 class ScoreboardViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var scoreboardTable: UITableView!
-    private var playerScores: [String] = []
+    public var playerScores: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.scoreboardTable.dataSource = self
         
-        playerScores.append("8")
-        playerScores.append("7")
-        playerScores.append("3")
-        playerScores.append("2")
-        playerScores.append("5")
+        playerScores.append("8432423")
+        playerScores.append("72245")
+        playerScores.append("542323")
+        playerScores.append("2452")
+        playerScores.append("51324")
         
         // Do any additional setup after loading the view.
     }
@@ -38,7 +38,7 @@ class ScoreboardViewController: UIViewController, UITableViewDataSource {
         let cell = scoreboardTable.dequeueReusableCell(withIdentifier: "playerScoreCell") as! ScoreTableViewCell
     
     cell.opponentNameLabel.text = "xXDestroyerOfWorldzXx"
-    cell.scoreLabel.text = "42"
+    cell.scoreLabel.text = self.playerScores[indexPath.row]
     
     return cell
     

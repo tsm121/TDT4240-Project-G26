@@ -25,7 +25,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13h-ju-WiR">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13h-ju-WiR">
                                 <rect key="frame" x="293" y="227" width="150" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="Scoreboard">
@@ -34,6 +34,9 @@
                                 <state key="disabled">
                                     <color key="titleColor" white="0.3478732638888889" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="7RH-Jh-Bit" kind="show" identifier="scoreboardSegue" id="rXo-Zs-LSD"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlS-k2-noY">
                                 <rect key="frame" x="293" y="187" width="150" height="40"/>
@@ -197,40 +200,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="psD-aX-L5K">
-                                <rect key="frame" x="20" y="52" width="627" height="303"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scoreboard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1mV-BJ-Geo">
-                                    <rect key="frame" x="0.0" y="0.0" width="627" height="21"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="psD-aX-L5K">
+                                <rect key="frame" x="20" y="52" width="696" height="342"/>
+                                <color key="backgroundColor" name="groundBrown"/>
+                                <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scoreboard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hlH-6I-iVv">
+                                    <rect key="frame" x="0.0" y="0.0" width="696" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                    <color key="textColor" red="0.5568627451" green="0.96470588239999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="playerScoreCell" id="ZG9-Lr-393" customClass="ScoreTableViewCell" customModule="Tankz" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="49" width="627" height="44"/>
+                                        <rect key="frame" x="0.0" y="64" width="696" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZG9-Lr-393" id="M2T-fZ-vFr">
-                                            <rect key="frame" x="0.0" y="0.0" width="627" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="696" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="OpponentName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Pg-XN-GrR">
-                                                    <rect key="frame" x="15" y="10" width="122" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oAb-hx-Q1O">
+                                                    <rect key="frame" x="646" y="11.333333333333336" width="45" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oAb-hx-Q1O">
-                                                    <rect key="frame" x="291" y="9" width="45" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OpponentName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Pg-XN-GrR">
+                                                    <rect key="frame" x="5" y="11" width="122" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="oAb-hx-Q1O" secondAttribute="trailing" constant="5" id="6sS-TK-uPK"/>
+                                                <constraint firstItem="5Pg-XN-GrR" firstAttribute="centerY" secondItem="M2T-fZ-vFr" secondAttribute="centerY" id="Snt-lx-ekc"/>
+                                                <constraint firstItem="5Pg-XN-GrR" firstAttribute="leading" secondItem="M2T-fZ-vFr" secondAttribute="leading" constant="5" id="dQX-v6-c3b"/>
+                                                <constraint firstItem="oAb-hx-Q1O" firstAttribute="centerY" secondItem="M2T-fZ-vFr" secondAttribute="centerY" id="oFc-fd-QuK"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.30196078430000001" green="0.47058823529999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="opponentNameLabel" destination="5Pg-XN-GrR" id="ywc-fO-fCd"/>
                                             <outlet property="scoreLabel" destination="oAb-hx-Q1O" id="tZp-SK-fxF"/>
@@ -239,7 +247,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.4039215686" green="0.33725490200000002" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="psD-aX-L5K" firstAttribute="top" secondItem="zhU-29-u7C" secondAttribute="top" constant="20" id="L7b-m2-eiZ"/>
                             <constraint firstItem="psD-aX-L5K" firstAttribute="leading" secondItem="zhU-29-u7C" secondAttribute="leading" constant="20" id="XCI-TR-AgD"/>
@@ -254,7 +262,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j96-nC-zZT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="92" y="2054"/>
+            <point key="canvasLocation" x="470" y="-575"/>
         </scene>
         <!--Join Game View Controller-->
         <scene sceneID="wUl-wB-dbf">
@@ -396,11 +404,14 @@
         <namedColor name="groundBrown">
             <color red="0.40400001406669617" green="0.33700001239776611" blue="0.29800000786781311" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="groundBrown">
+            <color red="0.40400001406669617" green="0.33700001239776611" blue="0.29800000786781311" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="militaryGreenLight">
             <color red="0.30199998617172241" green="0.47099998593330383" blue="0.3059999942779541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IsV-7P-a5j"/>
+        <segue reference="GtZ-rs-jmh"/>
     </inferredMetricsTieBreakers>
 </document>
