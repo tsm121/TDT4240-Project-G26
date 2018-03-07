@@ -19,6 +19,8 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.accessibilityIdentifier = "joinGameView"
 
         //Test data
         data.append("Vald Bagina")

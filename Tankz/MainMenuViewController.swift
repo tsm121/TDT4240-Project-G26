@@ -16,6 +16,7 @@ class MainMenuViewController: UIViewController {
 
 
         // Do any additional setup after loading the view.
+        view.accessibilityIdentifier = "mainMenuView"
     }
     
     func assignbackground(){
