@@ -29,11 +29,6 @@ class TankzUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
     func testMainMenu() {
         let app = XCUIApplication()
         XCTAssertTrue(app.isDisplayingMainMenu)
@@ -43,8 +38,9 @@ class TankzUITests: XCTestCase {
         let app = XCUIApplication()
         app.buttons["Join game"].tap()
         XCTAssertTrue(app.isDisplayingJoinGame)
-        app.buttons["Join game"].tap()
+        app.buttons["Join Game"].tap()
         XCTAssertTrue(app.isDisplayingGameLobby)
+        app.buttons["Back"].tap()
         app.buttons["Back"].tap()
         XCTAssertTrue(app.isDisplayingMainMenu)
     }
