@@ -28,34 +28,39 @@ class TankzUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
     
     func testMainMenu() {
         
         let app = XCUIApplication()
-        
-        app/*@START_MENU_TOKEN@*/.otherElements["mainMenuView"].buttons["Create game"]/*[[".otherElements[\"mainMenuView\"].buttons[\"Create game\"]",".buttons[\"Create game\"]"],[[[-1,1],[-1,0]]],[1]]@END_MENU_TOKEN@*/.tap()
+        XCTAssertTrue(app.isDisplayingMainMenu)
+        app/*@START_MENU_TOKEN@*/.buttons["Create game"]/*[[".otherElements[\"mainMenuView\"].buttons[\"Create game\"]",".buttons[\"Create game\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         app.navigationBars["Tankz.GameLobbyView"].buttons["Back"].tap()
-        
-        app/*@START_MENU_TOKEN@*/.otherElements["mainMenuView"].buttons["Join game"]/*[[".otherElements[\"mainMenuView\"].buttons[\"Join game\"]",".buttons[\"Join game\"]"],[[[-1,1],[-1,0]]],[1]]@END_MENU_TOKEN@*/.tap()
+        XCTAssertTrue(app.isDisplayingMainMenu)
+        app/*@START_MENU_TOKEN@*/.buttons["Join game"]/*[[".otherElements[\"mainMenuView\"].buttons[\"Join game\"]",".buttons[\"Join game\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         app.navigationBars["Tankz.JoinGameView"].buttons["Back"].tap()
-        
-        
+        XCTAssertTrue(app.isDisplayingMainMenu)
     }
     
     func testJoinGameView() {
+        let app = XCUIApplication()
+        app/*@START_MENU_TOKEN@*/.buttons["Join game"]/*[[".otherElements[\"mainMenuView\"].buttons[\"Join game\"]",".buttons[\"Join game\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        XCTAssertTrue(app.isDisplayingJoinGame)
+    }
+    
+    func testLobbyView() {
+        let app = XCUIApplication()
+        app/*@START_MENU_TOKEN@*/.buttons["Create game"]/*[[".otherElements[\"mainMenuView\"].buttons[\"Create game\"]",".buttons[\"Create game\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        XCTAssertTrue(app.isDisplayingGameLobby)
+        // Add test for joining lobby from host-list.
         
     }
     
     func testGameView() {
-        
+        let app = XCUIApplication()
+        app/*@START_MENU_TOKEN@*/.buttons["Create game"]/*[[".otherElements[\"mainMenuView\"].buttons[\"Create game\"]",".buttons[\"Create game\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.buttons["Go to gameScene"].tap()
+        XCTAssertTrue(app.isDisplayingGame)
     }
     
-    func testLobbyView() {
-        
-    }
     
 }
