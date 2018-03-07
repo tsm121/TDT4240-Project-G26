@@ -56,6 +56,9 @@ class Multiplayer : NSObject {
     }
     
     /* Join existing game. */
+    func joinGame(peerID: MCPeerID){
+        self.browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 5)
+    }
     
     /* Mark as ready to play. */
 }
@@ -110,6 +113,7 @@ extension Multiplayer : MCNearbyServiceAdvertiserDelegate {
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         NSLog("%@", "didReceiveInvitationFromPeer \(peerID)")
+        invitationHandler(true, self.session)
     }
     
 }

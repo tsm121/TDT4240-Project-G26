@@ -87,6 +87,7 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
     
     //Action based on user selection in tableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Multiplayer.shared.joinGame(peerID: self.data[indexPath.row])
         performSegue(withIdentifier: "connectToGameSegue", sender: self)
     }
 
