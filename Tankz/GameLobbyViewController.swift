@@ -23,6 +23,7 @@ class GameLobbyViewController: UIViewController, UITableViewDataSource {
         
 
         // Do any additional setup after loading the view.
+        view.accessibilityIdentifier = "gameLobbyView"
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
