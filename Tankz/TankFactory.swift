@@ -78,7 +78,7 @@ class TankFactory {
         public var tank : SKShapeNode
         init() {
             tank = SKShapeNode(rectOf: CGSize(width: 40, height: 20))
-            tank.fillColor = UIColor(named: "militaryGreenLight")!
+            tank.fillColor = UIColor(named: "militaryGreenDark")!
             tank.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 40, height: 20))
             tank.name = "BigTank"
         }
@@ -89,7 +89,7 @@ class TankFactory {
         public var tank: SKShapeNode
         init() {
             tank = SKShapeNode(rectOf: CGSize(width: 40, height: 80))
-            tank.fillColor = UIColor.green
+            tank.fillColor = UIColor(named: "militaryRed")!
             tank.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 40, height: 80))
             tank.name = "FunnyTank"
         }

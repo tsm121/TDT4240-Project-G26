@@ -75,6 +75,16 @@ class TankzUnitTests: XCTestCase {
         XCTAssertTrue((funny.name?.isEqual("FunnyTank"))!)
     }
     
+    func testTankColors() {
+        small = tankFactory.makeTank(tanktype: .smallTank)
+        big = tankFactory.makeTank(tanktype: .bigTank)
+        funny = tankFactory.makeTank(tanktype: .funnyTank)
+        
+        XCTAssertTrue(small.fillColor == UIColor(named: "militaryGreenLight"))
+        XCTAssertTrue(big.fillColor == UIColor(named: "militaryGreenDark"))
+        XCTAssertTrue(funny.fillColor == UIColor(named: "militaryRed"))
+    }
+    
     func testMapGround() {
         map = mapFactory.makeMap(MapType: .flat)
         XCTAssertTrue((map.name?.isEqual("FlatGround"))!)
@@ -85,8 +95,8 @@ class TankzUnitTests: XCTestCase {
     }
     
     func testMapColors() {
-        // map = mapFactory.makeMap(MapType: .flat)
-        // XCTAssertTrue(map.fillColor.isEqual(UIColor(named: "groundBrown")))
+        map = mapFactory.makeMap(MapType: .flat)
+        XCTAssertTrue(map.fillColor == UIColor(named: "groundBrown"))
     }
     
     func testPerformanceExample() {
