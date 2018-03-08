@@ -49,6 +49,8 @@ class MapFactory {
         shapeNode.physicsBody?.friction = 1.0
         shapeNode.physicsBody?.isDynamic = false
         shapeNode.physicsBody?.affectedByGravity = false
+        shapeNode.physicsBody!.categoryBitMask = PhysicsCategory.Edge
+        shapeNode.physicsBody!.collisionBitMask = PhysicsCategory.Projectile | PhysicsCategory.Tank
         
         // Set name of ground. For testing.
         switch MapType {

@@ -24,7 +24,8 @@ enum MapType {
     case hills
 }
 
-//Ammo types
+
+// Ammo types.
 enum AmmoType {
     case missile
     case clusterBomb
@@ -94,9 +95,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func placeTank(tank: SKShapeNode) {
         if tankFactory.iHaveMadeSoManyTanks == 1 {
-            tank.position = CGPoint(x: 100 + tank.frame.width/2,y: 400 + tank.frame.height/2)
+            tank.position = CGPoint(x: 100 + tank.frame.width/2,y: 300 + tank.frame.height/2)
         } else if tankFactory.iHaveMadeSoManyTanks == 2 {
-            tank.position = CGPoint(x: self.frame.width - 100 - tank.frame.width/2,y: 400 + tank.frame.height/2)
+            tank.position = CGPoint(x: self.frame.width - 100 - tank.frame.width/2,y: 300 + tank.frame.height/2)
         }
     }
     
@@ -116,7 +117,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsBody?.restitution = CGFloat(0)
         self.physicsBody?.angularDamping = CGFloat(0)
         self.physicsBody?.linearDamping = CGFloat(0)
-        self.physicsBody!.categoryBitMask = 0
+        self.physicsBody!.categoryBitMask = PhysicsCategory.Edge
+        self.physicsBody!.collisionBitMask = PhysicsCategory.Tank
         self.physicsBody?.isDynamic = false
         
         self.width = self.frame.width
@@ -144,10 +146,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let name = touchedNode.name {
             if name == "leftButton" {
                 print("leftButton touched")
-                tank1.position = CGPoint(x: 100 + tank1.frame.width/2,y: 400 + tank1.frame.height/2)
+                tank1.position = CGPoint(x: 100 + tank1.frame.width/2,y: 300 + tank1.frame.height/2)
             } else if name == "rightButton" {
                 print("rightButton touched")
-                tank2.position = CGPoint(x: 100 + tank2.frame.width/2,y: 400 + tank2.frame.height/2)
+                tank2.position = CGPoint(x: self.frame.width - tank2.frame.width/2 - 100 ,y: 300 + tank2.frame.height/2)
             } else {
                 self.touchDown(atPoint: positionInScene)
             }
