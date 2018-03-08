@@ -62,7 +62,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Generate the world map.
         mapFactory = MapFactory(skSceneWidth: CGFloat(self.size.width))
-        map = mapFactory.makeMap(MapType: .hills)
+        map = mapFactory.makeMap(MapType: .flat)
         self.addChild(map)
         
         
@@ -145,11 +145,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if let name = touchedNode.name {
             if name == "leftButton" {
-                print("leftButton touched")
-                tank1.position = CGPoint(x: 100 + tank1.frame.width/2,y: 300 + tank1.frame.height/2)
+                if self.tank1.action(forKey: "moveLeft") == nil { // check that there's no jump action running
+                    let moveLeft = SKAction.moveBy(x: -20, y: 5, duration: 0.5)
+                    
+                    self.tank1.run(SKAction.sequence([moveLeft]), withKey:"moveLeft")
+                }
             } else if name == "rightButton" {
-                print("rightButton touched")
-                tank2.position = CGPoint(x: self.frame.width - tank2.frame.width/2 - 100 ,y: 300 + tank2.frame.height/2)
+                if self.tank1.action(forKey: "moveRight") == nil { // check that there's no jump action running
+                    let moveRight = SKAction.moveBy(x: 20, y: 5, duration: 0.5)
+                    
+                    self.tank1.run(SKAction.sequence([moveRight]), withKey:"moveRight")
+                }
             } else {
                 self.touchDown(atPoint: positionInScene)
             }
