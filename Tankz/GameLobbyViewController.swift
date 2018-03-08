@@ -32,7 +32,6 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.setUpScrollView()
         
         //DemoUsers
         lobbyUsers.append(Player(ID: "1234"))
@@ -43,7 +42,7 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-
+        self.setUpScrollView()
     }
     
     //Setup for a given scrollView
