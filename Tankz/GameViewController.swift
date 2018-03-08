@@ -19,14 +19,19 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     var sceneView: SKView!
     
     private var pickerData: Array<Int> = Array(1...100)
-
+    weak var timer: Timer?
+    
+    deinit {
+        timer?.invalidate()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setUpPickers()
-
-
         
+        //self.getSelectedValue()
+
+        //Set up SKScene inside SKView
         sceneView = SKView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height*0.90))
         sceneView.backgroundColor = UIColor.black
         self.view.addSubview(sceneView)
@@ -41,14 +46,28 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 view.presentScene(scene)
                 currentGame = scene as! GameScene
                 currentGame.viewController = self
-                
             }
             
             view.ignoresSiblingOrder = true
-            
-            
         }
         view.accessibilityIdentifier = "gameView"
+    }
+    
+    //get values from the pickers. NOT DONE!
+    private func getSelectedValue(){
+        let timer = Timer(timeInterval: 0.1, repeats: true) { [unowned self] timer in
+            let row1 = self.anglePicker.selectedRow(inComponent: 0)
+            let row2 = self.powerPicker.selectedRow(inComponent: 0)
+            print("anglePicker: \(row1), \(self.anglePicker.tag)")
+            print("powerPicker: \(row2), \(self.powerPicker.tag)")
+        }
+        
+        // You need to add the timer to UITrackingRunLoopMode so it fires while scrolling the picker
+        let runLoop = RunLoop.current
+        runLoop.add(timer, forMode: .commonModes)
+        runLoop.add(timer, forMode: .UITrackingRunLoopMode)
+        
+        self.timer = timer
     }
     
     //Set up pickers with deleagte, data and tag
@@ -81,12 +100,6 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         return String(pickerData[row])
     }
     
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(String(self.pickerData[row]))
-        print(String(pickerView.tag))
-    }
-
     override var shouldAutorotate: Bool {
         return true
     }
