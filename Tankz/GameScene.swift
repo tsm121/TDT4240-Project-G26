@@ -46,7 +46,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Create game area, full screen.
         self.createArea()
-        self.createButtons()
         
         // Generate the world map.
         mapFactory = MapFactory(skSceneWidth: CGFloat(self.size.width))
@@ -66,20 +65,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func createButtons() {
-        self.leftButton = SKShapeNode(rectOf: CGSize(width: 100, height: 100))
-        self.leftButton.position = CGPoint(x: self.size.width/2 - 100, y: 200)
-        self.leftButton.name = "leftButton"
-        self.leftButton.fillColor = UIColor(named: "lightGreen")!
-        
-        self.rightButton = SKShapeNode(rectOf: CGSize(width: 100, height: 100))
-        self.rightButton.position = CGPoint(x: self.size.width/2 + 100, y: 200)
-        self.rightButton.name = "rightButton"
-        self.rightButton.fillColor = UIColor(named: "lightGreen")!
-        
-        self.addChild(self.leftButton)
-        self.addChild(self.rightButton)
+    func setTankPos(){
+        self.tank1.position = CGPoint(x: 100, y: 500)
     }
+    
     
     func placeTank(tank: SKShapeNode) {
         if tankFactory.iHaveMadeSoManyTanks == 1 {
@@ -126,19 +115,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //Listener for when touch began
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch:UITouch = touches.first!
-        let positionInScene = touch.location(in: self)
-        let touchedNode = self.atPoint(positionInScene)
-        
-        if let name = touchedNode.name {
-            if name == "leftButton" {
-                print("leftButton touched")
-                tank1.position = CGPoint(x: 100 + tank1.frame.width/2,y: 400 + tank1.frame.height/2)
-            } else if name == "rightButton" {
-                print("rightButton touched")
-                tank2.position = CGPoint(x: 100 + tank2.frame.width/2,y: 400 + tank2.frame.height/2)
-            }
-        }
         
     }
     
