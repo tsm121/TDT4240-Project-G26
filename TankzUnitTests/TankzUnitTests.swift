@@ -44,11 +44,11 @@ class TankzUnitTests: XCTestCase {
     
     func testFactory() {
         XCTAssertTrue(tankFactory.iHaveMadeSoManyTanks == 0)
-        small = tankFactory.makeTank(tanktype: .smallTank)
+        small = tankFactory.makeTank(tanktype: .smallTank, tankName: "SmallTank")
         XCTAssertTrue(tankFactory.iHaveMadeSoManyTanks == 1)
-        big = tankFactory.makeTank(tanktype: .bigTank)
+        big = tankFactory.makeTank(tanktype: .bigTank, tankName: "BigTank")
         XCTAssertTrue(tankFactory.iHaveMadeSoManyTanks == 2)
-        funny = tankFactory.makeTank(tanktype: .funnyTank)
+        funny = tankFactory.makeTank(tanktype: .funnyTank, tankName: "FunnyTank")
         XCTAssertTrue(tankFactory.iHaveMadeSoManyTanks == 3)
     }
     
@@ -56,9 +56,9 @@ class TankzUnitTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        small = tankFactory.makeTank(tanktype: .smallTank)
-        big = tankFactory.makeTank(tanktype: .bigTank)
-        funny = tankFactory.makeTank(tanktype: .funnyTank)
+        small = tankFactory.makeTank(tanktype: .smallTank, tankName: "SmallTank")
+        big = tankFactory.makeTank(tanktype: .bigTank, tankName: "BigTank")
+        funny = tankFactory.makeTank(tanktype: .funnyTank, tankName: "FunnyTank")
         
         XCTAssertTrue(small.frame.height < big.frame.height)
         XCTAssertTrue(small.frame.height < funny.frame.height)
@@ -66,9 +66,9 @@ class TankzUnitTests: XCTestCase {
     }
     
     func testTankNames() {
-        small = tankFactory.makeTank(tanktype: .smallTank)
-        big = tankFactory.makeTank(tanktype: .bigTank)
-        funny = tankFactory.makeTank(tanktype: .funnyTank)
+        small = tankFactory.makeTank(tanktype: .smallTank, tankName: "SmallTank")
+        big = tankFactory.makeTank(tanktype: .bigTank, tankName: "BigTank")
+        funny = tankFactory.makeTank(tanktype: .funnyTank, tankName: "FunnyTank")
         
         XCTAssertTrue((small.name?.isEqual("SmallTank"))!)
         XCTAssertTrue((big.name?.isEqual("BigTank"))!)
@@ -76,9 +76,9 @@ class TankzUnitTests: XCTestCase {
     }
     
     func testTankColors() {
-        small = tankFactory.makeTank(tanktype: .smallTank)
-        big = tankFactory.makeTank(tanktype: .bigTank)
-        funny = tankFactory.makeTank(tanktype: .funnyTank)
+        small = tankFactory.makeTank(tanktype: .smallTank, tankName: "SmallTank")
+        big = tankFactory.makeTank(tanktype: .bigTank, tankName: "BigTank")
+        funny = tankFactory.makeTank(tanktype: .funnyTank, tankName: "FunnyTank")
         
         XCTAssertTrue(small.fillColor == UIColor(named: "militaryGreenLight"))
         XCTAssertTrue(big.fillColor == UIColor(named: "militaryGreenDark"))

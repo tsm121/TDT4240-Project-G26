@@ -24,6 +24,7 @@ class ScoreboardViewController: UIViewController, UITableViewDataSource {
         playerScores.append("51324")
         
         // Do any additional setup after loading the view.
+        view.accessibilityIdentifier = "scoreboardView"
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
