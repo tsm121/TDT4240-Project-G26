@@ -26,6 +26,7 @@
 		1B6E2399204DC46200138EDA /* WarWound.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1B6E2398204DC46200138EDA /* WarWound.otf */; };
 		1BD8A5AD204EA7CD00104DEC /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8A5AC204EA7CD00104DEC /* GameTableViewCell.swift */; };
 		1BD8A5AF204ED62A00104DEC /* LobbyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8A5AE204ED62A00104DEC /* LobbyTableViewCell.swift */; };
+		5B0261CE205143A500A9F7BA /* XCUIApplication+Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0261CD205143A500A9F7BA /* XCUIApplication+Scoreboard.swift */; };
 		5B5D5B702050650000018A04 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D5B6F2050650000018A04 /* UIColor+Extension.swift */; };
 		5B81FEBF20501C9D00E9F68F /* TankzUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B81FEBE20501C9D00E9F68F /* TankzUITests.swift */; };
 		5B81FECD20501D4700E9F68F /* TankzUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B81FECC20501D4700E9F68F /* TankzUnitTests.swift */; };
@@ -76,6 +77,7 @@
 		1B6E2398204DC46200138EDA /* WarWound.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = WarWound.otf; sourceTree = "<group>"; };
 		1BD8A5AC204EA7CD00104DEC /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
 		1BD8A5AE204ED62A00104DEC /* LobbyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyTableViewCell.swift; sourceTree = "<group>"; };
+		5B0261CD205143A500A9F7BA /* XCUIApplication+Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Scoreboard.swift"; sourceTree = "<group>"; };
 		5B5D5B6F2050650000018A04 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		5B81FEBC20501C9D00E9F68F /* TankzUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TankzUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B81FEBE20501C9D00E9F68F /* TankzUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TankzUITests.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				5B81FED420502AEE00E9F68F /* XCUIApplication+GameView.swift */,
 				5B81FED620502B4C00E9F68F /* XCUIApplication+MainMenu.swift */,
 				5B81FEDC20502BD700E9F68F /* XCUIApplication+JoinGame.swift */,
+				5B0261CD205143A500A9F7BA /* XCUIApplication+Scoreboard.swift */,
 				5B81FEDA20502BA700E9F68F /* XCUIApplication+GameLobby.swift */,
 				5B81FEC020501C9D00E9F68F /* Info.plist */,
 			);
@@ -360,6 +363,7 @@
 				5B81FED520502AEE00E9F68F /* XCUIApplication+GameView.swift in Sources */,
 				5B81FEBF20501C9D00E9F68F /* TankzUITests.swift in Sources */,
 				5B81FED720502B4C00E9F68F /* XCUIApplication+MainMenu.swift in Sources */,
+				5B0261CE205143A500A9F7BA /* XCUIApplication+Scoreboard.swift in Sources */,
 				5B81FEDD20502BD700E9F68F /* XCUIApplication+JoinGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
