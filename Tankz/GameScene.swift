@@ -24,6 +24,13 @@ enum MapType {
     case hills
 }
 
+// Ammo types.
+enum AmmoType {
+    case missile
+    case clusterBomb
+    case funnyBomb
+}
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     weak var viewController: GameViewController!
