@@ -12,6 +12,7 @@ import GameplayKit
 
 class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource  {
     
+    @IBOutlet weak var movesLabel: UILabel!
     @IBOutlet weak var powerPicker: UIPickerView!
     @IBOutlet weak var anglePicker: UIPickerView!
     
@@ -19,16 +20,18 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     var sceneView: SKView!
     
     private var pickerData: Array<Int> = Array(1...100)
+    public var numMoves: Int  = 0
     weak var timer: Timer?
     
     deinit {
         timer?.invalidate()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setUpPickers()
-        
+        self.setNumMoves(numMoves: 5)
         //self.getSelectedValue()
 
         //Set up SKScene inside SKView
@@ -51,6 +54,35 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             view.ignoresSiblingOrder = true
         }
         view.accessibilityIdentifier = "gameView"
+    }
+    
+    //Setting number of moves
+    private func setNumMoves(numMoves: Int){
+        self.numMoves = 5
+        movesLabel.text = String(numMoves)
+    }
+    
+    //Listener for left move button
+    @IBAction func moveLeftAction(_ sender: Any) {
+        if self.useMove() {
+            //Run tank action here
+        }
+    }
+    
+    //Listener for right move button
+    @IBAction func moveRightAction(_ sender: Any) {
+        if self.useMove() {
+            //Run tank action here
+        }
+    }
+    
+    private func useMove() -> Bool {
+        
+        if self.numMoves >= 1 {
+            self.numMoves -= 1
+            self.movesLabel.text = String(numMoves)
+            return true
+        } else {return false}
     }
     
     //get values from the pickers. NOT DONE!

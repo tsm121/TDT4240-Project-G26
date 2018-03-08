@@ -105,10 +105,22 @@
                                 <rect key="frame" x="0.0" y="370" width="48" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="leftArrow"/>
+                                <connections>
+                                    <action selector="moveLeftAction:" destination="gDR-NA-MQg" eventType="touchUpInside" id="8W9-R6-HB7"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vwh-ki-2wj">
                                 <rect key="frame" x="56" y="374" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQd-Dy-lky">
+                                        <rect key="frame" x="0.0" y="10" width="40" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" red="0.85098039219999999" green="0.32549019610000002" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zne-Vx-fPw">
@@ -117,6 +129,9 @@
                                 <state key="normal" image="rightArrow">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="moveRightAction:" destination="gDR-NA-MQg" eventType="touchUpInside" id="Q7e-DL-A90"/>
+                                </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YdM-M8-ncG">
                                 <rect key="frame" x="449" y="374" width="80" height="40"/>
@@ -158,6 +173,7 @@
                     </view>
                     <connections>
                         <outlet property="anglePicker" destination="YdM-M8-ncG" id="v7g-fD-OMr"/>
+                        <outlet property="movesLabel" destination="YQd-Dy-lky" id="UNY-LC-GSA"/>
                         <outlet property="powerPicker" destination="YtM-jY-zvW" id="V5g-8h-Npb"/>
                     </connections>
                 </viewController>
