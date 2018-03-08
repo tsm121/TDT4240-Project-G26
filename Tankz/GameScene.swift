@@ -30,8 +30,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var mapFactory : MapFactory!
     private var tank : SKShapeNode!
     private var map : SKShapeNode!
-    private var height : Double!
-    private var width : Double!
+    private var height : CGFloat!
+    private var width : CGFloat!
     
     override func didMove(to view: SKView) {
         
@@ -48,7 +48,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Generate a tank from the factory.
         tankFactory = TankFactory()
-        tank = tankFactory.makeTank(tanktype: .smallTank)
+        tank = tankFactory.makeTank(tanktype: .bigTank)
         self.addChild(tank)
         
     }
@@ -62,7 +62,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Create player area with bounderies, together with physics
     func createArea() {
         self.scene?.anchorPoint = CGPoint(x: 0, y: 0)
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor(named: "skyBlue")!
         self.scaleMode = .aspectFill
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         self.physicsBody?.friction = CGFloat(0)
@@ -71,6 +71,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsBody?.linearDamping = CGFloat(0)
         self.physicsBody!.categoryBitMask = 0
         self.physicsBody?.isDynamic = false
+        
+        self.width = self.frame.width
+        self.height = self.frame.height
     }
     
     func touchDown(atPoint pos : CGPoint) {

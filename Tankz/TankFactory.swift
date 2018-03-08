@@ -36,6 +36,7 @@ class TankFactory {
     
     public func makeTank(tanktype: TankType) -> SKShapeNode {
         var tank : SKShapeNode
+        
         switch tanktype {
         case .smallTank:
             tank = SmallTank().tank
@@ -46,8 +47,6 @@ class TankFactory {
         }
         
         iHaveMadeSoManyTanks += 1
-        
-        
         
         // Physics on the tank body.
         tank.physicsBody?.affectedByGravity = true
@@ -64,47 +63,35 @@ class TankFactory {
     }
     
     // Class for SmallTank
-    class SmallTank: SKShapeNode {
+    class SmallTank {
         public var tank: SKShapeNode
-        override init() {
+        init() {
             tank = SKShapeNode(rectOf: CGSize(width: 20, height: 10))
-            tank.fillColor = UIColor.black
+            tank.fillColor = UIColor(named: "militaryGreenLight")!
             tank.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 20, height: 10))
             tank.name = "SmallTank"
-            super.init()
-        }
-        required init?(coder aDecoder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
         }
     }
     
     // Class for BigTank
-    class BigTank: SKShapeNode {
+    class BigTank {
         public var tank : SKShapeNode
-        override init() {
+        init() {
             tank = SKShapeNode(rectOf: CGSize(width: 40, height: 20))
-            tank.fillColor = UIColor.brown
+            tank.fillColor = UIColor(named: "militaryGreenDark")!
             tank.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 40, height: 20))
             tank.name = "BigTank"
-            super.init()
-        }
-        required init?(coder aDecoder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
         }
     }
     
     // Class for FunnyTank
-    class FunnyTank: SKShapeNode {
+    class FunnyTank {
         public var tank: SKShapeNode
-        override init() {
+        init() {
             tank = SKShapeNode(rectOf: CGSize(width: 40, height: 80))
-            tank.fillColor = UIColor.green
+            tank.fillColor = UIColor(named: "militaryRed")!
             tank.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 40, height: 80))
             tank.name = "FunnyTank"
-            super.init()
-        }
-        required init?(coder aDecoder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
         }
     }
     

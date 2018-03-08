@@ -26,16 +26,41 @@ class MapFactory {
                       CGPoint(x: Int(interval[4]), y: randHeight(maptype: MapType)),
                       CGPoint(x: Int(interval[5]), y: randHeight(maptype: MapType))]
         
-        //let linearShapeNode = SKShapeNode(points: &points, count: points.count)
+        
+        // Draw a BeizerPath from the points. Making it SMOOTH AF.
         let ground = SKShapeNode(splinePoints: &points, count: points.count)
-        ground.strokeColor = UIColor.red
-        ground.lineWidth = 5
-        ground.physicsBody = SKPhysicsBody(edgeChainFrom: ground.path!)
-        ground.physicsBody?.restitution = 0.0
-        ground.physicsBody?.friction = 1.0
-        ground.physicsBody?.isDynamic = false
-        ground.physicsBody?.affectedByGravity = false
-        return ground
+        
+        // Add straight lines at border to make closed beizer path.
+        let beizer = UIBezierPath(cgPath: ground.path!)
+        beizer.move(to: points.first!)
+        beizer.addLine(to: CGPoint(x: 0, y: 0))
+        beizer.addLine(to: CGPoint(x: self.width, y: 0))
+        beizer.addLine(to: points.last!)
+        
+        // Convert the path to a SKShapeNode and set colors and stuff.
+        let shapeNode = SKShapeNode(path: beizer.cgPath)
+        shapeNode.strokeColor = UIColor(named: "lightGreen")!
+        shapeNode.lineWidth = 1
+        shapeNode.fillColor = UIColor(named: "groundBrown")!
+        
+        // Give it some physics.
+        shapeNode.physicsBody = SKPhysicsBody(edgeChainFrom: ground.path!)
+        shapeNode.physicsBody?.restitution = 0.0
+        shapeNode.physicsBody?.friction = 1.0
+        shapeNode.physicsBody?.isDynamic = false
+        shapeNode.physicsBody?.affectedByGravity = false
+        
+        // Set name of ground. For testing.
+        switch MapType {
+        case .flat:
+            shapeNode.name = "FlatGround"
+        case .flatty:
+            shapeNode.name = "FlattyGround"
+        case .hills:
+            shapeNode.name = "HillsGround"
+        }
+        
+        return shapeNode
     }
     
     func randHeight(maptype: MapType) -> Int{
