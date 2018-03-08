@@ -59,7 +59,7 @@ class TankFactory {
         tank.physicsBody?.linearDamping = 1.0
         tank.physicsBody?.angularDamping = 1.0
         tank.physicsBody!.categoryBitMask = PhysicsCategory.Tank
-        tank.physicsBody!.collisionBitMask = PhysicsCategory.Edge | PhysicsCategory.Projectile
+        tank.physicsBody!.collisionBitMask = PhysicsCategory.Edge | PhysicsCategory.Projectile | PhysicsCategory.Tank
         tank.physicsBody?.usesPreciseCollisionDetection = true
         
         return tank
