@@ -58,7 +58,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Create game area, full screen.
         self.createArea()
-        self.createButtons()
         
         // Generate the world map.
         mapFactory = MapFactory(skSceneWidth: CGFloat(self.size.width))
@@ -78,20 +77,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func createButtons() {
-        self.leftButton = SKShapeNode(rectOf: CGSize(width: 100, height: 100))
-        self.leftButton.position = CGPoint(x: self.size.width/2 - 100, y: 200)
-        self.leftButton.name = "leftButton"
-        self.leftButton.fillColor = UIColor(named: "lightGreen")!
-        
-        self.rightButton = SKShapeNode(rectOf: CGSize(width: 100, height: 100))
-        self.rightButton.position = CGPoint(x: self.size.width/2 + 100, y: 200)
-        self.rightButton.name = "rightButton"
-        self.rightButton.fillColor = UIColor(named: "lightGreen")!
-        
-        self.addChild(self.leftButton)
-        self.addChild(self.rightButton)
+    func setTankPos(){
+        self.tank1.position = CGPoint(x: 100, y: 500)
     }
+    
     
     func placeTank(tank: SKShapeNode) {
         if tankFactory.iHaveMadeSoManyTanks == 1 {
@@ -139,27 +128,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //Listener for when touch began
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch:UITouch = touches.first!
-        let positionInScene = touch.location(in: self)
-        let touchedNode = self.atPoint(positionInScene)
-        
-        if let name = touchedNode.name {
-            if name == "leftButton" {
-                if self.tank1.action(forKey: "moveLeft") == nil { // check that there's no jump action running
-                    let moveLeft = SKAction.moveBy(x: -20, y: 5, duration: 0.5)
-                    
-                    self.tank1.run(SKAction.sequence([moveLeft]), withKey:"moveLeft")
-                }
-            } else if name == "rightButton" {
-                if self.tank1.action(forKey: "moveRight") == nil { // check that there's no jump action running
-                    let moveRight = SKAction.moveBy(x: 20, y: 5, duration: 0.5)
-                    
-                    self.tank1.run(SKAction.sequence([moveRight]), withKey:"moveRight")
-                }
-            } else {
-                self.touchDown(atPoint: positionInScene)
-            }
-        }
         
     }
     
