@@ -35,6 +35,9 @@
 		5B81FEDB20502BA700E9F68F /* XCUIApplication+GameLobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B81FEDA20502BA700E9F68F /* XCUIApplication+GameLobby.swift */; };
 		5B81FEDD20502BD700E9F68F /* XCUIApplication+JoinGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B81FEDC20502BD700E9F68F /* XCUIApplication+JoinGame.swift */; };
 		5BC1788320528B4C001D82BB /* Tank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC1788220528B4C001D82BB /* Tank.swift */; };
+		5BE364F720531D8D009F5AEA /* Ammo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE364F620531D8D009F5AEA /* Ammo.swift */; };
+		5BE364F920532725009F5AEA /* enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE364F820532725009F5AEA /* enums.swift */; };
+		5BE364FB2053274C009F5AEA /* PhysicsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE364FA2053274C009F5AEA /* PhysicsCategory.swift */; };
 		91AEA831204ED69D00130575 /* ScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AEA830204ED69D00130575 /* ScoreTableViewCell.swift */; };
 		F94366EB204DB88800D224A3 /* Multiplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94366EA204DB88800D224A3 /* Multiplayer.swift */; };
 /* End PBXBuildFile section */
@@ -91,6 +94,9 @@
 		5B81FEDA20502BA700E9F68F /* XCUIApplication+GameLobby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+GameLobby.swift"; sourceTree = "<group>"; };
 		5B81FEDC20502BD700E9F68F /* XCUIApplication+JoinGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+JoinGame.swift"; sourceTree = "<group>"; };
 		5BC1788220528B4C001D82BB /* Tank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tank.swift; sourceTree = "<group>"; };
+		5BE364F620531D8D009F5AEA /* Ammo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ammo.swift; sourceTree = "<group>"; };
+		5BE364F820532725009F5AEA /* enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enums.swift; sourceTree = "<group>"; };
+		5BE364FA2053274C009F5AEA /* PhysicsCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsCategory.swift; sourceTree = "<group>"; };
 		91AEA830204ED69D00130575 /* ScoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTableViewCell.swift; sourceTree = "<group>"; };
 		F94366EA204DB88800D224A3 /* Multiplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiplayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,8 +154,11 @@
 				1BD8A5AE204ED62A00104DEC /* LobbyTableViewCell.swift */,
 				1BD8A5AC204EA7CD00104DEC /* GameTableViewCell.swift */,
 				1B3E7C7C204FF66000744D17 /* AmmoFactory.swift */,
+				5BE364F620531D8D009F5AEA /* Ammo.swift */,
 				1B3E7C7B204FF66000744D17 /* MapFactory.swift */,
+				5BE364F820532725009F5AEA /* enums.swift */,
 				1B3E7C7D204FF66000744D17 /* ScoreboardViewController.swift */,
+				5BE364FA2053274C009F5AEA /* PhysicsCategory.swift */,
 				1B3E7C7E204FF66000744D17 /* TankFactory.swift */,
 				5BC1788220528B4C001D82BB /* Tank.swift */,
 				1B328A35204D71C500B77F10 /* GameScene.sks */,
@@ -346,14 +355,17 @@
 				91AEA831204ED69D00130575 /* ScoreTableViewCell.swift in Sources */,
 				1B6E2392204DA55D00138EDA /* MainMenuViewController.swift in Sources */,
 				1B6E2390204DA52200138EDA /* GameLobbyViewController.swift in Sources */,
+				5BE364F720531D8D009F5AEA /* Ammo.swift in Sources */,
 				5BC1788320528B4C001D82BB /* Tank.swift in Sources */,
 				5B5D5B702050650000018A04 /* UIColor+Extension.swift in Sources */,
 				1B328A3C204D71C500B77F10 /* GameViewController.swift in Sources */,
 				F94366EB204DB88800D224A3 /* Multiplayer.swift in Sources */,
 				1B3E7C81204FF66000744D17 /* ScoreboardViewController.swift in Sources */,
 				1B6E2394204DA91C00138EDA /* JoinGameViewController.swift in Sources */,
+				5BE364F920532725009F5AEA /* enums.swift in Sources */,
 				1BD8A5AF204ED62A00104DEC /* LobbyTableViewCell.swift in Sources */,
 				1B3E7C82204FF66000744D17 /* TankFactory.swift in Sources */,
+				5BE364FB2053274C009F5AEA /* PhysicsCategory.swift in Sources */,
 				1B619D62205033FC00C713F5 /* Player.swift in Sources */,
 				1B328A34204D71C500B77F10 /* AppDelegate.swift in Sources */,
 			);
