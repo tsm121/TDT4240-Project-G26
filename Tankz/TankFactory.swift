@@ -14,6 +14,7 @@ struct PhysicsCategory {
     static let Edge:        UInt32 = 0b1    //  1
     static let Projectile:  UInt32 = 0b10   //  2
     static let Tank:        UInt32 = 0b100  //  4
+    static let Ground:      UInt32 = 0b1000 // 5
 }
 
 
@@ -59,7 +60,7 @@ class TankFactory {
         tank.physicsBody?.linearDamping = 1.0
         tank.physicsBody?.angularDamping = 1.0
         tank.physicsBody!.categoryBitMask = PhysicsCategory.Tank
-        tank.physicsBody!.collisionBitMask = PhysicsCategory.Edge | PhysicsCategory.Projectile | PhysicsCategory.Tank
+        tank.physicsBody!.collisionBitMask = PhysicsCategory.Edge | PhysicsCategory.Projectile | PhysicsCategory.Tank | PhysicsCategory.Ground
         tank.physicsBody?.usesPreciseCollisionDetection = true
         
         return tank
