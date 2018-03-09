@@ -115,7 +115,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func touchDown(atPoint pos : CGPoint) {
-        //self.touchDownPos = pos
+        self.touchDownPos = pos
     }
     
     func touchMoved(toPoint pos : CGPoint) {
@@ -123,11 +123,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        //fire(touchDownPos: self.touchDownPos, touchUpPos: pos)
+        fire(touchDownPos: self.touchDownPos, touchUpPos: pos)
     }
     
     //Listener for when touch began
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch:UITouch = touches.first!
+        let positionInScene = touch.location(in: self)
+        let touchedNode = self.atPoint(positionInScene)
+        
+        if let name = touchedNode.name {
+            if name == "leftButton" {
+                if self.tank1.action(forKey: "moveLeft") == nil { // check that there's no jump action running
+                    let moveLeft = SKAction.moveBy(x: -20, y: 5, duration: 0.5)
+                    
+                    self.tank1.run(SKAction.sequence([moveLeft]), withKey:"moveLeft")
+                }
+            } else if name == "rightButton" {
+                if self.tank1.action(forKey: "moveRight") == nil { // check that there's no jump action running
+                    let moveRight = SKAction.moveBy(x: 20, y: 5, duration: 0.5)
+                    
+                    self.tank1.run(SKAction.sequence([moveRight]), withKey:"moveRight")
+                }
+            } else {
+                self.touchDown(atPoint: positionInScene)
+            }
+        }
         
     }
     
@@ -136,8 +157,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //let touch:UITouch = touches.first!
-        //self.touchUp(atPoint: touch.location(in: self))
+        let touch:UITouch = touches.first!
+        self.touchUp(atPoint: touch.location(in: self))
         
     }
     
@@ -161,7 +182,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //let deleteAmmo = ammo.run(SKAction.removeFromParent()) //to delete ammo on hit
         
     }
-
+    
 }
 
 

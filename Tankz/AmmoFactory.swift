@@ -36,6 +36,7 @@ class AmmoFactory {
         ammo.physicsBody?.affectedByGravity = true
         ammo.physicsBody?.mass = 1
         ammo.physicsBody!.categoryBitMask = PhysicsCategory.Projectile
+        ammo.physicsBody?.collisionBitMask = PhysicsCategory.Tank | PhysicsCategory.Ground
         ammo.physicsBody?.usesPreciseCollisionDetection = true
         ammo.position = CGPoint(x: self.tank.position.x , y: self.tank.position.y + 10) //+10 inntil vi fikser collision så den ikke treffer seg selv
         return ammo
@@ -45,9 +46,9 @@ class AmmoFactory {
     class Missile: SKShapeNode {
         public var ammo: SKShapeNode
         override init() {
-            ammo = SKShapeNode(rectOf: CGSize(width: 4, height: 4))
+            ammo = SKShapeNode(circleOfRadius: 2)
             ammo.fillColor = UIColor.black
-            ammo.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 4, height: 4))
+            ammo.physicsBody = SKPhysicsBody(circleOfRadius: 2)
             ammo.name = "Missile"
             super.init()
         }
