@@ -115,7 +115,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func touchDown(atPoint pos : CGPoint) {
-        //self.touchDownPos = pos
+        self.touchDownPos = pos
     }
     
     func touchMoved(toPoint pos : CGPoint) {
@@ -123,7 +123,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        //fire(touchDownPos: self.touchDownPos, touchUpPos: pos)
+        fire(touchDownPos: self.touchDownPos, touchUpPos: pos)
     }
     
     //Listener for when touch began
@@ -157,8 +157,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //let touch:UITouch = touches.first!
-        //self.touchUp(atPoint: touch.location(in: self))
+        let touch:UITouch = touches.first!
+        self.touchUp(atPoint: touch.location(in: self))
         
     }
     
