@@ -66,6 +66,11 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBAction func moveLeftAction(_ sender: Any) {
         if self.useMove() {
             //Run tank action here
+            if self.currentGame.tank1.body.action(forKey: "moveLeft") == nil { // check that there's no jump action running
+                let moveRight = self.currentGame.tank1.moveLeft
+                
+                self.currentGame.tank1.body.run(SKAction.sequence([moveRight]), withKey:"moveLeft")
+            }
         }
     }
     
@@ -73,6 +78,11 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBAction func moveRightAction(_ sender: Any) {
         if self.useMove() {
             //Run tank action here
+            if self.currentGame.tank1.body.action(forKey: "moveRight") == nil { // check that there's no jump action running
+                let moveRight = self.currentGame.tank1.moveRight
+                
+                self.currentGame.tank1.body.run(SKAction.sequence([moveRight]), withKey:"moveRight")
+            }
         }
     }
     

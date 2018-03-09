@@ -39,8 +39,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var tankFactory : TankFactory!
     private var mapFactory : MapFactory!
     private var ammoFactory : AmmoFactory!
-    private var tank1 : Tank!
-    private var tank2 : Tank!
+    public var tank1 : Tank!
+    public var tank2 : Tank!
     private var map : SKShapeNode!
     private var ammo : SKShapeNode!
     private var height : CGFloat!
