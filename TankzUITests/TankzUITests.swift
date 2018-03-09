@@ -30,13 +30,7 @@ class TankzUITests: XCTestCase {
         app.terminate()
     }
     
-    
     func testMainMenu() {
-        app/*@START_MENU_TOKEN@*/.buttons["Create game"]/*[[".otherElements[\"mainMenuView\"].buttons[\"Create game\"]",".buttons[\"Create game\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app.navigationBars["Tankz.GameLobbyView"].buttons["Back"].tap()
-        XCTAssertTrue(app.isDisplayingMainMenu)
-        app/*@START_MENU_TOKEN@*/.buttons["Join game"]/*[[".otherElements[\"mainMenuView\"].buttons[\"Join game\"]",".buttons[\"Join game\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app.navigationBars["Tankz.JoinGameView"].buttons["Back"].tap()
         XCTAssertTrue(app.isDisplayingMainMenu)
     }
     
@@ -63,5 +57,22 @@ class TankzUITests: XCTestCase {
         XCTAssertTrue(app.isDisplayingGame)
     }
     
+    func testFullUI() {
+        app/*@START_MENU_TOKEN@*/.buttons["Create game"]/*[[".otherElements[\"mainMenuView\"].buttons[\"Create game\"]",".buttons[\"Create game\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.navigationBars["Tankz.GameLobbyView"].buttons["Back"].tap()
+        XCTAssertTrue(app.isDisplayingMainMenu)
+        app/*@START_MENU_TOKEN@*/.buttons["Join game"]/*[[".otherElements[\"mainMenuView\"].buttons[\"Join game\"]",".buttons[\"Join game\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        XCTAssertTrue(app.isDisplayingJoinGame)
+        app.navigationBars["Tankz.JoinGameView"].buttons["Back"].tap()
+        XCTAssertTrue(app.isDisplayingMainMenu)
+        app.buttons["Scoreboard"].tap()
+        XCTAssertTrue(app.isDisplayingScoreboard)
+        app.navigationBars["Tankz.ScoreboardView"].buttons["Back"].tap()
+        app/*@START_MENU_TOKEN@*/.buttons["Create game"]/*[[".otherElements[\"mainMenuView\"].buttons[\"Create game\"]",".buttons[\"Create game\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.buttons["Go to gameScene"].tap()
+        XCTAssertTrue(app.isDisplayingGame)
+        app.buttons["Exit game"].tap()
+        XCTAssertTrue(app.isDisplayingMainMenu)
+    }
     
 }

@@ -19,7 +19,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var ammoFactory : AmmoFactory!
     public var tank1 : Tank!
     public var tank2 : Tank!
-    private var map : SKShapeNode!
+    private var map : Map!
     private var liveAmmo : Ammo!
     private var height : CGFloat!
     private var width : CGFloat!
@@ -41,8 +41,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Generate the world map.
         mapFactory = MapFactory(skSceneWidth: CGFloat(self.size.width))
-        map = mapFactory.makeMap(MapType: .flat)
-        self.addChild(map)
+        map = mapFactory.makeMap(mapType: .flat)
+        self.addChild(map.ground)
         
         
         // Generate a tank from the factory.
@@ -72,16 +72,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func fire(ammoType: AmmoType, tank: Tank, touchDownPos : CGPoint, touchUpPos : CGPoint){ //Arguments might not be needed
+    func fire(ammoType: AmmoType, tank: Tank, fireVector: CGVector){ //Arguments might not be needed
         self.liveAmmo = ammoFactory.makeAmmo(ammotype: ammoType)
-        
-        let xDrag = touchDownPos.x - touchUpPos.x
-        let yDrag = touchDownPos.y - touchUpPos.y
-        let scale = CGFloat(4)
-        
-        let velocity = CGVector(dx: xDrag * scale, dy: yDrag * scale)
         self.liveAmmo.projectile.position = CGPoint(x: self.tank1.body.position.x , y: self.tank1.body.position.y + 10)
-        self.liveAmmo.projectile.physicsBody?.velocity = velocity
+        self.liveAmmo.projectile.physicsBody?.velocity = fireVector
         self.addChild(self.liveAmmo.projectile)
         
         
@@ -121,7 +115,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        fire(ammoType: self.chosenAmmo, tank: tank1, touchDownPos: self.touchDownPos, touchUpPos: pos)
+        let xDrag = self.touchDownPos.x - pos.x
+        let yDrag = self.touchDownPos.y - pos.y
+        let scale = CGFloat(4)
+        let fireVector = CGVector(dx: xDrag * scale, dy: yDrag * scale)
+        fire(ammoType: self.chosenAmmo, tank: tank1, fireVector: fireVector)
     }
     
     //Listener for when touch began
@@ -134,13 +132,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if name == "leftButton" {
                 if self.tank1.body.action(forKey: "moveLeft") == nil { // check that there's no action running
                     let moveLeft = SKAction.moveBy(x: -20, y: 5, duration: 0.5)
-                    
                     self.tank1.body.run(SKAction.sequence([moveLeft]), withKey:"moveLeft")
                 }
             } else if name == "rightButton" {
                 if self.tank1.body.action(forKey: "moveRight") == nil { // check that there's no action running
                     let moveRight = SKAction.moveBy(x: 20, y: 5, duration: 0.5)
-                    
                     self.tank1.body.run(SKAction.sequence([moveRight]), withKey:"moveRight")
                 }
             } else {
