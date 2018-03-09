@@ -16,9 +16,9 @@ class TankzUnitTests: XCTestCase {
     var gameScene : GameScene!
     
     var tankFactory : TankFactory!
-    var small : SKShapeNode!
-    var big : SKShapeNode!
-    var funny : SKShapeNode!
+    var small : Tank!
+    var big : Tank!
+    var funny : Tank!
     
     var mapFactory : MapFactory!
     var map : SKShapeNode!
@@ -44,45 +44,46 @@ class TankzUnitTests: XCTestCase {
     
     func testFactory() {
         XCTAssertTrue(tankFactory.iHaveMadeSoManyTanks == 0)
-        small = tankFactory.makeTank(tanktype: .smallTank, tankName: "SmallTank")
+        small = tankFactory.makeTank(tanktype: .smallTank, tankName: "SmallTank", color: UIColor.black)
         XCTAssertTrue(tankFactory.iHaveMadeSoManyTanks == 1)
-        big = tankFactory.makeTank(tanktype: .bigTank, tankName: "BigTank")
+        big = tankFactory.makeTank(tanktype: .bigTank, tankName: "BigTank", color: UIColor.black)
         XCTAssertTrue(tankFactory.iHaveMadeSoManyTanks == 2)
-        funny = tankFactory.makeTank(tanktype: .funnyTank, tankName: "FunnyTank")
+        funny = tankFactory.makeTank(tanktype: .funnyTank, tankName: "FunnyTank", color: UIColor.black)
         XCTAssertTrue(tankFactory.iHaveMadeSoManyTanks == 3)
+        XCTAssertTrue(tankFactory.name.isEqual("TankFactory Inc."))
     }
     
     func testTankSizes() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        small = tankFactory.makeTank(tanktype: .smallTank, tankName: "SmallTank")
-        big = tankFactory.makeTank(tanktype: .bigTank, tankName: "BigTank")
-        funny = tankFactory.makeTank(tanktype: .funnyTank, tankName: "FunnyTank")
+        small = tankFactory.makeTank(tanktype: .smallTank, tankName: "SmallTank", color: UIColor.black)
+        big = tankFactory.makeTank(tanktype: .bigTank, tankName: "BigTank", color: UIColor.black)
+        funny = tankFactory.makeTank(tanktype: .funnyTank, tankName: "FunnyTank", color: UIColor.black)
         
-        XCTAssertTrue(small.frame.height < big.frame.height)
-        XCTAssertTrue(small.frame.height < funny.frame.height)
-        XCTAssertTrue(big.frame.height < funny.frame.height)
+        XCTAssertTrue(small.body.frame.height < big.body.frame.height)
+        XCTAssertTrue(small.body.frame.height < funny.body.frame.height)
+        XCTAssertTrue(big.body.frame.height < funny.body.frame.height)
     }
     
     func testTankNames() {
-        small = tankFactory.makeTank(tanktype: .smallTank, tankName: "SmallTank")
-        big = tankFactory.makeTank(tanktype: .bigTank, tankName: "BigTank")
-        funny = tankFactory.makeTank(tanktype: .funnyTank, tankName: "FunnyTank")
+        small = tankFactory.makeTank(tanktype: .smallTank, tankName: "SmallTank", color: UIColor.black)
+        big = tankFactory.makeTank(tanktype: .bigTank, tankName: "BigTank", color: UIColor.black)
+        funny = tankFactory.makeTank(tanktype: .funnyTank, tankName: "FunnyTank", color: UIColor.black)
         
-        XCTAssertTrue((small.name?.isEqual("SmallTank"))!)
-        XCTAssertTrue((big.name?.isEqual("BigTank"))!)
-        XCTAssertTrue((funny.name?.isEqual("FunnyTank"))!)
+        XCTAssertTrue((small.body.name?.isEqual("SmallTank"))!)
+        XCTAssertTrue((big.body.name?.isEqual("BigTank"))!)
+        XCTAssertTrue((funny.body.name?.isEqual("FunnyTank"))!)
     }
     
     func testTankColors() {
-        small = tankFactory.makeTank(tanktype: .smallTank, tankName: "SmallTank")
-        big = tankFactory.makeTank(tanktype: .bigTank, tankName: "BigTank")
-        funny = tankFactory.makeTank(tanktype: .funnyTank, tankName: "FunnyTank")
+        small = tankFactory.makeTank(tanktype: .smallTank, tankName: "SmallTank", color: UIColor(named: "militaryGreenLight")!)
+        big = tankFactory.makeTank(tanktype: .bigTank, tankName: "BigTank", color: UIColor(named: "militaryGreenDark")!)
+        funny = tankFactory.makeTank(tanktype: .funnyTank, tankName: "FunnyTank", color: UIColor(named: "militaryRed")!)
         
-        XCTAssertTrue(small.fillColor == UIColor(named: "militaryGreenLight"))
-        XCTAssertTrue(big.fillColor == UIColor(named: "militaryGreenDark"))
-        XCTAssertTrue(funny.fillColor == UIColor(named: "militaryRed"))
+        XCTAssertTrue(small.body.fillColor == UIColor(named: "militaryGreenLight"))
+        XCTAssertTrue(big.body.fillColor == UIColor(named: "militaryGreenDark"))
+        XCTAssertTrue(funny.body.fillColor == UIColor(named: "militaryRed"))
     }
     
     func testMapGround() {

@@ -33,70 +33,27 @@ class TankFactory {
     */
     
     public let name = "TankFactory Inc."
+    
     var iHaveMadeSoManyTanks = 0
     
-    public func makeTank(tanktype: TankType, tankName: String) -> SKShapeNode {
-        var tank : SKShapeNode
+    public func makeTank(tanktype: TankType, tankName: String, color: UIColor) -> Tank {
         
-        switch tanktype {
-        case .smallTank:
-            tank = SmallTank(tankName: tankName).tank
-            tank.physicsBody?.mass = 1
-        case .bigTank:
-            tank = BigTank(tankName: tankName).tank
-            tank.physicsBody?.mass = 3
-        case .funnyTank:
-            tank = FunnyTank(tankName: tankName).tank
-            tank.physicsBody?.mass = 2
-        }
-        
+        let tank = Tank(tankType: tanktype, tankName: tankName, color: color)
         
         iHaveMadeSoManyTanks += 1
         
         // Physics on the tank body.
-        tank.physicsBody?.affectedByGravity = true
-        tank.physicsBody?.friction = 1.0
-        tank.physicsBody?.restitution = 0.0
-        tank.physicsBody?.linearDamping = 1.0
-        tank.physicsBody?.angularDamping = 1.0
-        tank.physicsBody!.categoryBitMask = PhysicsCategory.Tank
-        tank.physicsBody!.collisionBitMask = PhysicsCategory.Edge | PhysicsCategory.Projectile | PhysicsCategory.Tank | PhysicsCategory.Ground
-        tank.physicsBody?.usesPreciseCollisionDetection = true
+        tank.body.physicsBody?.affectedByGravity = true
+        tank.body.physicsBody?.friction = 1.0
+        tank.body.physicsBody?.restitution = 0.0
+        tank.body.physicsBody?.linearDamping = 1.0
+        tank.body.physicsBody?.angularDamping = 1.0
+        tank.body.physicsBody!.categoryBitMask = PhysicsCategory.Tank
+        tank.body.physicsBody!.collisionBitMask = PhysicsCategory.Edge | PhysicsCategory.Projectile | PhysicsCategory.Tank | PhysicsCategory.Ground
+        tank.body.physicsBody?.usesPreciseCollisionDetection = true
         
         return tank
     }
     
-    // Class for SmallTank
-    class SmallTank {
-        public var tank: SKShapeNode
-        init(tankName: String) {
-            tank = SKShapeNode(rectOf: CGSize(width: 20, height: 10))
-            tank.fillColor = UIColor(named: "militaryGreenLight")!
-            tank.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 20, height: 10))
-            tank.name = tankName
-        }
-    }
-    
-    // Class for BigTank
-    class BigTank {
-        public var tank : SKShapeNode
-        init(tankName: String) {
-            tank = SKShapeNode(rectOf: CGSize(width: 40, height: 20))
-            tank.fillColor = UIColor(named: "militaryGreenDark")!
-            tank.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 40, height: 20))
-            tank.name = tankName
-        }
-    }
-    
-    // Class for FunnyTank
-    class FunnyTank {
-        public var tank: SKShapeNode
-        init(tankName: String) {
-            tank = SKShapeNode(rectOf: CGSize(width: 40, height: 80))
-            tank.fillColor = UIColor(named: "militaryRed")!
-            tank.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 40, height: 80))
-            tank.name = tankName
-        }
-    }
-    
 }
+

@@ -39,8 +39,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var tankFactory : TankFactory!
     private var mapFactory : MapFactory!
     private var ammoFactory : AmmoFactory!
-    private var tank1 : SKShapeNode!
-    private var tank2 : SKShapeNode!
+    private var tank1 : Tank!
+    private var tank2 : Tank!
     private var map : SKShapeNode!
     private var ammo : SKShapeNode!
     private var height : CGFloat!
@@ -67,26 +67,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Generate a tank from the factory.
         tankFactory = TankFactory()
-        tank1 = tankFactory.makeTank(tanktype: .bigTank, tankName: "Player 1")
-        placeTank(tank: tank1)
-        tank2 = tankFactory.makeTank(tanktype: .funnyTank, tankName: "Player 2")
-        placeTank(tank: tank2)
+        tank1 = tankFactory.makeTank(tanktype: .bigTank, tankName: "Player 1", color: UIColor(named: "militaryGreenLight")!)
+        placeTank(tankBody: tank1.body)
+        tank2 = tankFactory.makeTank(tanktype: .funnyTank, tankName: "Player 2", color: UIColor(named: "militaryGreenDark")!)
+        placeTank(tankBody: tank2.body)
         
-        self.addChild(tank1)
-        self.addChild(tank2)
+        self.addChild(tank1.body)
+        self.addChild(tank2.body)
         
     }
     
     func setTankPos(){
-        self.tank1.position = CGPoint(x: 100, y: 500)
+        self.tank1.body.position = CGPoint(x: 100, y: 500)
     }
     
     
-    func placeTank(tank: SKShapeNode) {
+    func placeTank(tankBody: SKShapeNode) {
         if tankFactory.iHaveMadeSoManyTanks == 1 {
-            tank.position = CGPoint(x: 100 + tank.frame.width/2,y: 300 + tank.frame.height/2)
+            tankBody.position = CGPoint(x: 100 + tankBody.frame.width/2,y: 300 + tankBody.frame.height/2)
         } else if tankFactory.iHaveMadeSoManyTanks == 2 {
-            tank.position = CGPoint(x: self.frame.width - 100 - tank.frame.width/2,y: 300 + tank.frame.height/2)
+            tankBody.position = CGPoint(x: self.frame.width - 100 - tankBody.frame.width/2,y: 300 + tankBody.frame.height/2)
         }
     }
     
@@ -134,16 +134,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if let name = touchedNode.name {
             if name == "leftButton" {
-                if self.tank1.action(forKey: "moveLeft") == nil { // check that there's no jump action running
+                if self.tank1.body.action(forKey: "moveLeft") == nil { // check that there's no jump action running
                     let moveLeft = SKAction.moveBy(x: -20, y: 5, duration: 0.5)
                     
-                    self.tank1.run(SKAction.sequence([moveLeft]), withKey:"moveLeft")
+                    self.tank1.body.run(SKAction.sequence([moveLeft]), withKey:"moveLeft")
                 }
             } else if name == "rightButton" {
-                if self.tank1.action(forKey: "moveRight") == nil { // check that there's no jump action running
+                if self.tank1.body.action(forKey: "moveRight") == nil { // check that there's no jump action running
                     let moveRight = SKAction.moveBy(x: 20, y: 5, duration: 0.5)
                     
-                    self.tank1.run(SKAction.sequence([moveRight]), withKey:"moveRight")
+                    self.tank1.body.run(SKAction.sequence([moveRight]), withKey:"moveRight")
                 }
             } else {
                 self.touchDown(atPoint: positionInScene)
@@ -167,7 +167,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func fire(touchDownPos : CGPoint, touchUpPos : CGPoint){ //Arguments might not be needed
         // Generate ammo from the factory.
-        ammoFactory = AmmoFactory(touchDownPos: touchDownPos, touchUpPos: touchUpPos, tank : self.tank1) //choose shooting tank based on turn when implementing turnbased
+        ammoFactory = AmmoFactory(touchDownPos: touchDownPos, touchUpPos: touchUpPos, tank : self.tank1.body) //choose shooting tank based on turn when implementing turnbased
         ammo = ammoFactory.makeAmmo(ammotype: .missile)
         self.addChild(ammo)
         
