@@ -10,28 +10,6 @@ import SpriteKit
 import GameplayKit
 
 
-// Tank types.
-enum TankType {
-    case smallTank
-    case bigTank
-    case funnyTank
-}
-
-// Map types.
-enum MapType {
-    case flat
-    case flatty
-    case hills
-}
-
-
-// Ammo types.
-enum AmmoType {
-    case missile
-    case clusterBomb
-    case funnyBomb
-}
-
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     weak var viewController: GameViewController!
@@ -42,9 +20,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     public var tank1 : Tank!
     public var tank2 : Tank!
     private var map : SKShapeNode!
-    private var ammo : SKShapeNode!
+    private var liveAmmo : Ammo!
     private var height : CGFloat!
     private var width : CGFloat!
+    
+    private var chosenAmmo : AmmoType = .missile
     
     private var touchDownPos : CGPoint!
     
@@ -72,6 +52,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tank2 = tankFactory.makeTank(tanktype: .funnyTank, tankName: "Player 2", color: UIColor(named: "militaryGreenDark")!)
         placeTank(tankBody: tank2.body)
         
+        ammoFactory = AmmoFactory()
+        
         self.addChild(tank1.body)
         self.addChild(tank2.body)
         
@@ -90,11 +72,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    // Called before each frame is rendered
-    override func update(_ currentTime: TimeInterval) {
+    func fire(ammoType: AmmoType, tank: Tank, touchDownPos : CGPoint, touchUpPos : CGPoint){ //Arguments might not be needed
+        self.liveAmmo = ammoFactory.makeAmmo(ammotype: ammoType)
         
+        let xDrag = touchDownPos.x - touchUpPos.x
+        let yDrag = touchDownPos.y - touchUpPos.y
+        let scale = CGFloat(4)
+        
+        let velocity = CGVector(dx: xDrag * scale, dy: yDrag * scale)
+        self.liveAmmo.projectile.position = CGPoint(x: self.tank1.body.position.x , y: self.tank1.body.position.y + 10)
+        self.liveAmmo.projectile.physicsBody?.velocity = velocity
+        self.addChild(self.liveAmmo.projectile)
+        
+        
+        //let deleteAmmo = ammo.run(SKAction.removeFromParent()) //to delete ammo on hit
     }
-
+    
     
     //Create player area with bounderies, together with physics
     func createArea() {
@@ -114,6 +107,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.height = self.frame.height
     }
     
+    // Called before each frame is rendered
+    override func update(_ currentTime: TimeInterval) {
+        
+    }
+    
     func touchDown(atPoint pos : CGPoint) {
         self.touchDownPos = pos
     }
@@ -123,7 +121,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        fire(touchDownPos: self.touchDownPos, touchUpPos: pos)
+        fire(ammoType: self.chosenAmmo, tank: tank1, touchDownPos: self.touchDownPos, touchUpPos: pos)
     }
     
     //Listener for when touch began
@@ -134,13 +132,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if let name = touchedNode.name {
             if name == "leftButton" {
-                if self.tank1.body.action(forKey: "moveLeft") == nil { // check that there's no jump action running
+                if self.tank1.body.action(forKey: "moveLeft") == nil { // check that there's no action running
                     let moveLeft = SKAction.moveBy(x: -20, y: 5, duration: 0.5)
                     
                     self.tank1.body.run(SKAction.sequence([moveLeft]), withKey:"moveLeft")
                 }
             } else if name == "rightButton" {
-                if self.tank1.body.action(forKey: "moveRight") == nil { // check that there's no jump action running
+                if self.tank1.body.action(forKey: "moveRight") == nil { // check that there's no action running
                     let moveRight = SKAction.moveBy(x: 20, y: 5, duration: 0.5)
                     
                     self.tank1.body.run(SKAction.sequence([moveRight]), withKey:"moveRight")
@@ -165,23 +163,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
     
-    func fire(touchDownPos : CGPoint, touchUpPos : CGPoint){ //Arguments might not be needed
-        // Generate ammo from the factory.
-        ammoFactory = AmmoFactory(touchDownPos: touchDownPos, touchUpPos: touchUpPos, tank : self.tank1.body) //choose shooting tank based on turn when implementing turnbased
-        ammo = ammoFactory.makeAmmo(ammotype: .missile)
-        self.addChild(ammo)
-        
-        let xDrag = touchDownPos.x - touchUpPos.x
-        let yDrag = touchDownPos.y - touchUpPos.y
-        let scale = CGFloat(4)
-        
-        let velocity = CGVector(dx: xDrag * scale, dy: yDrag * scale)
-        ammo.physicsBody?.velocity = velocity
-        
-        
-        //let deleteAmmo = ammo.run(SKAction.removeFromParent()) //to delete ammo on hit
-        
-    }
     
 }
 
