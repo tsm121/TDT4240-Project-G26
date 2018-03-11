@@ -21,7 +21,7 @@ class TankzUnitTests: XCTestCase {
     var funny : Tank!
     
     var mapFactory : MapFactory!
-    var map : SKShapeNode!
+    var map : Map!
     
     override func setUp() {
         super.setUp()
@@ -87,17 +87,17 @@ class TankzUnitTests: XCTestCase {
     }
     
     func testMapGround() {
-        map = mapFactory.makeMap(MapType: .flat)
-        XCTAssertTrue((map.name?.isEqual("FlatGround"))!)
-        map = mapFactory.makeMap(MapType: .flatty)
-        XCTAssertTrue((map.name?.isEqual("FlattyGround"))!)
-        map = mapFactory.makeMap(MapType: .hills)
-        XCTAssertTrue((map.name?.isEqual("HillsGround"))!)
+        map = mapFactory.makeMap(mapType: .flat)
+        XCTAssertTrue((map.ground.name?.isEqual("FlatGround"))!)
+        map = mapFactory.makeMap(mapType: .flatty)
+        XCTAssertTrue((map.ground.name?.isEqual("FlattyGround"))!)
+        map = mapFactory.makeMap(mapType: .hills)
+        XCTAssertTrue((map.ground.name?.isEqual("HillsGround"))!)
     }
     
     func testMapColors() {
-        map = mapFactory.makeMap(MapType: .flat)
-        XCTAssertTrue(map.fillColor == UIColor(named: "groundBrown"))
+        map = mapFactory.makeMap(mapType: .flat)
+        XCTAssertTrue(map.ground.fillColor == UIColor(named: "groundBrown"))
     }
     
     func testPerformanceExample() {

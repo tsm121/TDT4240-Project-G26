@@ -63,7 +63,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.tank1.body.position = CGPoint(x: 100, y: 500)
     }
     
-    
     func placeTank(tankBody: SKShapeNode) {
         if tankFactory.iHaveMadeSoManyTanks == 1 {
             tankBody.position = CGPoint(x: 100 + tankBody.frame.width/2,y: 300 + tankBody.frame.height/2)
