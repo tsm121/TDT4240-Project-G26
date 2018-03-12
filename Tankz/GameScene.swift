@@ -139,7 +139,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if let name = touchedNode.name {
             if name == "leftButton" {
-                
             } else if name == "rightButton" {
             } else {
                 self.touchDown(atPoint: positionInScene)
