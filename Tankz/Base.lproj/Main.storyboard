@@ -175,7 +175,7 @@
                     </view>
                     <connections>
                         <outlet property="anglePicker" destination="YdM-M8-ncG" id="v7g-fD-OMr"/>
-                        <outlet property="movesLabel" destination="YQd-Dy-lky" id="UNY-LC-GSA"/>
+                        <outlet property="fuelLabel" destination="YQd-Dy-lky" id="W2p-TG-eqa"/>
                         <outlet property="powerPicker" destination="YtM-jY-zvW" id="V5g-8h-Npb"/>
                     </connections>
                 </viewController>
