@@ -25,6 +25,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var width : CGFloat!
     
     private var chosenAmmo : AmmoType = .missile
+    public var currentTank : Tank!
     
     private var touchDownPos : CGPoint!
     
@@ -52,6 +53,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tank2 = tankFactory.makeTank(tanktype: .funnyTank, tankName: "Player 2", color: UIColor(named: "militaryGreenDark")!)
         placeTank(tankBody: tank2.body)
         
+        currentTank = tank1
         ammoFactory = AmmoFactory()
         
         self.addChild(tank1.body)
@@ -71,14 +73,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func fire(ammoType: AmmoType, tank: Tank, fireVector: CGVector){ //Arguments might not be needed
+    func fire(ammoType: AmmoType, fireVector: CGVector){ //Arguments might not be needed
         self.liveAmmo = ammoFactory.makeAmmo(ammotype: ammoType)
-        self.liveAmmo.projectile.position = CGPoint(x: self.tank1.body.position.x , y: self.tank1.body.position.y + 10)
+        self.liveAmmo.projectile.position = CGPoint(x: self.currentTank.body.position.x , y: self.currentTank.body.position.y + 10)
         self.liveAmmo.projectile.physicsBody?.velocity = fireVector
         self.addChild(self.liveAmmo.projectile)
-        
+        nextTurn()
         
         //let deleteAmmo = ammo.run(SKAction.removeFromParent()) //to delete ammo on hit
+    }
+    
+    func nextTurn() {
+        if (tank1.body.name?.isEqual(currentTank.body.name))! {
+            currentTank = tank2
+        } else {
+            currentTank = tank1
+        }
     }
     
     
@@ -118,7 +128,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let yDrag = self.touchDownPos.y - pos.y
         let scale = CGFloat(4)
         let fireVector = CGVector(dx: xDrag * scale, dy: yDrag * scale)
-        fire(ammoType: self.chosenAmmo, tank: tank1, fireVector: fireVector)
+        fire(ammoType: self.chosenAmmo, fireVector: fireVector)
     }
     
     //Listener for when touch began
@@ -129,15 +139,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if let name = touchedNode.name {
             if name == "leftButton" {
-                if self.tank1.body.action(forKey: "moveLeft") == nil { // check that there's no action running
-                    let moveLeft = SKAction.moveBy(x: -20, y: 5, duration: 0.5)
-                    self.tank1.body.run(SKAction.sequence([moveLeft]), withKey:"moveLeft")
-                }
+                
             } else if name == "rightButton" {
-                if self.tank1.body.action(forKey: "moveRight") == nil { // check that there's no action running
-                    let moveRight = SKAction.moveBy(x: 20, y: 5, duration: 0.5)
-                    self.tank1.body.run(SKAction.sequence([moveRight]), withKey:"moveRight")
-                }
             } else {
                 self.touchDown(atPoint: positionInScene)
             }

@@ -58,7 +58,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     //Setting number of moves
     private func setNumMoves(numMoves: Int){
-        self.numMoves = 5
+        self.numMoves = 10
         movesLabel.text = String(numMoves)
     }
     
@@ -66,10 +66,11 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBAction func moveLeftAction(_ sender: Any) {
         if self.useMove() {
             //Run tank action here
-            if self.currentGame.tank1.body.action(forKey: "moveLeft") == nil { // check that there's no jump action running
-                let moveRight = self.currentGame.tank1.moveLeft
-                
-                self.currentGame.tank1.body.run(SKAction.sequence([moveRight]), withKey:"moveLeft")
+            if self.currentGame.currentTank.body.action(forKey: "moveLeft") == nil { // check that there's no jump action running
+                if currentGame.currentTank.fuel > 0 {
+                    currentGame.currentTank.body.run(SKAction.sequence([currentGame.currentTank.moveLeft]), withKey:"moveLeft")
+                    currentGame.currentTank.useFuel()
+                }
             }
         }
     }
@@ -79,15 +80,15 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         if self.useMove() {
             //Run tank action here
             if self.currentGame.tank1.body.action(forKey: "moveRight") == nil { // check that there's no jump action running
-                let moveRight = self.currentGame.tank1.moveRight
-                
-                self.currentGame.tank1.body.run(SKAction.sequence([moveRight]), withKey:"moveRight")
+                if currentGame.currentTank.fuel > 0 {
+                    currentGame.currentTank.body.run(SKAction.sequence([currentGame.currentTank.moveRight]), withKey:"moveRight")
+                    currentGame.currentTank.useFuel()
+                }
             }
         }
     }
     
     private func useMove() -> Bool {
-        
         if self.numMoves >= 1 {
             self.numMoves -= 1
             self.movesLabel.text = String(numMoves)
