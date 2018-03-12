@@ -61,6 +61,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    //Returns this users tank
+    //TODO: Need to get a check if which tank this is, currently player1
+    public func getMyTank() -> Tank{
+        return self.tank1
+    }
+    
+    public func moveTankLeft() {
+        if self.currentTank.hasFuel() {
+            //Run tank action here
+            if self.currentTank.body.action(forKey: "moveLeft") == nil { // check that there's no jump action running
+                if self.currentTank.fuel > 0 {
+                    self.currentTank.body.run(SKAction.sequence([self.currentTank.moveLeft]), withKey:"moveLeft")
+                    self.currentTank.useFuel()
+                    self.viewController.setFuelLabel()
+                }
+            }
+        }
+    }
+    
+    public func moveTankRight() {
+        if self.currentTank.hasFuel() {
+            //Run tank action here
+            if self.currentTank.body.action(forKey: "moveRight") == nil { // check that there's no jump action running
+                if self.currentTank.fuel > 0 {
+                    self.currentTank.body.run(SKAction.sequence([self.currentTank.moveRight]), withKey:"moveRight")
+                    self.currentTank.useFuel()
+                    self.viewController.setFuelLabel()
+                }
+            }
+        }
+    }
+    
     func setTankPos(){
         self.tank1.body.position = CGPoint(x: 100, y: 500)
     }

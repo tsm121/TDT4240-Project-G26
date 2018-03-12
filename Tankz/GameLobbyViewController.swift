@@ -152,28 +152,6 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         Multiplayer.shared.ceaseAdvertisingAsHost()
     }
-    
-    /*func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = lobbyTable.dequeueReusableCell(withIdentifier: "lobbyCell") as! LobbyTableViewCell
-        
-        let user = lobbyUsers[indexPath.row]
-        let cellText: String
-        cell.playerNameLabel.text = user.getPlayerName()
-        
-        //Set a given status label from ready to not ready, or vica versa
-        if user.getReadyStatus() {
-            cellText = "Not ready"
-            cell.readyStatusLabel.textColor = UIColor(named: "militaryRed")
-        } else {
-            cellText = "Ready"
-            cell.readyStatusLabel.textColor = UIColor(named: "lightGreen")
-        }
-        
-        cell.readyStatusLabel.text = cellText
-        cell.readyStatusIcon.isHidden = user.getReadyStatus()
-
-        return cell
-    }*/
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

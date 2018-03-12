@@ -60,7 +60,13 @@ class Tank {
     }
     
     
-    func useFuel() {
+    public func useFuel() {
         self.fuel -= 1
+    }
+    
+    public func hasFuel() -> Bool {
+        if self.fuel >= 1 {
+            return true
+        } else {return false}
     }
 }
