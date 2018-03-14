@@ -19,24 +19,39 @@
 		1B3E7C80204FF66000744D17 /* AmmoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3E7C7C204FF66000744D17 /* AmmoFactory.swift */; };
 		1B3E7C81204FF66000744D17 /* ScoreboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3E7C7D204FF66000744D17 /* ScoreboardViewController.swift */; };
 		1B3E7C82204FF66000744D17 /* TankFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3E7C7E204FF66000744D17 /* TankFactory.swift */; };
+		1B619D62205033FC00C713F5 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B619D61205033FC00C713F5 /* Player.swift */; };
 		1B6E2390204DA52200138EDA /* GameLobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E238F204DA52200138EDA /* GameLobbyViewController.swift */; };
 		1B6E2392204DA55D00138EDA /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E2391204DA55D00138EDA /* MainMenuViewController.swift */; };
 		1B6E2394204DA91C00138EDA /* JoinGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E2393204DA91C00138EDA /* JoinGameViewController.swift */; };
 		1B6E2399204DC46200138EDA /* WarWound.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1B6E2398204DC46200138EDA /* WarWound.otf */; };
 		1BD8A5AD204EA7CD00104DEC /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8A5AC204EA7CD00104DEC /* GameTableViewCell.swift */; };
 		1BD8A5AF204ED62A00104DEC /* LobbyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8A5AE204ED62A00104DEC /* LobbyTableViewCell.swift */; };
+		5B0261CE205143A500A9F7BA /* XCUIApplication+Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0261CD205143A500A9F7BA /* XCUIApplication+Scoreboard.swift */; };
+		5B5D5B702050650000018A04 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D5B6F2050650000018A04 /* UIColor+Extension.swift */; };
+		5B81FEBF20501C9D00E9F68F /* TankzUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B81FEBE20501C9D00E9F68F /* TankzUITests.swift */; };
+		5B81FECD20501D4700E9F68F /* TankzUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B81FECC20501D4700E9F68F /* TankzUnitTests.swift */; };
+		5B81FED520502AEE00E9F68F /* XCUIApplication+GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B81FED420502AEE00E9F68F /* XCUIApplication+GameView.swift */; };
+		5B81FED720502B4C00E9F68F /* XCUIApplication+MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B81FED620502B4C00E9F68F /* XCUIApplication+MainMenu.swift */; };
+		5B81FEDB20502BA700E9F68F /* XCUIApplication+GameLobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B81FEDA20502BA700E9F68F /* XCUIApplication+GameLobby.swift */; };
+		5B81FEDD20502BD700E9F68F /* XCUIApplication+JoinGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B81FEDC20502BD700E9F68F /* XCUIApplication+JoinGame.swift */; };
+		5BB82CCF20533A51004ADD6D /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB82CCE20533A51004ADD6D /* Map.swift */; };
+		5BC1788320528B4C001D82BB /* Tank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC1788220528B4C001D82BB /* Tank.swift */; };
+		5BE364F720531D8D009F5AEA /* Ammo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE364F620531D8D009F5AEA /* Ammo.swift */; };
+		5BE364F920532725009F5AEA /* enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE364F820532725009F5AEA /* enums.swift */; };
+		5BE364FB2053274C009F5AEA /* PhysicsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE364FA2053274C009F5AEA /* PhysicsCategory.swift */; };
+		91AEA831204ED69D00130575 /* ScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AEA830204ED69D00130575 /* ScoreTableViewCell.swift */; };
 		F94366EB204DB88800D224A3 /* Multiplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94366EA204DB88800D224A3 /* Multiplayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5BD23C37204DB76400223D09 /* PBXContainerItemProxy */ = {
+		5B81FEC120501C9D00E9F68F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1B328A28204D71C400B77F10 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1B328A2F204D71C500B77F10;
 			remoteInfo = Tankz;
 		};
-		5BD23C83204F2A4000223D09 /* PBXContainerItemProxy */ = {
+		5B81FECF20501D4700E9F68F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1B328A28204D71C400B77F10 /* Project object */;
 			proxyType = 1;
@@ -60,12 +75,31 @@
 		1B3E7C7C204FF66000744D17 /* AmmoFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmmoFactory.swift; sourceTree = "<group>"; };
 		1B3E7C7D204FF66000744D17 /* ScoreboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardViewController.swift; sourceTree = "<group>"; };
 		1B3E7C7E204FF66000744D17 /* TankFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TankFactory.swift; sourceTree = "<group>"; };
+		1B619D61205033FC00C713F5 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		1B6E238F204DA52200138EDA /* GameLobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLobbyViewController.swift; sourceTree = "<group>"; };
 		1B6E2391204DA55D00138EDA /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		1B6E2393204DA91C00138EDA /* JoinGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGameViewController.swift; sourceTree = "<group>"; };
 		1B6E2398204DC46200138EDA /* WarWound.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = WarWound.otf; sourceTree = "<group>"; };
 		1BD8A5AC204EA7CD00104DEC /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
 		1BD8A5AE204ED62A00104DEC /* LobbyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyTableViewCell.swift; sourceTree = "<group>"; };
+		5B0261CD205143A500A9F7BA /* XCUIApplication+Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Scoreboard.swift"; sourceTree = "<group>"; };
+		5B5D5B6F2050650000018A04 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		5B81FEBC20501C9D00E9F68F /* TankzUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TankzUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B81FEBE20501C9D00E9F68F /* TankzUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TankzUITests.swift; sourceTree = "<group>"; };
+		5B81FEC020501C9D00E9F68F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B81FECA20501D4700E9F68F /* TankzUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TankzUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B81FECC20501D4700E9F68F /* TankzUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TankzUnitTests.swift; sourceTree = "<group>"; };
+		5B81FECE20501D4700E9F68F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B81FED420502AEE00E9F68F /* XCUIApplication+GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+GameView.swift"; sourceTree = "<group>"; };
+		5B81FED620502B4C00E9F68F /* XCUIApplication+MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+MainMenu.swift"; sourceTree = "<group>"; };
+		5B81FEDA20502BA700E9F68F /* XCUIApplication+GameLobby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+GameLobby.swift"; sourceTree = "<group>"; };
+		5B81FEDC20502BD700E9F68F /* XCUIApplication+JoinGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+JoinGame.swift"; sourceTree = "<group>"; };
+		5BB82CCE20533A51004ADD6D /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		5BC1788220528B4C001D82BB /* Tank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tank.swift; sourceTree = "<group>"; };
+		5BE364F620531D8D009F5AEA /* Ammo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ammo.swift; sourceTree = "<group>"; };
+		5BE364F820532725009F5AEA /* enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enums.swift; sourceTree = "<group>"; };
+		5BE364FA2053274C009F5AEA /* PhysicsCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsCategory.swift; sourceTree = "<group>"; };
+		91AEA830204ED69D00130575 /* ScoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTableViewCell.swift; sourceTree = "<group>"; };
 		F94366EA204DB88800D224A3 /* Multiplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiplayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,14 +111,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5BD23C2F204DB76400223D09 /* Frameworks */ = {
+		5B81FEB920501C9D00E9F68F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5BD23C7B204F2A4000223D09 /* Frameworks */ = {
+		5B81FEC720501D4700E9F68F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -98,6 +132,8 @@
 			isa = PBXGroup;
 			children = (
 				1B328A32204D71C500B77F10 /* Tankz */,
+				5B81FEBD20501C9D00E9F68F /* TankzUITests */,
+				5B81FECB20501D4700E9F68F /* TankzUnitTests */,
 				1B328A31204D71C500B77F10 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -106,6 +142,8 @@
 			isa = PBXGroup;
 			children = (
 				1B328A30204D71C500B77F10 /* Tankz.app */,
+				5B81FEBC20501C9D00E9F68F /* TankzUITests.xctest */,
+				5B81FECA20501D4700E9F68F /* TankzUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,22 +151,30 @@
 		1B328A32204D71C500B77F10 /* Tankz */ = {
 			isa = PBXGroup;
 			children = (
+				1B328A3D204D71C500B77F10 /* Main.storyboard */,
 				1B328A37204D71C500B77F10 /* Actions.sks */,
-				1B328A33204D71C500B77F10 /* AppDelegate.swift */,
-				1BD8A5AE204ED62A00104DEC /* LobbyTableViewCell.swift */,
-				1BD8A5AC204EA7CD00104DEC /* GameTableViewCell.swift */,
-				1B3E7C7C204FF66000744D17 /* AmmoFactory.swift */,
-				1B3E7C7B204FF66000744D17 /* MapFactory.swift */,
-				1B3E7C7D204FF66000744D17 /* ScoreboardViewController.swift */,
-				1B3E7C7E204FF66000744D17 /* TankFactory.swift */,
 				1B328A35204D71C500B77F10 /* GameScene.sks */,
 				1B328A39204D71C500B77F10 /* GameScene.swift */,
-				1B328A3B204D71C500B77F10 /* GameViewController.swift */,
-				1B328A3D204D71C500B77F10 /* Main.storyboard */,
-				1B6E2393204DA91C00138EDA /* JoinGameViewController.swift */,
+				1B328A33204D71C500B77F10 /* AppDelegate.swift */,
 				1B6E2391204DA55D00138EDA /* MainMenuViewController.swift */,
-				F94366EA204DB88800D224A3 /* Multiplayer.swift */,
+				1B6E2393204DA91C00138EDA /* JoinGameViewController.swift */,
+				1B3E7C7D204FF66000744D17 /* ScoreboardViewController.swift */,
+				91AEA830204ED69D00130575 /* ScoreTableViewCell.swift */,
+				1BD8A5AC204EA7CD00104DEC /* GameTableViewCell.swift */,
 				1B6E238F204DA52200138EDA /* GameLobbyViewController.swift */,
+				1BD8A5AE204ED62A00104DEC /* LobbyTableViewCell.swift */,
+				1B328A3B204D71C500B77F10 /* GameViewController.swift */,
+				1B3E7C7C204FF66000744D17 /* AmmoFactory.swift */,
+				5BE364F620531D8D009F5AEA /* Ammo.swift */,
+				1B3E7C7B204FF66000744D17 /* MapFactory.swift */,
+				5BB82CCE20533A51004ADD6D /* Map.swift */,
+				1B3E7C7E204FF66000744D17 /* TankFactory.swift */,
+				5BC1788220528B4C001D82BB /* Tank.swift */,
+				1B619D61205033FC00C713F5 /* Player.swift */,
+				F94366EA204DB88800D224A3 /* Multiplayer.swift */,
+				5BE364F820532725009F5AEA /* enums.swift */,
+				5BE364FA2053274C009F5AEA /* PhysicsCategory.swift */,
+				5B5D5B6F2050650000018A04 /* UIColor+Extension.swift */,
 				1B328A40204D71C500B77F10 /* Assets.xcassets */,
 				1B6E2397204DC46200138EDA /* fonts */,
 				1B328A42204D71C500B77F10 /* LaunchScreen.storyboard */,
@@ -143,6 +189,29 @@
 				1B6E2398204DC46200138EDA /* WarWound.otf */,
 			);
 			path = fonts;
+			sourceTree = "<group>";
+		};
+		5B81FEBD20501C9D00E9F68F /* TankzUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5B81FEBE20501C9D00E9F68F /* TankzUITests.swift */,
+				5B81FED420502AEE00E9F68F /* XCUIApplication+GameView.swift */,
+				5B81FED620502B4C00E9F68F /* XCUIApplication+MainMenu.swift */,
+				5B81FEDC20502BD700E9F68F /* XCUIApplication+JoinGame.swift */,
+				5B0261CD205143A500A9F7BA /* XCUIApplication+Scoreboard.swift */,
+				5B81FEDA20502BA700E9F68F /* XCUIApplication+GameLobby.swift */,
+				5B81FEC020501C9D00E9F68F /* Info.plist */,
+			);
+			path = TankzUITests;
+			sourceTree = "<group>";
+		};
+		5B81FECB20501D4700E9F68F /* TankzUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				5B81FECC20501D4700E9F68F /* TankzUnitTests.swift */,
+				5B81FECE20501D4700E9F68F /* Info.plist */,
+			);
+			path = TankzUnitTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,38 +234,40 @@
 			productReference = 1B328A30204D71C500B77F10 /* Tankz.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5BD23C31204DB76400223D09 /* TankzUITests */ = {
+		5B81FEBB20501C9D00E9F68F /* TankzUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5BD23C3B204DB76400223D09 /* Build configuration list for PBXNativeTarget "TankzUITests" */;
+			buildConfigurationList = 5B81FEC520501C9D00E9F68F /* Build configuration list for PBXNativeTarget "TankzUITests" */;
 			buildPhases = (
-				5BD23C2E204DB76400223D09 /* Sources */,
-				5BD23C2F204DB76400223D09 /* Frameworks */,
-				5BD23C30204DB76400223D09 /* Resources */,
+				5B81FEB820501C9D00E9F68F /* Sources */,
+				5B81FEB920501C9D00E9F68F /* Frameworks */,
+				5B81FEBA20501C9D00E9F68F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5BD23C38204DB76400223D09 /* PBXTargetDependency */,
+				5B81FEC220501C9D00E9F68F /* PBXTargetDependency */,
 			);
 			name = TankzUITests;
 			productName = TankzUITests;
+			productReference = 5B81FEBC20501C9D00E9F68F /* TankzUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		5BD23C7D204F2A4000223D09 /* TankzUnitTests */ = {
+		5B81FEC920501D4700E9F68F /* TankzUnitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5BD23C87204F2A4000223D09 /* Build configuration list for PBXNativeTarget "TankzUnitTests" */;
+			buildConfigurationList = 5B81FED120501D4700E9F68F /* Build configuration list for PBXNativeTarget "TankzUnitTests" */;
 			buildPhases = (
-				5BD23C7A204F2A4000223D09 /* Sources */,
-				5BD23C7B204F2A4000223D09 /* Frameworks */,
-				5BD23C7C204F2A4000223D09 /* Resources */,
+				5B81FEC620501D4700E9F68F /* Sources */,
+				5B81FEC720501D4700E9F68F /* Frameworks */,
+				5B81FEC820501D4700E9F68F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5BD23C84204F2A4000223D09 /* PBXTargetDependency */,
+				5B81FED020501D4700E9F68F /* PBXTargetDependency */,
 			);
 			name = TankzUnitTests;
 			productName = TankzUnitTests;
+			productReference = 5B81FECA20501D4700E9F68F /* TankzUnitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -213,12 +284,12 @@
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
-					5BD23C31204DB76400223D09 = {
+					5B81FEBB20501C9D00E9F68F = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 1B328A2F204D71C500B77F10;
 					};
-					5BD23C7D204F2A4000223D09 = {
+					5B81FEC920501D4700E9F68F = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 1B328A2F204D71C500B77F10;
@@ -239,8 +310,8 @@
 			projectRoot = "";
 			targets = (
 				1B328A2F204D71C500B77F10 /* Tankz */,
-				5BD23C31204DB76400223D09 /* TankzUITests */,
-				5BD23C7D204F2A4000223D09 /* TankzUnitTests */,
+				5B81FEBB20501C9D00E9F68F /* TankzUITests */,
+				5B81FEC920501D4700E9F68F /* TankzUnitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -259,14 +330,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5BD23C30204DB76400223D09 /* Resources */ = {
+		5B81FEBA20501C9D00E9F68F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5BD23C7C204F2A4000223D09 /* Resources */ = {
+		5B81FEC820501D4700E9F68F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -284,44 +355,59 @@
 				1BD8A5AD204EA7CD00104DEC /* GameTableViewCell.swift in Sources */,
 				1B3E7C80204FF66000744D17 /* AmmoFactory.swift in Sources */,
 				1B328A3A204D71C500B77F10 /* GameScene.swift in Sources */,
+				91AEA831204ED69D00130575 /* ScoreTableViewCell.swift in Sources */,
 				1B6E2392204DA55D00138EDA /* MainMenuViewController.swift in Sources */,
 				1B6E2390204DA52200138EDA /* GameLobbyViewController.swift in Sources */,
+				5BE364F720531D8D009F5AEA /* Ammo.swift in Sources */,
+				5BC1788320528B4C001D82BB /* Tank.swift in Sources */,
+				5B5D5B702050650000018A04 /* UIColor+Extension.swift in Sources */,
+				5BB82CCF20533A51004ADD6D /* Map.swift in Sources */,
 				1B328A3C204D71C500B77F10 /* GameViewController.swift in Sources */,
 				F94366EB204DB88800D224A3 /* Multiplayer.swift in Sources */,
 				1B3E7C81204FF66000744D17 /* ScoreboardViewController.swift in Sources */,
 				1B6E2394204DA91C00138EDA /* JoinGameViewController.swift in Sources */,
+				5BE364F920532725009F5AEA /* enums.swift in Sources */,
 				1BD8A5AF204ED62A00104DEC /* LobbyTableViewCell.swift in Sources */,
 				1B3E7C82204FF66000744D17 /* TankFactory.swift in Sources */,
+				5BE364FB2053274C009F5AEA /* PhysicsCategory.swift in Sources */,
+				1B619D62205033FC00C713F5 /* Player.swift in Sources */,
 				1B328A34204D71C500B77F10 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5BD23C2E204DB76400223D09 /* Sources */ = {
+		5B81FEB820501C9D00E9F68F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B81FEDB20502BA700E9F68F /* XCUIApplication+GameLobby.swift in Sources */,
+				5B81FED520502AEE00E9F68F /* XCUIApplication+GameView.swift in Sources */,
+				5B81FEBF20501C9D00E9F68F /* TankzUITests.swift in Sources */,
+				5B81FED720502B4C00E9F68F /* XCUIApplication+MainMenu.swift in Sources */,
+				5B0261CE205143A500A9F7BA /* XCUIApplication+Scoreboard.swift in Sources */,
+				5B81FEDD20502BD700E9F68F /* XCUIApplication+JoinGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5BD23C7A204F2A4000223D09 /* Sources */ = {
+		5B81FEC620501D4700E9F68F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B81FECD20501D4700E9F68F /* TankzUnitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5BD23C38204DB76400223D09 /* PBXTargetDependency */ = {
+		5B81FEC220501C9D00E9F68F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1B328A2F204D71C500B77F10 /* Tankz */;
-			targetProxy = 5BD23C37204DB76400223D09 /* PBXContainerItemProxy */;
+			targetProxy = 5B81FEC120501C9D00E9F68F /* PBXContainerItemProxy */;
 		};
-		5BD23C84204F2A4000223D09 /* PBXTargetDependency */ = {
+		5B81FED020501D4700E9F68F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1B328A2F204D71C500B77F10 /* Tankz */;
-			targetProxy = 5BD23C83204F2A4000223D09 /* PBXContainerItemProxy */;
+			targetProxy = 5B81FECF20501D4700E9F68F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -457,6 +543,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Tankz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tdt4240.group26.Tankz;
@@ -471,6 +558,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Tankz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tdt4240.group26.Tankz;
@@ -480,13 +568,13 @@
 			};
 			name = Release;
 		};
-		5BD23C39204DB76400223D09 /* Debug */ = {
+		5B81FEC320501C9D00E9F68F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = TankzUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = TDT4240G26.TankzUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tdt4240.group26.TankzUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -494,13 +582,13 @@
 			};
 			name = Debug;
 		};
-		5BD23C3A204DB76400223D09 /* Release */ = {
+		5B81FEC420501C9D00E9F68F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = TankzUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = TDT4240G26.TankzUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tdt4240.group26.TankzUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -508,14 +596,14 @@
 			};
 			name = Release;
 		};
-		5BD23C85204F2A4000223D09 /* Debug */ = {
+		5B81FED220501D4700E9F68F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = TankzUnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = TDT4240G26.TankzUnitTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tdt4240.group26.TankzUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -523,14 +611,14 @@
 			};
 			name = Debug;
 		};
-		5BD23C86204F2A4000223D09 /* Release */ = {
+		5B81FED320501D4700E9F68F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = TankzUnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = TDT4240G26.TankzUnitTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tdt4240.group26.TankzUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -559,20 +647,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5BD23C3B204DB76400223D09 /* Build configuration list for PBXNativeTarget "TankzUITests" */ = {
+		5B81FEC520501C9D00E9F68F /* Build configuration list for PBXNativeTarget "TankzUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5BD23C39204DB76400223D09 /* Debug */,
-				5BD23C3A204DB76400223D09 /* Release */,
+				5B81FEC320501C9D00E9F68F /* Debug */,
+				5B81FEC420501C9D00E9F68F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5BD23C87204F2A4000223D09 /* Build configuration list for PBXNativeTarget "TankzUnitTests" */ = {
+		5B81FED120501D4700E9F68F /* Build configuration list for PBXNativeTarget "TankzUnitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5BD23C85204F2A4000223D09 /* Debug */,
-				5BD23C86204F2A4000223D09 /* Release */,
+				5B81FED220501D4700E9F68F /* Debug */,
+				5B81FED320501D4700E9F68F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

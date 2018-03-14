@@ -1,8 +1,8 @@
 //
-//  XCUIApplication+LobbyView.swift
+//  XCUIApplication+GameLobby.swift
 //  TankzUITests
 //
-//  Created by Martin Langmo Karlstrøm on 06.03.2018.
+//  Created by Martin Langmo Karlstrøm on 07.03.2018.
 //  Copyright © 2018 TDT4240-Group26. All rights reserved.
 //
 
@@ -13,4 +13,3 @@ extension XCUIApplication {
         return otherElements["gameLobbyView"].exists
     }
 }
-

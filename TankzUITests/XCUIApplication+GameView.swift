@@ -1,5 +1,5 @@
 //
-//  XCUIApplication+JoinGame.swift
+//  XCUIApplication+GameView.swift
 //  TankzUITests
 //
 //  Created by Martin Langmo Karlstrøm on 07.03.2018.
@@ -9,7 +9,7 @@
 import XCTest
 
 extension XCUIApplication {
-    var isDisplayingJoinGame: Bool {
-        return otherElements["joinGameView"].exists
+    var isDisplayingGame: Bool {
+        return otherElements["gameView"].exists
     }
 }

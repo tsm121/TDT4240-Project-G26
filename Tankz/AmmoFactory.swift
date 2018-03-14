@@ -6,10 +6,14 @@
 //  Copyright © 2018 TDT4240-Group26. All rights reserved.
 //
 
-import Foundation
+import SpriteKit
+
 
 class AmmoFactory {
     
-    
+    public func makeAmmo(ammotype: AmmoType) -> Ammo {
+        return Ammo(ammoType: ammotype)
+    }
     
 }
+
