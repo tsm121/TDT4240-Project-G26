@@ -246,6 +246,22 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SlS-JY-5ZN">
+                                <rect key="frame" x="376" y="333" width="72" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Not Ready"/>
+                                <connections>
+                                    <action selector="notReady:" destination="usC-V1-22A" eventType="touchUpInside" id="4xF-0x-Xx6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O8j-hf-CWi">
+                                <rect key="frame" x="317" y="335" width="43" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Ready"/>
+                                <connections>
+                                    <action selector="isReady:" destination="usC-V1-22A" eventType="touchUpInside" id="h9Y-aa-b2G"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" name="groundBrown"/>
                         <constraints>
@@ -287,8 +303,10 @@
                     </view>
                     <connections>
                         <outlet property="changeMapBtn" destination="CRB-b6-v4W" id="TES-aE-16B"/>
+                        <outlet property="notReadyButton" destination="SlS-JY-5ZN" id="MUd-S3-3Jx"/>
                         <outlet property="pageControlP1" destination="wge-d1-hGQ" id="vZI-L7-KUW"/>
                         <outlet property="pageControlP2" destination="0C0-ZZ-uQ1" id="MKZ-QW-IpS"/>
+                        <outlet property="readyButton" destination="O8j-hf-CWi" id="sWW-UO-AM1"/>
                         <outlet property="readyStatusLabelP1" destination="A88-wj-9ac" id="GSS-gd-LuN"/>
                         <outlet property="readyStatusLabelP2" destination="rEj-aH-NsF" id="Ks7-Vf-atZ"/>
                         <outlet property="scrollViewP1" destination="NHb-HI-PuY" id="CGN-O1-lLZ"/>
@@ -518,6 +536,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GtZ-rs-jmh"/>
+        <segue reference="IsV-7P-a5j"/>
     </inferredMetricsTieBreakers>
 </document>

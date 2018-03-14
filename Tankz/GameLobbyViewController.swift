@@ -21,19 +21,24 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var scrollViewP1: UIScrollView!
     
     @IBOutlet weak var changeMapBtn: UIButton!
-    
-    let multiplayerManager = Multiplayer()
+    @IBOutlet weak var readyButton: UIButton!
+    @IBOutlet weak var notReadyButton: UIButton!
     
     private var lobbyUsers: [Player] = []
     
     override func viewWillAppear(_ animated: Bool) {
         Multiplayer.shared.advertiseAsHost()
     }
+    @IBAction func isReady(_ sender: Any) {
+        Multiplayer.shared.messageIsReady()
+    }
+    @IBAction func notReady(_ sender: Any) {
+        Multiplayer.shared.messageNotReady()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.setUpScrollView()
-        
         //DemoUsers
         lobbyUsers.append(Player(ID: "1234"))
         lobbyUsers.append(Player(ID: "5678"))
@@ -147,15 +152,12 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         }else{
             tankTypeLabel.text = "TankType 4"
         }
+        Multiplayer.shared.messageStartGame()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         Multiplayer.shared.ceaseAdvertisingAsHost()
     }
-    
-    /* TODO: REMOVE func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Multiplayer.shared.send()
-    }*/
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

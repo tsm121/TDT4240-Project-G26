@@ -1,5 +1,15 @@
 import Foundation
 import MultipeerConnectivity
+/* Player */
+struct TankzPlayer {
+    var peerID: MCPeerID
+    var isReady: Bool
+}
+
+/* Message Structure */
+struct Message : Codable{
+    var type: String
+}
 
 /**
  * Handles all the functionality related to multiplayer.
@@ -7,14 +17,28 @@ import MultipeerConnectivity
  */
 class Multiplayer : NSObject {
     
+    /* Singleton */
+    static let shared: Multiplayer = Multiplayer()
+    
+    /* Multipeer Connectivity Variables */
     private let type = "tankz"
     private let peerID = MCPeerID(displayName: UIDevice.current.name)
     private let browser : MCNearbyServiceBrowser
     private let advertiser : MCNearbyServiceAdvertiser
-    static let shared: Multiplayer = Multiplayer()
-    var games = [MCPeerID]()
+    
+    /* Game Variables */
+    let player: TankzPlayer
+    var opponent: TankzPlayer?
+    var ishost = false
+
+    /* Join Game  Variables*/
+    var games = [MCPeerID]() // Available Games
+    
+    /* Lobby Variables*/
+    var isReady = false
     
     override init () {
+        self.player = TankzPlayer(peerID: self.peerID, isReady: false)
         self.browser = MCNearbyServiceBrowser(peer: self.peerID, serviceType: self.type)
         self.advertiser = MCNearbyServiceAdvertiser(peer: self.peerID, discoveryInfo: nil, serviceType: self.type)
         super.init()
@@ -22,12 +46,13 @@ class Multiplayer : NSObject {
     
     lazy var session : MCSession = {
         let session = MCSession(peer: self.peerID, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.none)
-        session.delegate = self as? MCSessionDelegate
+        session.delegate = self
         return session
     }()
     
     /* Advertise this client as a host for other clients. */
     func advertiseAsHost() {
+        self.ishost = true
         self.advertiser.delegate = self
         self.advertiser.startAdvertisingPeer()
     }
@@ -56,40 +81,95 @@ class Multiplayer : NSObject {
     
     /* Join existing game. */
     func joinGame(peerID: MCPeerID){
+        self.ishost = false;
+        self.isReady = true;
         self.browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 5)
     }
     
-    /* todo(thurs): Send some data to the host and vice verca. */
-    func send() {
-        do {
-            try self.session.send("herp".data(using: .utf8)!, toPeers: session.connectedPeers, with: .reliable)
-            NSLog("didSend")
-        }
-        catch let error {
-            NSLog("%@", "didReceiveError: \(error)")
+    /* Encoder */
+    func encodeMessage(message: Message) -> Data{
+        let encodedData = try? JSONEncoder().encode(message);
+        // TODO: Optional! Add error handling if time
+        return encodedData!
+    }
+    
+    /* Decoder */
+    func decodeMessage(data: Data) -> Message {
+        let decodedMessage = try? JSONDecoder().decode(Message.self, from: data)
+        // TODO: Optional! Add error handling if time
+        return decodedMessage!
+    }
+    
+    /* Send Data */
+    func send(message: Message){
+        let message = self.encodeMessage(message: message)
+        try? self.session.send(message, toPeers: self.session.connectedPeers, with: .reliable)
+    }
+    
+    /* Message: Start Game */
+    func messageStartGame(){
+        self.send(message: Message(type: "startgame"))
+    }
+    
+    /* Message: Is Ready */
+    func messageIsReady(){
+        self.send(message: Message(type: "isready"))
+    }
+    
+    /* Message: Not Ready */
+    func messageNotReady(){
+        self.send(message: Message(type: "notready"))
+    }
+    
+    /* Message Handlers */
+    func handleMessage(message: Message){
+        switch message.type {
+        case "startgame":
+            handleStartGame()
+            NSLog("%@", "startgameMessage: \(message)")
+        case "isReady":
+            handleIsReady()
+            NSLog("%@", "isReadyMessage: \(message)")
+        case "notReady":
+            handleNotReady()
+            NSLog("%@", "notReadyMessage: \(message)")
+        default:
+            NSLog("%@", "invalidMessage: \(message)")
         }
     }
-        
-    /* todo(thurs): Mark as ready to play. */
     
-    /* todo(thurs): Handle leaving a game. */
+    func handleStartGame(){
+        // TODO: Handle start game message
+    }
     
-    /* todo(thurs): Handle host disconnecting. */
+    func handleIsReady(){
+        // TODO: Handle is ready message
+    }
+    
+    func handleNotReady(){
+        // TODO: Handle not ready
+    }
+    
+    /* TODO: Mark as ready to play. */
+    
+    /* TODO: Check if ready to play */
+    
+    /* TODO: Implement Heartbeat or fix disconnected error
+        /* todo(thurs): Handle leaving a game. */
+
+        /* todo(thurs): Handle host disconnecting. */
+    */
 }
 
 extension Multiplayer : MCSessionDelegate {
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         NSLog("%@", "peer \(peerID) didChangeState: \(state.rawValue)")
-        
-        /* Wait 5 seconds and then try to send. */
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            Multiplayer.shared.send();
-        }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         NSLog("%@", "didReceiveData: \(data)")
+        handleMessage(message: decodeMessage(data: data))
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
