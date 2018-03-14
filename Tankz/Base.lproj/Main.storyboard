@@ -93,6 +93,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fe2-ET-Ecf">
+                                <rect key="frame" x="0.0" y="375" width="738" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOo-YO-QJk">
+                                <rect key="frame" x="280" y="375" width="70" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.85098039219999999" green="0.32549019610000002" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="FIRE!!">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="fireAction:" destination="gDR-NA-MQg" eventType="touchUpInside" id="OZ4-JE-nbs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aeq-q2-daS">
+                                <rect key="frame" x="170" y="375" width="68" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Exit game">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="D9A-YS-uel" kind="show" identifier="exitGameSegue" animates="NO" id="NIf-HQ-LTt"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="05T-dN-URJ">
                                 <rect key="frame" x="0.0" y="370" width="48" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -159,14 +185,15 @@
                                 <rect key="frame" x="627" y="374" width="80" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aeq-q2-daS">
-                                <rect key="frame" x="225" y="379" width="68" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nhj-t4-QQh">
+                                <rect key="frame" x="618" y="43" width="99" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Exit game">
+                                <color key="backgroundColor" red="0.85098039219999999" green="0.32549019610000002" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="OpponentTurn">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="D9A-YS-uel" kind="show" identifier="exitGameSegue" animates="NO" id="NIf-HQ-LTt"/>
+                                    <action selector="oppTurnActionTest:" destination="gDR-NA-MQg" eventType="touchUpInside" id="w1p-fe-hhk"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -175,7 +202,10 @@
                     </view>
                     <connections>
                         <outlet property="anglePicker" destination="YdM-M8-ncG" id="v7g-fD-OMr"/>
+                        <outlet property="disableView" destination="Fe2-ET-Ecf" id="0wf-4R-yxi"/>
+                        <outlet property="fireBtn" destination="GOo-YO-QJk" id="5bG-uX-sdp"/>
                         <outlet property="fuelLabel" destination="YQd-Dy-lky" id="W2p-TG-eqa"/>
+                        <outlet property="oppTurnTemp" destination="Nhj-t4-QQh" id="upn-aw-xJ6"/>
                         <outlet property="powerPicker" destination="YtM-jY-zvW" id="V5g-8h-Npb"/>
                     </connections>
                 </viewController>

@@ -28,6 +28,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     public var currentTank : Tank!
     
     private var touchDownPos : CGPoint!
+    private var prevMove: (SKAction, String)?
+    private var lastMove: (SKAction, String)?
+
     
     private var leftButton : SKShapeNode!
     private var rightButton : SKShapeNode!
@@ -58,41 +61,115 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.addChild(tank1.body)
         self.addChild(tank2.body)
+                
+    }
+    
+
+    //TODO: Not done, does not evaluate given data
+    /**
+     Recieves opponent action data from the Multiplayer service.
+     Evaluates the given information and performes these action for the users.
+     - Parameters:
+        - fireVector: `CGVector`, the vector that the opponent used
+        - ammoType: `AmmoType`, the `AmmoType` that the opponent used
+        - moveAction: (`SkAction`, `String`), tuple of opponent move action with action and direction-key.
+     */
+    public func gameListener(fireVector: CGVector, ammoType: AmmoType, moveAction: (SKAction, String)) {
+        
+        //Run opponent move
+        self.moveOppTank(move: moveAction)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+            //Run opponent shot
+            self.fire(ammoType: ammoType, fireVector: fireVector, tank: self.tank2)
+            print("Opponent shoots")
+        }
+        
+        //Give user controls
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+            self.userTurn()        }
+    }
+    
+    //Temp func (should be a listner)
+    /**
+     Get called on upon by `gameListener()` when the opponent action has been performed.
+     Enables the controls so that the user can perform his/hers turn.
+     */
+    func userTurn() {
+        //Enable controls for this unit
+        self.viewController.enableControls()
+        //Do actions
+    }
+    
+    //TODO: Tell Multiplayer-class your actions
+    /**
+     Get called on upon by  `GameViewController`'s `fireAction()` when the user has pressed the `UIButton` for fire.
+     Disable user controls and resets the last moves done.
+     */
+    public func finishTurn() {
+        self.viewController.disableControls()
+        
+        //Send information to opponent
+        //Reset information
+        self.prevMove = self.lastMove
+        self.lastMove = nil
         
     }
     
-    //Returns this users tank
-    //TODO: Need to get a check if which tank this is, currently player1
+    /**
+     Getter for users tank.
+     - returns:
+    `Tank`: Users tank
+     */
     public func getMyTank() -> Tank{
         return self.tank1
     }
     
+    /**
+     Moves users `Tank` to the left with a `SKAction` and set `prevMove` and `lastMove`.
+     */
     public func moveTankLeft() {
         if self.currentTank.hasFuel() {
-            //Run tank action here
-            if self.currentTank.body.action(forKey: "moveLeft") == nil { // check that there's no jump action running
+            if self.currentTank.body.action(forKey: "moveLeft") == nil {
                 if self.currentTank.fuel > 0 {
                     self.currentTank.body.run(SKAction.sequence([self.currentTank.moveLeft]), withKey:"moveLeft")
                     self.currentTank.useFuel()
                     self.viewController.setFuelLabel()
+                    self.prevMove = self.lastMove
+                    self.lastMove = (self.currentTank.moveLeft, "moveLeft")
                 }
             }
         }
     }
     
+    /**
+     Moves users `Tank` to the right with a `SKAction` and set `prevMove` and `lastMove`.
+     */
     public func moveTankRight() {
         if self.currentTank.hasFuel() {
-            //Run tank action here
-            if self.currentTank.body.action(forKey: "moveRight") == nil { // check that there's no jump action running
+            if self.currentTank.body.action(forKey: "moveRight") == nil {
                 if self.currentTank.fuel > 0 {
                     self.currentTank.body.run(SKAction.sequence([self.currentTank.moveRight]), withKey:"moveRight")
                     self.currentTank.useFuel()
                     self.viewController.setFuelLabel()
+                    self.prevMove = self.lastMove
+                    self.lastMove = (self.currentTank.moveRight, "moveRight")
                 }
             }
         }
     }
     
+    /**
+     Moves opponent `Tank` to the given position.
+     - Parameters:
+        - move: the given `SKAction` and direction-key
+     */
+    public func moveOppTank(move:(SKAction, String)) {
+        if self.tank2.body.action(forKey: move.1) == nil {
+            self.tank2.body.run(move.0, withKey: move.1)
+        }
+    }
+
     func setTankPos(){
         self.tank1.body.position = CGPoint(x: 100, y: 500)
     }
@@ -105,12 +182,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func fire(ammoType: AmmoType, fireVector: CGVector){ //Arguments might not be needed
+    func fire(ammoType: AmmoType, fireVector: CGVector, tank: Tank){ //Arguments might not be needed
         self.liveAmmo = ammoFactory.makeAmmo(ammotype: ammoType)
-        self.liveAmmo.projectile.position = CGPoint(x: self.currentTank.body.position.x , y: self.currentTank.body.position.y + 10)
+        self.liveAmmo.projectile.position = CGPoint(x: tank.body.position.x , y: tank.body.position.y + 10)
         self.liveAmmo.projectile.physicsBody?.velocity = fireVector
         self.addChild(self.liveAmmo.projectile)
-        nextTurn()
+        //nextTurn()
         
         //let deleteAmmo = ammo.run(SKAction.removeFromParent()) //to delete ammo on hit
     }
@@ -160,7 +237,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let yDrag = self.touchDownPos.y - pos.y
         let scale = CGFloat(4)
         let fireVector = CGVector(dx: xDrag * scale, dy: yDrag * scale)
-        fire(ammoType: self.chosenAmmo, fireVector: fireVector)
+        fire(ammoType: self.chosenAmmo, fireVector: fireVector, tank: self.currentTank)
     }
     
     //Listener for when touch began
