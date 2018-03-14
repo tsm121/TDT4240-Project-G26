@@ -21,7 +21,7 @@ class Multiplayer : NSObject {
     }
     
     lazy var session : MCSession = {
-        let session = MCSession(peer: self.peerID, securityIdentity: nil, encryptionPreference: .required)
+        let session = MCSession(peer: self.peerID, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.none)
         session.delegate = self as? MCSessionDelegate
         return session
     }()
@@ -60,7 +60,16 @@ class Multiplayer : NSObject {
     }
     
     /* todo(thurs): Send some data to the host and vice verca. */
-    
+    func send() {
+        do {
+            try self.session.send("herp".data(using: .utf8)!, toPeers: session.connectedPeers, with: .reliable)
+            NSLog("didSend")
+        }
+        catch let error {
+            NSLog("%@", "didReceiveError: \(error)")
+        }
+    }
+        
     /* todo(thurs): Mark as ready to play. */
     
     /* todo(thurs): Handle leaving a game. */
@@ -71,7 +80,12 @@ class Multiplayer : NSObject {
 extension Multiplayer : MCSessionDelegate {
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        NSLog("%@", "peer \(peerID) didChangeState: \(state)")
+        NSLog("%@", "peer \(peerID) didChangeState: \(state.rawValue)")
+        
+        /* Wait 5 seconds and then try to send. */
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            Multiplayer.shared.send();
+        }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {

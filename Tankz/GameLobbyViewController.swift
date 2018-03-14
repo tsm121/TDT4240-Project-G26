@@ -53,6 +53,10 @@ class GameLobbyViewController: UIViewController, UITableViewDataSource {
 
         return cell
     }
+    
+    /* TODO: REMOVE func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Multiplayer.shared.send()
+    }*/
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
