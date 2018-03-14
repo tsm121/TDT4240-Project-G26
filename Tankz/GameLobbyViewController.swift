@@ -152,6 +152,10 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         Multiplayer.shared.ceaseAdvertisingAsHost()
     }
+    
+    /* TODO: REMOVE func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Multiplayer.shared.send()
+    }*/
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

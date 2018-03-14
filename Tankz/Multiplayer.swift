@@ -7,8 +7,6 @@ import MultipeerConnectivity
  */
 class Multiplayer : NSObject {
     
-    
-
     private let type = "tankz"
     private let peerID = MCPeerID(displayName: UIDevice.current.name)
     private let browser : MCNearbyServiceBrowser
@@ -23,7 +21,7 @@ class Multiplayer : NSObject {
     }
     
     lazy var session : MCSession = {
-        let session = MCSession(peer: self.peerID, securityIdentity: nil, encryptionPreference: .required)
+        let session = MCSession(peer: self.peerID, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.none)
         session.delegate = self as? MCSessionDelegate
         return session
     }()
@@ -57,8 +55,54 @@ class Multiplayer : NSObject {
     }
     
     /* Join existing game. */
+    func joinGame(peerID: MCPeerID){
+        self.browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 5)
+    }
     
-    /* Mark as ready to play. */
+    /* todo(thurs): Send some data to the host and vice verca. */
+    func send() {
+        do {
+            try self.session.send("herp".data(using: .utf8)!, toPeers: session.connectedPeers, with: .reliable)
+            NSLog("didSend")
+        }
+        catch let error {
+            NSLog("%@", "didReceiveError: \(error)")
+        }
+    }
+        
+    /* todo(thurs): Mark as ready to play. */
+    
+    /* todo(thurs): Handle leaving a game. */
+    
+    /* todo(thurs): Handle host disconnecting. */
+}
+
+extension Multiplayer : MCSessionDelegate {
+    
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        NSLog("%@", "peer \(peerID) didChangeState: \(state.rawValue)")
+        
+        /* Wait 5 seconds and then try to send. */
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            Multiplayer.shared.send();
+        }
+    }
+    
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        NSLog("%@", "didReceiveData: \(data)")
+    }
+    
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        NSLog("%@", "didReceiveStream")
+    }
+    
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+        NSLog("%@", "didStartReceivingResourceWithName")
+    }
+    
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+        NSLog("%@", "didFinishReceivingResourceWithName")
+    }
 }
 
 extension Multiplayer : MCNearbyServiceBrowserDelegate {
@@ -88,6 +132,7 @@ extension Multiplayer : MCNearbyServiceAdvertiserDelegate {
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         NSLog("%@", "didReceiveInvitationFromPeer \(peerID)")
+        invitationHandler(true, self.session)
     }
     
 }
