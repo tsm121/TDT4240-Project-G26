@@ -39,7 +39,7 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         
         /* Register event listener for when multiplayer fires events. */
-        Multiplayer.shared.addEventListener(listener: self.testListener)
+        Multiplayer.shared.addEventListener(listener: self.multiplayerListener)
                 
         super.viewDidLoad()
 
