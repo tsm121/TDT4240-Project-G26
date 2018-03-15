@@ -4,6 +4,7 @@ import MultipeerConnectivity
 struct TankzPlayer {
     var peerID: MCPeerID
     var isReady: Bool
+    var isHost: Bool
 }
 
 /* Message Structure */
@@ -26,6 +27,25 @@ class Multiplayer : NSObject {
     private let browser : MCNearbyServiceBrowser
     private let advertiser : MCNearbyServiceAdvertiser
     
+    /* Game Variables */
+    var player: TankzPlayer
+    var opponent: TankzPlayer?
+
+    /* Join Game  Variables*/
+    var games = [MCPeerID]() // Available Games
+    override init () {
+        self.player = TankzPlayer(peerID: self.peerID, isReady: false, isHost: false)
+        self.browser = MCNearbyServiceBrowser(peer: self.peerID, serviceType: self.type)
+        self.advertiser = MCNearbyServiceAdvertiser(peer: self.peerID, discoveryInfo: nil, serviceType: self.type)
+        super.init()
+    }
+    
+    lazy var session : MCSession = {
+        let session = MCSession(peer: self.peerID, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.none)
+        session.delegate = self
+        return session
+    }()
+    
     /* Listeners for events */
     private var listener : (Message) -> () = Multiplayer.noop;
     
@@ -41,38 +61,14 @@ class Multiplayer : NSObject {
     static func noop(message: Message) {
         
     }
- 
+    
     func notifyAllEventListeners(message: Message) {
         self.listener(message);
     }
     
-    /* Game Variables */
-    let player: TankzPlayer
-    var opponent: TankzPlayer?
-    var ishost = false
-
-    /* Join Game  Variables*/
-    var games = [MCPeerID]() // Available Games
-    
-    /* Lobby Variables*/
-    var isReady = false
-    
-    override init () {
-        self.player = TankzPlayer(peerID: self.peerID, isReady: false)
-        self.browser = MCNearbyServiceBrowser(peer: self.peerID, serviceType: self.type)
-        self.advertiser = MCNearbyServiceAdvertiser(peer: self.peerID, discoveryInfo: nil, serviceType: self.type)
-        super.init()
-    }
-    
-    lazy var session : MCSession = {
-        let session = MCSession(peer: self.peerID, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.none)
-        session.delegate = self
-        return session
-    }()
-    
     /* Advertise this client as a host for other clients. */
     func advertiseAsHost() {
-        self.ishost = true
+        self.player.isHost = true
         self.advertiser.delegate = self
         self.advertiser.startAdvertisingPeer()
     }
@@ -101,9 +97,10 @@ class Multiplayer : NSObject {
     
     /* Join existing game. */
     func joinGame(peerID: MCPeerID){
-        self.ishost = false;
-        self.isReady = true;
+        self.player.isHost = false;
+        self.player.isReady = false;
         self.browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 5)
+        self.opponent = TankzPlayer(peerID: peerID, isReady: false, isHost: true)
     }
     
     /* Encoder */
@@ -126,14 +123,13 @@ class Multiplayer : NSObject {
         try? self.session.send(message, toPeers: self.session.connectedPeers, with: .reliable)
     }
     
-    /* Message: Start Game */
-    func messageStartGame(){
-        self.send(message: Message(type: "startgame"))
-    }
-    
     /* Message: Is Ready */
     func messageIsReady(){
+        self.player.isReady = true
         self.send(message: Message(type: "isready"))
+        if (self.opponent?.isReady)! {
+            self.notifyAllEventListeners(message: Message(type: "startgame"))
+        }
     }
     
     /* Message: Not Ready */
@@ -141,40 +137,34 @@ class Multiplayer : NSObject {
         self.send(message: Message(type: "notready"))
     }
     
-    /* Message Handlers */
+    /* --- Message Handlers --- */
     func handleMessage(message: Message){
         switch message.type {
-        case "startgame":
-            handleStartGame()
-            self.notifyAllEventListeners(message: message)
-            NSLog("%@", "startgameMessage: \(message)")
-        case "isReady":
-            handleIsReady()
+        case "isready":
+            handleIsReady(message: message)
             NSLog("%@", "isReadyMessage: \(message)")
-        case "notReady":
-            handleNotReady()
+        case "notready":
+            handleNotReady(message: message)
             NSLog("%@", "notReadyMessage: \(message)")
         default:
             NSLog("%@", "invalidMessage: \(message)")
         }
     }
     
-    func handleStartGame(){
-        // TODO: Handle start game message
-    }
-    
-    func handleIsReady(){
+    func handleIsReady(message: Message){
         // TODO: Handle is ready message
+        self.opponent?.isReady = true
+        self.notifyAllEventListeners(message: message)
+        if self.player.isReady {
+            self.notifyAllEventListeners(message: Message(type: "startgame"))
+        }
     }
     
-    func handleNotReady(){
+    func handleNotReady(message: Message){
         // TODO: Handle not ready
+        self.opponent?.isReady = false
+        self.notifyAllEventListeners(message: message)
     }
-    
-    /* TODO: Mark as ready to play. */
-    
-    /* TODO: Check if ready to play */
-    
     /* TODO: Implement Heartbeat or fix disconnected error
         /* todo(thurs): Handle leaving a game. */
 
@@ -234,6 +224,7 @@ extension Multiplayer : MCNearbyServiceAdvertiserDelegate {
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         NSLog("%@", "didReceiveInvitationFromPeer \(peerID)")
         invitationHandler(true, self.session)
+        self.opponent = TankzPlayer(peerID: peerID, isReady: false, isHost: false)
     }
     
 }

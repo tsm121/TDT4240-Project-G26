@@ -54,11 +54,22 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidDisappear(_ animated: Bool) {
         /* Un-register event listener for multiplayer. */
-        Multiplayer.shared.removeEventListener(listener: self.testListener)
+        Multiplayer.shared.removeEventListener(listener: self.multiplayerListener)
     }
 
-    func testListener(message: Message) {
-        print("Event listener fired!")
+    func multiplayerListener(message: Message) {
+        // NOTE: It's possibel DispatchQueue needs to wrap everything
+        if message.type == "isready"{
+            // TODO: update opponent is ready UI
+        }
+        if message.type == "notready"{
+            // TODO: update opponent is ready UI
+        }
+        if message.type == "startgame"{
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "startGameSegue", sender: self)
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -166,7 +177,6 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         }else{
             tankTypeLabel.text = "TankType 4"
         }
-        Multiplayer.shared.messageStartGame()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
