@@ -26,6 +26,26 @@ class Multiplayer : NSObject {
     private let browser : MCNearbyServiceBrowser
     private let advertiser : MCNearbyServiceAdvertiser
     
+    /* Listeners for events */
+    private var listener : (Message) -> () = Multiplayer.noop;
+    
+    func addEventListener(listener: @escaping (Message) -> ()) {
+        self.listener = listener;
+    }
+    
+    func removeEventListener(listener: @escaping (Message) -> ()) {
+        self.listener = Multiplayer.noop;
+    }
+    
+    /* todo(mike): No operation for replacing event listener with Void. */
+    static func noop(message: Message) {
+        
+    }
+ 
+    func notifyAllEventListeners(message: Message) {
+        self.listener(message);
+    }
+    
     /* Game Variables */
     let player: TankzPlayer
     var opponent: TankzPlayer?
@@ -126,6 +146,7 @@ class Multiplayer : NSObject {
         switch message.type {
         case "startgame":
             handleStartGame()
+            self.notifyAllEventListeners(message: message)
             NSLog("%@", "startgameMessage: \(message)")
         case "isReady":
             handleIsReady()

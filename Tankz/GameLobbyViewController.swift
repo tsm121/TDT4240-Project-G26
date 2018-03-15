@@ -35,7 +35,12 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     @IBAction func notReady(_ sender: Any) {
         Multiplayer.shared.messageNotReady()
     }
+    
     override func viewDidLoad() {
+        
+        /* Register event listener for when multiplayer fires events. */
+        Multiplayer.shared.addEventListener(listener: self.testListener)
+                
         super.viewDidLoad()
 
         self.setUpScrollView()
@@ -45,6 +50,15 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
 
         // Do any additional setup after loading the view.
         view.accessibilityIdentifier = "gameLobbyView"
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        /* Un-register event listener for multiplayer. */
+        Multiplayer.shared.removeEventListener(listener: self.testListener)
+    }
+
+    func testListener(message: Message) {
+        print("Event listener fired!")
     }
     
     override func viewDidAppear(_ animated: Bool) {
