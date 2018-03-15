@@ -32,6 +32,9 @@ class MainMenuViewController: UIViewController {
         self.view.sendSubview(toBack: imageView)
     }
 
+    @IBAction func createGame(_ sender: Any) {
+        Multiplayer.shared.advertiseAsHost()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

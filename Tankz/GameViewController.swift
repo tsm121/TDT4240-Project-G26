@@ -35,7 +35,10 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        /* Attach multiplayerListener */
+        //Multiplayer.shared.addEventListener(listener: <#T##(Message) -> ()#>)
+        /* Set if it's players turn */
+
         view.accessibilityIdentifier = "gameView"
         self.setUpPickers()
         //self.getSelectedValue()
@@ -55,6 +58,10 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
 
         self.currentGame.gameListener(fireVector: CGVector(dx: -300, dy: 200), ammoType: .missile, moveAction: (self.currentGame.tank2.moveLeft, "moveLeft") )
         
+    }
+    
+    func multiplayerListener(message: Message) {
+        self.currentGame.gameListener(fireVector: CGVector(dx: -300, dy: 200), ammoType: .missile, moveAction: (self.currentGame.tank2.moveLeft, "moveLeft") )
     }
     
     /**
@@ -224,8 +231,12 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             
             view.ignoresSiblingOrder = true
         }
-        
-        self.currentGame.userTurn()
+        if Multiplayer.shared.player.isHost {
+            self.enableControls()
+        }
+        else {
+            self.disableControls()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

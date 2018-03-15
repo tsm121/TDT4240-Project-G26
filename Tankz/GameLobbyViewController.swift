@@ -27,7 +27,7 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     private var lobbyUsers: [Player] = []
     
     override func viewWillAppear(_ animated: Bool) {
-        Multiplayer.shared.advertiseAsHost()
+        
     }
     @IBAction func isReady(_ sender: Any) {
         Multiplayer.shared.messageIsReady()
@@ -40,7 +40,6 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         
         /* Register event listener for when multiplayer fires events. */
         Multiplayer.shared.addEventListener(listener: self.multiplayerListener)
-                
         super.viewDidLoad()
 
         self.setUpScrollView()
@@ -180,7 +179,9 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        Multiplayer.shared.ceaseAdvertisingAsHost()
+        if Multiplayer.shared.player.isHost{
+            Multiplayer.shared.ceaseAdvertisingAsHost()
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -103,6 +103,11 @@ class Multiplayer : NSObject {
         self.opponent = TankzPlayer(peerID: peerID, isReady: false, isHost: true)
     }
     
+    func playerJoinedGame(peerID : MCPeerID){
+        self.opponent = TankzPlayer(peerID: peerID, isReady: false, isHost: false)
+        self.ceaseAdvertisingAsHost()
+    }
+    
     /* Encoder */
     func encodeMessage(message: Message) -> Data{
         let encodedData = try? JSONEncoder().encode(message);
@@ -134,6 +139,7 @@ class Multiplayer : NSObject {
     
     /* Message: Not Ready */
     func messageNotReady(){
+        self.player.isReady = false
         self.send(message: Message(type: "notready"))
     }
     
@@ -224,7 +230,16 @@ extension Multiplayer : MCNearbyServiceAdvertiserDelegate {
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         NSLog("%@", "didReceiveInvitationFromPeer \(peerID)")
         invitationHandler(true, self.session)
-        self.opponent = TankzPlayer(peerID: peerID, isReady: false, isHost: false)
+        playerJoinedGame(peerID: peerID)
     }
     
 }
+/* Alert CODE
+static func alertHelper(){
+    let alert = UIAlertController(title: "My Alert", message: string, preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+        NSLog("The \"OK\" alert occured.")
+    }))
+    self.present(alert, animated: true, completion: nil)
+}
+ */
