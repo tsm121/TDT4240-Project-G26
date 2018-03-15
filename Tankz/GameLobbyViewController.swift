@@ -21,25 +21,55 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var scrollViewP1: UIScrollView!
     
     @IBOutlet weak var changeMapBtn: UIButton!
-    
-    let multiplayerManager = Multiplayer()
+    @IBOutlet weak var readyButton: UIButton!
+    @IBOutlet weak var notReadyButton: UIButton!
     
     private var lobbyUsers: [Player] = []
     
     override func viewWillAppear(_ animated: Bool) {
         Multiplayer.shared.advertiseAsHost()
     }
+    @IBAction func isReady(_ sender: Any) {
+        Multiplayer.shared.messageIsReady()
+    }
+    @IBAction func notReady(_ sender: Any) {
+        Multiplayer.shared.messageNotReady()
+    }
+    
     override func viewDidLoad() {
+        
+        /* Register event listener for when multiplayer fires events. */
+        Multiplayer.shared.addEventListener(listener: self.multiplayerListener)
+                
         super.viewDidLoad()
 
         self.setUpScrollView()
-        
         //DemoUsers
         lobbyUsers.append(Player(ID: "1234"))
         lobbyUsers.append(Player(ID: "5678"))
 
         // Do any additional setup after loading the view.
         view.accessibilityIdentifier = "gameLobbyView"
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        /* Un-register event listener for multiplayer. */
+        Multiplayer.shared.removeEventListener(listener: self.multiplayerListener)
+    }
+
+    func multiplayerListener(message: Message) {
+        // NOTE: It's possibel DispatchQueue needs to wrap everything
+        if message.type == "isready"{
+            // TODO: update opponent is ready UI
+        }
+        if message.type == "notready"{
+            // TODO: update opponent is ready UI
+        }
+        if message.type == "startgame"{
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "startGameSegue", sender: self)
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -152,10 +182,6 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         Multiplayer.shared.ceaseAdvertisingAsHost()
     }
-    
-    /* TODO: REMOVE func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Multiplayer.shared.send()
-    }*/
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
