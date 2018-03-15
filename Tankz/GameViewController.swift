@@ -12,6 +12,11 @@ import GameplayKit
 
 class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource  {
     
+    //Just for testing, DELETE later
+    @IBOutlet weak var oppTurnTemp: UIButton!
+    
+    @IBOutlet weak var fireBtn: UIButton!
+    @IBOutlet weak var disableView: UIView!
     @IBOutlet weak var fuelLabel: UILabel!
     @IBOutlet weak var powerPicker: UIPickerView!
     @IBOutlet weak var anglePicker: UIPickerView!
@@ -40,25 +45,94 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         sceneView.backgroundColor = UIColor.black
         self.view.addSubview(sceneView)
         
+        //TempBtn, DELETE later
+        self.view.bringSubview(toFront: self.oppTurnTemp)
+        
     }
     
-    //Setting number of moves
+    //For test purposes only. DELETE later
+    @IBAction func oppTurnActionTest(_ sender: Any) {
+
+        self.currentGame.gameListener(fireVector: CGVector(dx: -300, dy: 200), ammoType: .missile, moveAction: (self.currentGame.tank2.moveLeft, "moveLeft") )
+        
+    }
+    
+    /**
+     Fires a projectile with angle and power chosen in the `UIPicker`s
+     - Parameters:
+        - sender: Any
+     */
+    @IBAction func fireAction(_ sender: Any) {
+        
+        let power = self.getPowerValue()
+        let angle = self.getAngleValue()
+        let vector = CGVector(dx: power * 10 , dy: angle * 10)
+        
+        self.currentGame.fire(ammoType: .missile, fireVector: vector, tank: self.currentGame.tank1)
+        self.currentGame.finishTurn()
+    }
+    
+    /**
+     Enables the UI controls by moving the `disableView` to back
+     */
+    public func enableControls() {
+        self.view.sendSubview(toBack: self.disableView)
+    }
+    
+    /**
+     Disable the UI controls by moving the `disableView` to front
+     */
+    public func disableControls() {
+        print("Disable controls")
+        self.view.bringSubview(toFront: self.disableView)
+
+
+    }
+    
+    /**
+     Sets the fuel label to users tank fuel status
+     */
     public func setFuelLabel(){
         fuelLabel.text = String(self.myTank.fuel)
     }
     
-    //Listener for left move button
+    /**
+    `IBAction` for left arrow `UIButton`. Moves the tank to the left
+     - Parameters:
+        - sender: Any
+     */
     @IBAction func moveLeftAction(_ sender: Any) {
         self.currentGame.moveTankLeft()
     }
     
-    //Listener for right move button
+    /**
+     `IBAction` for right arrow `UIButton`. Moves the tank to the right
+     - Parameters:
+        - sender: Any
+     */
     @IBAction func moveRightAction(_ sender: Any) {
         self.currentGame.moveTankRight()
     }
     
-
+    /**
+     Getter for the chosen power value in the `UIPicker`
+     - Returns:
+     `Int`: Chosen power value
+     */
+    private func getPowerValue() -> Int {
+        return self.anglePicker.selectedRow(inComponent: 0)
+    }
     
+    /**
+     Getter for the chosen angle value in the `UIPicker`
+     - Returns:
+     `Int`: Chosen power angle
+     */
+    private func getAngleValue() -> Int {
+        return self.powerPicker.selectedRow(inComponent: 0)
+    }
+    
+
     //get values from the pickers. NOT DONE!
     private func getSelectedValue(){
         let timer = Timer(timeInterval: 0.1, repeats: true) { [unowned self] timer in
@@ -76,7 +150,9 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         self.timer = timer
     }
     
-    //Set up pickers with deleagte, data and tag
+    /**
+     Setter for the `UIPicker`s and set their delegate, datasource and tag.
+     */
     private func setUpPickers() {
         self.anglePicker.delegate = self
         self.anglePicker.dataSource = self
@@ -91,20 +167,21 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         self.powerPicker.selectRow(49, inComponent: 0, animated: true)
     }
     
-    // The number of columns of data
+    // Default function for the UIPicker: The number of columns of data
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    // The number of rows of data
+    // Default function for the UIPicker: The number of rows of data
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return self.pickerData.count
     }
     
-    // The data to return for the row and component (column) that's being passed in
+    // Default function for the UIPicker: The data to return for the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return String(pickerData[row])
     }
+    
     
     override var shouldAutorotate: Bool {
         return true
@@ -126,12 +203,12 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         self.prepareScene()
         self.myTank = self.currentGame.getMyTank()
         self.setFuelLabel()
-        
-        
 
     }
     
-    //Generate SKScene and add to view
+    /**
+     Generates a `SKScene` and adds it to the current `view`
+     */
     private func prepareScene() {
         if let view = self.sceneView as SKView? {
             // Load the SKScene from 'GameScene.sks'
@@ -147,6 +224,8 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             
             view.ignoresSiblingOrder = true
         }
+        
+        self.currentGame.userTurn()
     }
     
     override func viewDidAppear(_ animated: Bool) {
