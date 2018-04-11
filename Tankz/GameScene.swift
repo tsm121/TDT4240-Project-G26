@@ -81,7 +81,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
             //Run opponent shot
-            self.fire(ammoType: ammoType, fireVector: fireVector, tank: self.tank2)
+            self.fire(ammoType: ammoType, fireVector: fireVector, tank: self.currentTank)
             print("Opponent shoots")
         }
         
@@ -123,7 +123,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     `Tank`: Users tank
      */
     public func getMyTank() -> Tank{
-        return self.tank1
+        if (Multiplayer.shared.player.isHost){
+            return self.tank1
+        }
+        return self.tank2
     }
     
     /**
@@ -188,7 +191,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.liveAmmo.projectile.position = CGPoint(x: tank.body.position.x , y: tank.body.position.y + 10)
         self.liveAmmo.projectile.physicsBody?.velocity = fireVector
         self.addChild(self.liveAmmo.projectile)
-        //nextTurn()
+        nextTurn()
         
         //let deleteAmmo = ammo.run(SKAction.removeFromParent()) //to delete ammo on hit
     }

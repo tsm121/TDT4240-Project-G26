@@ -81,7 +81,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         let angle = self.getAngleValue()
         let vector = CGVector(dx: power * 10 , dy: angle * 10)
         Multiplayer.shared.messageFire(vector: vector);
-        self.currentGame.fire(ammoType: .missile, fireVector: vector, tank: self.currentGame.tank1)
+        self.currentGame.fire(ammoType: .missile, fireVector: vector, tank: self.currentGame.currentTank)
         self.currentGame.finishTurn()
     }
     
