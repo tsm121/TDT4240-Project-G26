@@ -10,6 +10,20 @@ struct TankzPlayer {
 /* Message Structure */
 struct Message : Codable{
     var type: String
+    var power: Float
+    var angle: Float
+    
+    init(type: String){
+        self.type = type
+        self.power = 0.0
+        self.angle = 0.0
+    }
+    
+    init(type: String, power: Float, angle: Float){
+        self.type = type
+        self.power = power
+        self.angle = angle
+    }
 }
 
 /**
@@ -54,6 +68,8 @@ class Multiplayer : NSObject {
     }
     
     func removeEventListener(listener: @escaping (Message) -> ()) {
+        /* Attach multiplayerListener */
+        NSLog("%@", "Removing Event Listener")
         self.listener = Multiplayer.noop;
     }
     
@@ -103,6 +119,11 @@ class Multiplayer : NSObject {
         self.opponent = TankzPlayer(peerID: peerID, isReady: false, isHost: true)
     }
     
+    func playerJoinedGame(peerID : MCPeerID){
+        self.opponent = TankzPlayer(peerID: peerID, isReady: false, isHost: false)
+        self.ceaseAdvertisingAsHost()
+    }
+    
     /* Encoder */
     func encodeMessage(message: Message) -> Data{
         let encodedData = try? JSONEncoder().encode(message);
@@ -126,19 +147,35 @@ class Multiplayer : NSObject {
     /* Message: Is Ready */
     func messageIsReady(){
         self.player.isReady = true
-        self.send(message: Message(type: "isready"))
-        if (self.opponent?.isReady)! {
-            self.notifyAllEventListeners(message: Message(type: "startgame"))
+        if (self.opponent != nil) {
+            self.send(message: Message(type: "isready"))
+            /* Todo: Crashes on self.oppenent?.isReady if there is no opponent */
+            if (self.opponent?.isReady)! {
+                self.notifyAllEventListeners(message: Message(type: "startgame"))
+            }
         }
     }
     
     /* Message: Not Ready */
     func messageNotReady(){
+        self.player.isReady = false
         self.send(message: Message(type: "notready"))
     }
-    
+    /* TODO: Message Fire/"End Turn" */
+    func messageFire(vector: CGVector){
+        self.send(message: Message(type: "fire", power: Float(vector.dx), angle: Float(vector.dy)))
+    }
+    /* TODO: Message Move Left */
+    func messageMoveLeft(){
+        self.send(message: Message(type: "moveleft"))
+    }
+    /* TODO: Message Move Right */
+    func messageMoveRight(){
+        self.send(message: Message(type: "moveright"))
+    }
     /* --- Message Handlers --- */
     func handleMessage(message: Message){
+        NSLog("%@", "message \(message.type)")
         switch message.type {
         case "isready":
             handleIsReady(message: message)
@@ -146,6 +183,15 @@ class Multiplayer : NSObject {
         case "notready":
             handleNotReady(message: message)
             NSLog("%@", "notReadyMessage: \(message)")
+        case "fire":
+            handleFire(message: message)
+            NSLog("%@", "fireMessage \(message)")
+        case "moveleft":
+            handleMoveLeft(message: message)
+            NSLog("%@", "fireMessage \(message)")
+        case "moveright":
+            handleMoveRight(message: message)
+            NSLog("%@", "fireMessage \(message)")
         default:
             NSLog("%@", "invalidMessage: \(message)")
         }
@@ -165,6 +211,18 @@ class Multiplayer : NSObject {
         self.opponent?.isReady = false
         self.notifyAllEventListeners(message: message)
     }
+    
+    func handleFire(message: Message){
+        self.notifyAllEventListeners(message: message)
+    }
+    
+    func handleMoveLeft(message: Message){
+        self.notifyAllEventListeners(message: message)
+    }
+    
+    func handleMoveRight(message: Message){
+        self.notifyAllEventListeners(message: message)
+    }
     /* TODO: Implement Heartbeat or fix disconnected error
         /* todo(thurs): Handle leaving a game. */
 
@@ -176,6 +234,11 @@ extension Multiplayer : MCSessionDelegate {
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         NSLog("%@", "peer \(peerID) didChangeState: \(state.rawValue)")
+        if (state == MCSessionState.connected){
+            if (self.player.isReady){
+                self.messageIsReady()
+            }
+        }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
@@ -224,7 +287,16 @@ extension Multiplayer : MCNearbyServiceAdvertiserDelegate {
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         NSLog("%@", "didReceiveInvitationFromPeer \(peerID)")
         invitationHandler(true, self.session)
-        self.opponent = TankzPlayer(peerID: peerID, isReady: false, isHost: false)
+        playerJoinedGame(peerID: peerID)
     }
     
 }
+/* Alert CODE
+static func alertHelper(){
+    let alert = UIAlertController(title: "My Alert", message: string, preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+        NSLog("The \"OK\" alert occured.")
+    }))
+    self.present(alert, animated: true, completion: nil)
+}
+ */
