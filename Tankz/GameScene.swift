@@ -189,7 +189,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(self.liveAmmo.projectile)
         //nextTurn()
         
-        //let deleteAmmo = ammo.run(SKAction.removeFromParent()) //to delete ammo on hit
+        //let deleteAmmo = liveAmmo.run(SKAction.removeFromParent()) //to delete ammo on hit
     }
     
     func nextTurn() {
@@ -222,6 +222,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // Called before each frame is rendered
     override func update(_ currentTime: TimeInterval) {
         
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        
+        let firstBody = contact.bodyA
+        let secondBody = contact.bodyB
+        
+        //If projectile hits something in its contactTestBitMask
+        if(firstBody.categoryBitMask == PhysicsCategory.Projectile || secondBody.categoryBitMask == PhysicsCategory.Projectile) {
+            print("Projectile hit something")
+            liveAmmo.projectile.run(SKAction.removeFromParent()) //deletes ammo on hit
+        }
+        
+        //If projectile hits a tank.
+        if((firstBody.categoryBitMask == PhysicsCategory.Tank && secondBody.categoryBitMask == PhysicsCategory.Projectile) ||
+            (firstBody.categoryBitMask == PhysicsCategory.Projectile && secondBody.categoryBitMask == PhysicsCategory.Tank)) {
+            print("Projectile hit a tank")
+            
+            if(firstBody == tank1.body.physicsBody || secondBody == tank1.body.physicsBody) { // If tank1 was hit.
+                tank1.damageTaken = tank1.damageTaken + liveAmmo.damage
+                print("tank1 took damage, health: ", tank1.health - tank1.damageTaken,"/",tank1.health)
+                if (tank1.health - tank1.damageTaken < 0) { // If tank1 exploded
+                    tank1.body.run(SKAction.removeFromParent())
+                    print("tank1 exploded.")
+                }
+            }
+            
+            if(firstBody == tank2.body.physicsBody || secondBody == tank2.body.physicsBody) { // If tank2 was hit.
+                tank2.damageTaken = tank2.damageTaken + liveAmmo.damage
+                print("tank2 took damage, health: ", tank2.health - tank2.damageTaken,"/",tank2.health)
+                if (tank2.health - tank2.damageTaken < 0) { //If tank2 exploded.
+                    tank2.body.run(SKAction.removeFromParent())
+                    print("tank2 exploded.")
+                }
+            }
+        }
     }
     
     func touchDown(atPoint pos : CGPoint) {

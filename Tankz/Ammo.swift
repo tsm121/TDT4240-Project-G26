@@ -42,5 +42,6 @@ class Ammo {
         self.projectile.physicsBody?.mass = self.mass
         self.projectile.physicsBody?.categoryBitMask = PhysicsCategory.Projectile
         self.projectile.physicsBody?.collisionBitMask = PhysicsCategory.Tank | PhysicsCategory.Ground
+        self.projectile.physicsBody?.contactTestBitMask = PhysicsCategory.Tank | PhysicsCategory.Ground
     }
 }

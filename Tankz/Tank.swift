@@ -10,7 +10,8 @@ import SpriteKit
 
 class Tank {
     public let body: SKShapeNode
-    public let health: Double
+    public var health: Double
+    public var damageTaken: Double
     public let mass: CGFloat
     public let size: CGSize
     public var fuel: Int
@@ -23,6 +24,7 @@ class Tank {
             self.size = CGSize(width: 10, height: 5)
             self.mass = 10.0
             self.health = 100.0
+            self.damageTaken = 0.0
             self.fuel = 20
             self.moveRight = SKAction.moveBy(x: 20, y: 5, duration: 0.5)
             self.moveLeft = SKAction.moveBy(x: -20, y: 5, duration: 0.5)
@@ -30,13 +32,15 @@ class Tank {
             self.size = CGSize(width: 20, height: 10)
             self.mass = 20.0
             self.health = 200.0
+            self.damageTaken = 0.0
             self.fuel = 10
             self.moveRight = SKAction.moveBy(x: 10, y: 5, duration: 0.5)
             self.moveLeft = SKAction.moveBy(x: -10, y: 5, duration: 0.5)
         case .funnyTank:
             self.size = CGSize(width: 15, height: 15)
             self.mass = 15.0
-            self.health = 75.0
+            self.health = 284.0
+            self.damageTaken = 196.0
             self.fuel = 15
             self.moveRight = SKAction.moveBy(x: 20, y: 5, duration: 0.1)
             self.moveLeft = SKAction.moveBy(x: -20, y: 5, duration: 0.1)
@@ -56,6 +60,7 @@ class Tank {
         self.body.physicsBody?.angularDamping = 1.0
         self.body.physicsBody!.categoryBitMask = PhysicsCategory.Tank
         self.body.physicsBody!.collisionBitMask = PhysicsCategory.Edge | PhysicsCategory.Projectile | PhysicsCategory.Tank | PhysicsCategory.Ground
+        self.body.physicsBody!.contactTestBitMask = PhysicsCategory.Projectile
         self.body.physicsBody?.usesPreciseCollisionDetection = true
     }
     
