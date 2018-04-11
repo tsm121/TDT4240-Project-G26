@@ -121,9 +121,6 @@ class Multiplayer : NSObject {
     
     func playerJoinedGame(peerID : MCPeerID){
         self.opponent = TankzPlayer(peerID: peerID, isReady: false, isHost: false)
-        if (self.player.isReady){
-            self.messageIsReady()
-        }
         self.ceaseAdvertisingAsHost()
     }
     
@@ -237,6 +234,11 @@ extension Multiplayer : MCSessionDelegate {
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         NSLog("%@", "peer \(peerID) didChangeState: \(state.rawValue)")
+        if (state == MCSessionState.connected){
+            if (self.player.isReady){
+                self.messageIsReady()
+            }
+        }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
