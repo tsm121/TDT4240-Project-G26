@@ -27,3 +27,8 @@ enum AmmoType {
     case clusterBomb
     case funnyBomb
 }
+
+enum TankDirection: Int {
+    case left = -1
+    case right = 1
+}

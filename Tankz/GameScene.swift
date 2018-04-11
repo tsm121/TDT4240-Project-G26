@@ -51,9 +51,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Generate a tank from the factory.
         tankFactory = TankFactory()
-        tank1 = tankFactory.makeTank(tanktype: .bigTank, tankName: "Player 1", color: UIColor(named: "militaryGreenLight")!)
+        tank1 = tankFactory.makeTank(tanktype: .bigTank, tankName: "Player 1", color: UIColor(named: "militaryGreenLight")!, tankdirection: TankDirection.right)
         placeTank(tankBody: tank1.body)
-        tank2 = tankFactory.makeTank(tanktype: .funnyTank, tankName: "Player 2", color: UIColor(named: "militaryGreenDark")!)
+        tank2 = tankFactory.makeTank(tanktype: .funnyTank, tankName: "Player 2", color: UIColor(named: "militaryGreenDark")!, tankdirection: TankDirection.left)
         placeTank(tankBody: tank2.body)
         
         currentTank = tank1
@@ -81,25 +81,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
             //Run opponent shot
-            self.fire(ammoType: ammoType, fireVector: fireVector, tank: self.currentTank)
+            self.fire(ammoType: ammoType, fireVector: fireVector)
             print("Opponent shoots")
         }
         
         //Give user controls
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
-            self.userTurn()
+            self.nextTurn()
         }
-    }
-    
-    //Temp func (should be a listner)
-    /**
-     Get called on upon by `gameListener()` when the opponent action has been performed.
-     Enables the controls so that the user can perform his/hers turn.
-     */
-    func userTurn() {
-        //Enable controls for this unit
-        self.viewController.enableControls()
-        //Do actions
     }
     
     //TODO: Tell Multiplayer-class your actions
@@ -107,15 +96,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
      Get called on upon by  `GameViewController`'s `fireAction()` when the user has pressed the `UIButton` for fire.
      Disable user controls and resets the last moves done.
      */
-    public func finishTurn() {
-        self.viewController.disableControls()
-        
-        //Send information to opponent
-        //Reset information
-        self.prevMove = self.lastMove
-        self.lastMove = nil
-        
-    }
     
     /**
      Getter for users tank.
@@ -186,21 +166,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func fire(ammoType: AmmoType, fireVector: CGVector, tank: Tank){ //Arguments might not be needed
+    func fire(ammoType: AmmoType, fireVector: CGVector){ //Arguments might not be needed
+        if (self.getMyTank().body.name?.isEqual(currentTank.body.name))! {
+            self.viewController.disableControls()
+        }
         self.liveAmmo = ammoFactory.makeAmmo(ammotype: ammoType)
-        self.liveAmmo.projectile.position = CGPoint(x: tank.body.position.x , y: tank.body.position.y + 10)
-        self.liveAmmo.projectile.physicsBody?.velocity = fireVector
+        self.liveAmmo.projectile.position = CGPoint(x: currentTank.body.position.x , y: currentTank.body.position.y + 10)
+        self.liveAmmo.projectile.physicsBody?.velocity = CGVector(dx: fireVector.dx*CGFloat(currentTank.tankdirection.rawValue), dy: fireVector.dy)
         self.addChild(self.liveAmmo.projectile)
-        nextTurn()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+            self.nextTurn()
+        }
         
         //let deleteAmmo = ammo.run(SKAction.removeFromParent()) //to delete ammo on hit
     }
     
     func nextTurn() {
+        
         if (tank1.body.name?.isEqual(currentTank.body.name))! {
             currentTank = tank2
         } else {
             currentTank = tank1
+        }
+        if (self.getMyTank().body.name?.isEqual(currentTank.body.name))! {
+            self.viewController.enableControls()
         }
     }
     
@@ -237,11 +226,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        let xDrag = self.touchDownPos.x - pos.x
+        /*let xDrag = self.touchDownPos.x - pos.x
         let yDrag = self.touchDownPos.y - pos.y
         let scale = CGFloat(4)
         let fireVector = CGVector(dx: xDrag * scale, dy: yDrag * scale)
-        fire(ammoType: self.chosenAmmo, fireVector: fireVector, tank: self.currentTank)
+        fire(ammoType: self.chosenAmmo, fireVector: fireVector)*/
     }
     
     //Listener for when touch began

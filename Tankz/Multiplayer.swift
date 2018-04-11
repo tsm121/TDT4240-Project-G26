@@ -121,6 +121,9 @@ class Multiplayer : NSObject {
     
     func playerJoinedGame(peerID : MCPeerID){
         self.opponent = TankzPlayer(peerID: peerID, isReady: false, isHost: false)
+        if (self.player.isReady){
+            self.messageIsReady()
+        }
         self.ceaseAdvertisingAsHost()
     }
     
@@ -147,10 +150,12 @@ class Multiplayer : NSObject {
     /* Message: Is Ready */
     func messageIsReady(){
         self.player.isReady = true
-        self.send(message: Message(type: "isready"))
-        /* Todo: Crashes on self.oppenent?.isReady if there is no opponent */
-        if (self.opponent?.isReady)! {
-            self.notifyAllEventListeners(message: Message(type: "startgame"))
+        if (self.opponent != nil) {
+            self.send(message: Message(type: "isready"))
+            /* Todo: Crashes on self.oppenent?.isReady if there is no opponent */
+            if (self.opponent?.isReady)! {
+                self.notifyAllEventListeners(message: Message(type: "startgame"))
+            }
         }
     }
     
@@ -184,6 +189,12 @@ class Multiplayer : NSObject {
         case "fire":
             handleFire(message: message)
             NSLog("%@", "fireMessage \(message)")
+        case "moveleft":
+            handleMoveLeft(message: message)
+            NSLog("%@", "fireMessage \(message)")
+        case "moveright":
+            handleMoveRight(message: message)
+            NSLog("%@", "fireMessage \(message)")
         default:
             NSLog("%@", "invalidMessage: \(message)")
         }
@@ -205,6 +216,14 @@ class Multiplayer : NSObject {
     }
     
     func handleFire(message: Message){
+        self.notifyAllEventListeners(message: message)
+    }
+    
+    func handleMoveLeft(message: Message){
+        self.notifyAllEventListeners(message: message)
+    }
+    
+    func handleMoveRight(message: Message){
         self.notifyAllEventListeners(message: message)
     }
     /* TODO: Implement Heartbeat or fix disconnected error

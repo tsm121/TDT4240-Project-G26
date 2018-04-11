@@ -24,7 +24,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     var currentGame: GameScene!
     var sceneView: SKView!
     
-    private var pickerData: Array<Int> = Array(1...100)
+    private var pickerData: Array<Int> = Array(0...180)
     weak var timer: Timer?
     
     var myTank: Tank!
@@ -32,7 +32,13 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     func messageListener(message: Message) {
         NSLog("%@", "messageListener \(message.type)")
         if message.type == "fire"{
-            self.currentGame.gameListener(fireVector: CGVector(dx: CGFloat(message.power), dy: CGFloat(message.angle)), ammoType: .missile, moveAction: (self.currentGame.tank2.moveLeft, "moveLeft") )
+            self.currentGame.fire(ammoType: .missile, fireVector: CGVector(dx: CGFloat(message.power),dy: CGFloat(message.angle)))
+        }
+        if message.type == "moveleft" {
+            self.currentGame.moveTankLeft();
+        }
+        if message.type == "moveright" {
+            self.currentGame.moveTankRight()
         }
     }
     
@@ -79,10 +85,15 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         
         let power = self.getPowerValue()
         let angle = self.getAngleValue()
-        let vector = CGVector(dx: power * 10 , dy: angle * 10)
+        print (power)
+        print (angle)
+        print (cos(Double(angle) * Double.pi / 180.0))
+        print (sin(Double(angle) * Double.pi / 180.0))
+        let xValue = CGFloat(cos(Double(angle) * Double.pi / 180.0) * Double(power * 10))
+        let yValue = CGFloat(sin(Double(angle) * Double.pi / 180.0) * Double(power * 10))
+        let vector = CGVector(dx: xValue, dy: yValue)
         Multiplayer.shared.messageFire(vector: vector);
-        self.currentGame.fire(ammoType: .missile, fireVector: vector, tank: self.currentGame.currentTank)
-        self.currentGame.finishTurn()
+        self.currentGame.fire(ammoType: .missile, fireVector: vector)
     }
     
     /**
@@ -114,6 +125,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
      */
     @IBAction func moveLeftAction(_ sender: Any) {
         self.currentGame.moveTankLeft()
+        Multiplayer.shared.messageMoveLeft()
     }
     
     /**
@@ -123,6 +135,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
      */
     @IBAction func moveRightAction(_ sender: Any) {
         self.currentGame.moveTankRight()
+        Multiplayer.shared.messageMoveRight()
     }
     
     /**
