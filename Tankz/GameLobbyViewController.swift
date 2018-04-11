@@ -22,7 +22,6 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var changeMapBtn: UIButton!
     @IBOutlet weak var readyButton: UIButton!
-    @IBOutlet weak var notReadyButton: UIButton!
     
     private var lobbyUsers: [Player] = []
     
@@ -30,10 +29,27 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         
     }
     @IBAction func isReady(_ sender: Any) {
-        Multiplayer.shared.messageIsReady()
-    }
-    @IBAction func notReady(_ sender: Any) {
-        Multiplayer.shared.messageNotReady()
+        if Multiplayer.shared.player.isReady{
+            if (!Multiplayer.shared.player.isHost) {
+                self.readyStatusLabelP2.text = "Not Ready"
+            }
+            else {
+                self.readyStatusLabelP1.text = "Not Ready"
+            }
+            readyButton.setTitle("Ready", for: .normal)
+            Multiplayer.shared.messageNotReady()
+        }
+        else {
+            if (!Multiplayer.shared.player.isHost) {
+                self.readyStatusLabelP2.text = "Ready"
+            }
+            else {
+                self.readyStatusLabelP1.text = "Ready"
+            }
+            readyButton.setTitle("Not Ready", for: .normal)
+            Multiplayer.shared.messageIsReady()
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -54,10 +70,24 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     func multiplayerListener(message: Message) {
         // NOTE: It's possibel DispatchQueue needs to wrap everything
         if message.type == "isready"{
-            // TODO: update opponent is ready UI
+            DispatchQueue.main.async {
+                if (Multiplayer.shared.player.isHost) {
+                    self.readyStatusLabelP2.text = "Ready"
+                }
+                else {
+                    self.readyStatusLabelP1.text = "Ready"
+                }
+            }
         }
         if message.type == "notready"{
-            // TODO: update opponent is ready UI
+            DispatchQueue.main.async {
+                if (Multiplayer.shared.player.isHost) {
+                    self.readyStatusLabelP2.text = "Not Ready"
+                }
+                else {
+                    self.readyStatusLabelP1.text = "Not Ready"
+                }
+            }
         }
         if message.type == "startgame"{
             DispatchQueue.main.async {

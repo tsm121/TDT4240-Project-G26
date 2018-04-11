@@ -277,16 +277,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SlS-JY-5ZN">
-                                <rect key="frame" x="376" y="333" width="72" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Not Ready"/>
-                                <connections>
-                                    <action selector="notReady:" destination="usC-V1-22A" eventType="touchUpInside" id="4xF-0x-Xx6"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O8j-hf-CWi">
-                                <rect key="frame" x="317" y="335" width="43" height="30"/>
+                                <rect key="frame" x="347" y="347" width="43" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Ready"/>
                                 <connections>
@@ -334,7 +326,6 @@
                     </view>
                     <connections>
                         <outlet property="changeMapBtn" destination="CRB-b6-v4W" id="TES-aE-16B"/>
-                        <outlet property="notReadyButton" destination="SlS-JY-5ZN" id="MUd-S3-3Jx"/>
                         <outlet property="pageControlP1" destination="wge-d1-hGQ" id="vZI-L7-KUW"/>
                         <outlet property="pageControlP2" destination="0C0-ZZ-uQ1" id="MKZ-QW-IpS"/>
                         <outlet property="readyButton" destination="O8j-hf-CWi" id="sWW-UO-AM1"/>
