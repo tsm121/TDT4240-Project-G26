@@ -188,8 +188,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.liveAmmo.projectile.physicsBody?.velocity = fireVector
         self.addChild(self.liveAmmo.projectile)
         //nextTurn()
-        
-        //let deleteAmmo = liveAmmo.run(SKAction.removeFromParent()) //to delete ammo on hit
     }
     
     func nextTurn() {
