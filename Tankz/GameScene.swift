@@ -87,7 +87,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //Give user controls
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
-            self.userTurn()        }
+            self.userTurn()
+        }
     }
     
     //Temp func (should be a listner)

@@ -29,14 +29,19 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     var myTank: Tank!
     
+    func messageListener(message: Message) {
+        NSLog("%@", "messageListener \(message.type)")
+        if message.type == "fire"{
+            self.currentGame.gameListener(fireVector: CGVector(dx: CGFloat(message.power), dy: CGFloat(message.angle)), ammoType: .missile, moveAction: (self.currentGame.tank2.moveLeft, "moveLeft") )
+        }
+    }
+    
     deinit {
         timer?.invalidate()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        /* Attach multiplayerListener */
-        //Multiplayer.shared.addEventListener(listener: <#T##(Message) -> ()#>)
         /* Set if it's players turn */
 
         view.accessibilityIdentifier = "gameView"
@@ -47,6 +52,11 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         sceneView = SKView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height*0.90))
         sceneView.backgroundColor = UIColor.black
         self.view.addSubview(sceneView)
+        
+        /* Attach multiplayerListener */
+        NSLog("%@", "Adding Event Listener")
+        Multiplayer.shared.addEventListener(listener: self.messageListener)
+        NSLog("%@", "Event Listener Added")
         
         //TempBtn, DELETE later
         self.view.bringSubview(toFront: self.oppTurnTemp)
@@ -60,10 +70,6 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         
     }
     
-    func multiplayerListener(message: Message) {
-        self.currentGame.gameListener(fireVector: CGVector(dx: -300, dy: 200), ammoType: .missile, moveAction: (self.currentGame.tank2.moveLeft, "moveLeft") )
-    }
-    
     /**
      Fires a projectile with angle and power chosen in the `UIPicker`s
      - Parameters:
@@ -74,7 +80,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         let power = self.getPowerValue()
         let angle = self.getAngleValue()
         let vector = CGVector(dx: power * 10 , dy: angle * 10)
-        
+        Multiplayer.shared.messageFire(vector: vector);
         self.currentGame.fire(ammoType: .missile, fireVector: vector, tank: self.currentGame.tank1)
         self.currentGame.finishTurn()
     }
@@ -92,8 +98,6 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     public func disableControls() {
         print("Disable controls")
         self.view.bringSubview(toFront: self.disableView)
-
-
     }
     
     /**

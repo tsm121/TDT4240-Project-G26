@@ -50,11 +50,6 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         // Do any additional setup after loading the view.
         view.accessibilityIdentifier = "gameLobbyView"
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        /* Un-register event listener for multiplayer. */
-        Multiplayer.shared.removeEventListener(listener: self.multiplayerListener)
-    }
 
     func multiplayerListener(message: Message) {
         // NOTE: It's possibel DispatchQueue needs to wrap everything

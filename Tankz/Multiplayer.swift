@@ -10,6 +10,20 @@ struct TankzPlayer {
 /* Message Structure */
 struct Message : Codable{
     var type: String
+    var power: Float
+    var angle: Float
+    
+    init(type: String){
+        self.type = type
+        self.power = 0.0
+        self.angle = 0.0
+    }
+    
+    init(type: String, power: Float, angle: Float){
+        self.type = type
+        self.power = power
+        self.angle = angle
+    }
 }
 
 /**
@@ -54,6 +68,8 @@ class Multiplayer : NSObject {
     }
     
     func removeEventListener(listener: @escaping (Message) -> ()) {
+        /* Attach multiplayerListener */
+        NSLog("%@", "Removing Event Listener")
         self.listener = Multiplayer.noop;
     }
     
@@ -132,6 +148,7 @@ class Multiplayer : NSObject {
     func messageIsReady(){
         self.player.isReady = true
         self.send(message: Message(type: "isready"))
+        /* Todo: Crashes on self.oppenent?.isReady if there is no opponent */
         if (self.opponent?.isReady)! {
             self.notifyAllEventListeners(message: Message(type: "startgame"))
         }
@@ -142,9 +159,21 @@ class Multiplayer : NSObject {
         self.player.isReady = false
         self.send(message: Message(type: "notready"))
     }
-    
+    /* TODO: Message Fire/"End Turn" */
+    func messageFire(vector: CGVector){
+        self.send(message: Message(type: "fire", power: Float(vector.dx), angle: Float(vector.dy)))
+    }
+    /* TODO: Message Move Left */
+    func messageMoveLeft(){
+        self.send(message: Message(type: "moveleft"))
+    }
+    /* TODO: Message Move Right */
+    func messageMoveRight(){
+        self.send(message: Message(type: "moveright"))
+    }
     /* --- Message Handlers --- */
     func handleMessage(message: Message){
+        NSLog("%@", "message \(message.type)")
         switch message.type {
         case "isready":
             handleIsReady(message: message)
@@ -152,6 +181,9 @@ class Multiplayer : NSObject {
         case "notready":
             handleNotReady(message: message)
             NSLog("%@", "notReadyMessage: \(message)")
+        case "fire":
+            handleFire(message: message)
+            NSLog("%@", "fireMessage \(message)")
         default:
             NSLog("%@", "invalidMessage: \(message)")
         }
@@ -169,6 +201,10 @@ class Multiplayer : NSObject {
     func handleNotReady(message: Message){
         // TODO: Handle not ready
         self.opponent?.isReady = false
+        self.notifyAllEventListeners(message: message)
+    }
+    
+    func handleFire(message: Message){
         self.notifyAllEventListeners(message: message)
     }
     /* TODO: Implement Heartbeat or fix disconnected error
