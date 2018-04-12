@@ -17,8 +17,9 @@ class Tank {
     public var fuel: Int
     public let moveRight: SKAction
     public let moveLeft: SKAction
+    public let tankdirection: TankDirection
     
-    init(tankType: TankType, tankName: String, color: UIColor) {
+    init(tankType: TankType, tankName: String, color: UIColor, tankdirection: TankDirection) {
         switch tankType {
         case .smallTank:
             self.size = CGSize(width: 10, height: 5)
@@ -45,6 +46,7 @@ class Tank {
             self.moveRight = SKAction.moveBy(x: 20, y: 5, duration: 0.1)
             self.moveLeft = SKAction.moveBy(x: -20, y: 5, duration: 0.1)
         }
+        self.tankdirection = tankdirection
         
         self.body = SKShapeNode(rectOf: self.size)
         self.body.physicsBody = SKPhysicsBody(rectangleOf: self.size)

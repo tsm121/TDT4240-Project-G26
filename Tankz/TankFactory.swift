@@ -25,9 +25,9 @@ class TankFactory {
     
     var iHaveMadeSoManyTanks = 0
     
-    public func makeTank(tanktype: TankType, tankName: String, color: UIColor) -> Tank {
+    public func makeTank(tanktype: TankType, tankName: String, color: UIColor, tankdirection: TankDirection) -> Tank {
         iHaveMadeSoManyTanks += 1
-        return Tank(tankType: tanktype, tankName: tankName, color: color)
+        return Tank(tankType: tanktype, tankName: tankName, color: color, tankdirection: tankdirection);
     }
     
 }
