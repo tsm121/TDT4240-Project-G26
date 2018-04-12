@@ -247,6 +247,9 @@ extension Multiplayer : MCSessionDelegate {
                 self.messageIsReady()
             }
         }
+        if (state == MCSessionState.notConnected && peerID === opponent?.peerID){
+            notifyAllEventListeners(message: Message(type: "opponentdisconnected"))
+        }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {

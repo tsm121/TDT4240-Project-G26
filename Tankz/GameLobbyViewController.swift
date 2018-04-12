@@ -94,6 +94,16 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
                 self.performSegue(withIdentifier: "startGameSegue", sender: self)
             }
         }
+        if message.type == "opponentdisconnected" {
+            if Multiplayer.shared.player.isHost {
+                self.readyStatusLabelP2.text = "Not Ready"
+                Multiplayer.shared.opponent = nil;
+                Multiplayer.shared.advertiseAsHost();
+            }
+            else {
+                
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
