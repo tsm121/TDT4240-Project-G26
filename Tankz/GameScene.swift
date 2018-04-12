@@ -64,33 +64,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     }
 
-
-    //TODO: Not done, does not evaluate given data
-    /**
-     Recieves opponent action data from the Multiplayer service.
-     Evaluates the given information and performes these action for the users.
-     - Parameters:
-        - fireVector: `CGVector`, the vector that the opponent used
-        - ammoType: `AmmoType`, the `AmmoType` that the opponent used
-        - moveAction: (`SkAction`, `String`), tuple of opponent move action with action and direction-key.
-     */
-    public func gameListener(fireVector: CGVector, ammoType: AmmoType, moveAction: (SKAction, String)) {
-
-        //Run opponent move
-        self.moveOppTank(move: moveAction)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
-            //Run opponent shot
-            self.fire(ammoType: ammoType, fireVector: fireVector)
-            print("Opponent shoots")
-        }
-
-        //Give user controls
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
-            self.nextTurn()
-        }
-    }
-
     //TODO: Tell Multiplayer-class your actions
     /**
      Get called on upon by  `GameViewController`'s `fireAction()` when the user has pressed the `UIButton` for fire.
@@ -143,19 +116,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    /**
-     Moves opponent `Tank` to the given position.
-     - Parameters:
-        - move: the given `SKAction` and direction-key
-     */
-    public func moveOppTank(move:(SKAction, String)) {
-        if self.tank2.body.action(forKey: move.1) == nil {
-            self.tank2.body.run(move.0, withKey: move.1)
-        }
-    }
-
     func setTankPos(){
-        self.tank1.body.position = CGPoint(x: 100, y: 500)
+        self.currentTank.body.position = CGPoint(x: 100, y: 500)
     }
 
     func placeTank(tankBody: SKShapeNode) {
@@ -166,23 +128,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    func fire(ammoType: AmmoType, fireVector: CGVector){ //Arguments might not be needed
+    func fire(ammoType: AmmoType, power: Float, angle: Float){ //Arguments might not be needed
+        let xValue = CGFloat(cos(Double(angle) * Double.pi / 180.0) * Double(power * 10))
+        let yValue = CGFloat(sin(Double(angle) * Double.pi / 180.0) * Double(power * 10))
         if (self.getMyTank().body.name?.isEqual(currentTank.body.name))! {
             self.viewController.disableControls()
         }
         self.liveAmmo = ammoFactory.makeAmmo(ammotype: ammoType)
         self.liveAmmo.projectile.position = CGPoint(x: currentTank.body.position.x , y: currentTank.body.position.y + 10)
-        self.liveAmmo.projectile.physicsBody?.velocity = CGVector(dx: fireVector.dx*CGFloat(currentTank.tankdirection.rawValue), dy: fireVector.dy)
+        self.liveAmmo.projectile.physicsBody?.velocity = CGVector(dx: xValue*CGFloat(currentTank.tankdirection.rawValue), dy: yValue)
         self.addChild(self.liveAmmo.projectile)
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
             self.nextTurn()
         }
-
-        //let deleteAmmo = ammo.run(SKAction.removeFromParent()) //to delete ammo on hit
     }
 
     func nextTurn() {
-
         if (tank1.body.name?.isEqual(currentTank.body.name))! {
             currentTank = tank2
         } else {
@@ -262,11 +223,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func touchUp(atPoint pos : CGPoint) {
-        /*let xDrag = self.touchDownPos.x - pos.x
-        let yDrag = self.touchDownPos.y - pos.y
-        let scale = CGFloat(4)
-        let fireVector = CGVector(dx: xDrag * scale, dy: yDrag * scale)
-        fire(ammoType: self.chosenAmmo, fireVector: fireVector)*/
+        
     }
 
     //Listener for when touch began
