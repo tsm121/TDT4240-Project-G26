@@ -21,6 +21,8 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
     private var reloadGamesList: Timer? = nil
     
     override func viewWillAppear(_ animated: Bool) {
+        self.data.removeAll()
+        self.tableView.reloadData()
         Multiplayer.shared.lookForGames()
     }
     

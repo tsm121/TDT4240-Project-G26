@@ -94,6 +94,14 @@ class Multiplayer : NSObject {
         self.advertiser.stopAdvertisingPeer()
     }
     
+    func disconnect() {
+        self.player.isHost = false
+        self.player.isReady = false
+        self.games.removeAll()
+        ceaseAdvertisingAsHost()
+        ceaseLookingForGames()
+        self.session.disconnect()
+    }
     /* Look for games. */
     func lookForGames() {
         self.games = [MCPeerID]()

@@ -73,10 +73,15 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBAction func oppTurnActionTest(_ sender: Any) {
         if currentGame.currentTank !== currentGame.getMyTank() {
             Multiplayer.shared.handleMessage(message: Message(type: "fire", power: 50, angle: 45))
+            gameHasEnded()
             
         }
     }
-    
+    func gameHasEnded(){
+        Multiplayer.shared.disconnect()
+        performSegue(withIdentifier: "exitGameSegue", sender: self)
+        // TODO: Move to scoreboard instead
+    }
     /**
      Fires a projectile with angle and power chosen in the `UIPicker`s
      - Parameters:
