@@ -162,8 +162,8 @@ class Multiplayer : NSObject {
         self.send(message: Message(type: "notready"))
     }
     /* TODO: Message Fire/"End Turn" */
-    func messageFire(vector: CGVector){
-        self.send(message: Message(type: "fire", power: Float(vector.dx), angle: Float(vector.dy)))
+    func messageFire(power: Float, angle: Float){
+        self.send(message: Message(type: "fire", power: power, angle: angle))
     }
     /* TODO: Message Move Left */
     func messageMoveLeft(){
@@ -188,10 +188,10 @@ class Multiplayer : NSObject {
             NSLog("%@", "fireMessage \(message)")
         case "moveleft":
             handleMoveLeft(message: message)
-            NSLog("%@", "fireMessage \(message)")
+            NSLog("%@", "moveleftmessage \(message)")
         case "moveright":
             handleMoveRight(message: message)
-            NSLog("%@", "fireMessage \(message)")
+            NSLog("%@", "moverightmessage \(message)")
         default:
             NSLog("%@", "invalidMessage: \(message)")
         }

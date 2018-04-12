@@ -32,7 +32,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     func messageListener(message: Message) {
         NSLog("%@", "messageListener \(message.type)")
         if message.type == "fire"{
-            self.currentGame.fire(ammoType: .missile, fireVector: CGVector(dx: CGFloat(message.power),dy: CGFloat(message.angle)))
+            self.currentGame.fire(ammoType: .missile, power: message.power, angle: message.angle)
         }
         if message.type == "moveleft" {
             self.currentGame.moveTankLeft();
@@ -71,9 +71,10 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     //For test purposes only. DELETE later
     @IBAction func oppTurnActionTest(_ sender: Any) {
-
-        self.currentGame.gameListener(fireVector: CGVector(dx: -300, dy: 200), ammoType: .missile, moveAction: (self.currentGame.tank2.moveLeft, "moveLeft") )
-        
+        if currentGame.currentTank !== currentGame.getMyTank() {
+            Multiplayer.shared.handleMessage(message: Message(type: "fire", power: 50, angle: 45))
+            
+        }
     }
     
     /**
@@ -83,17 +84,10 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
      */
     @IBAction func fireAction(_ sender: Any) {
         
-        let power = self.getPowerValue()
-        let angle = self.getAngleValue()
-        print (power)
-        print (angle)
-        print (cos(Double(angle) * Double.pi / 180.0))
-        print (sin(Double(angle) * Double.pi / 180.0))
-        let xValue = CGFloat(cos(Double(angle) * Double.pi / 180.0) * Double(power * 10))
-        let yValue = CGFloat(sin(Double(angle) * Double.pi / 180.0) * Double(power * 10))
-        let vector = CGVector(dx: xValue, dy: yValue)
-        Multiplayer.shared.messageFire(vector: vector);
-        self.currentGame.fire(ammoType: .missile, fireVector: vector)
+        let power = Float(self.getPowerValue())
+        let angle = Float(self.getAngleValue())
+        Multiplayer.shared.messageFire(power: power, angle: angle);
+        self.currentGame.fire(ammoType: .missile, power: power, angle: angle)
     }
     
     /**
@@ -107,7 +101,6 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
      Disable the UI controls by moving the `disableView` to front
      */
     public func disableControls() {
-        print("Disable controls")
         self.view.bringSubview(toFront: self.disableView)
     }
     
