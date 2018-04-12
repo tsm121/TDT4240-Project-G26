@@ -67,6 +67,7 @@ class Map {
         self.ground.physicsBody?.affectedByGravity = false
         self.ground.physicsBody!.categoryBitMask = PhysicsCategory.Ground
         self.ground.physicsBody!.collisionBitMask = PhysicsCategory.Projectile | PhysicsCategory.Tank
+        self.ground.physicsBody!.contactTestBitMask = PhysicsCategory.Projectile
     }
     
     func randHeight(height: CGFloat) -> Int{
