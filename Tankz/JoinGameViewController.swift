@@ -28,10 +28,6 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        // Load data
-        refreshListView(self)
-        reloadGamesList = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(JoinGameViewController.refreshListView), userInfo: nil, repeats: true)
         view.accessibilityIdentifier = "joinGameView"
         
         //Set datasource and delegate for table
@@ -40,7 +36,10 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
         
         // Do any additional setup after loading the view.
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        refreshListView(self)
+        reloadGamesList = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(JoinGameViewController.refreshListView), userInfo: nil, repeats: true)
+    }
     override func viewWillDisappear(_ animated: Bool) {
         reloadGamesList?.invalidate()
         reloadGamesList = nil
