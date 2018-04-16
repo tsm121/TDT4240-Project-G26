@@ -40,6 +40,15 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         if message.type == "moveright" {
             self.currentGame.moveTankRight()
         }
+        if message.type == "opponentdisconnected" {
+            let alert = UIAlertController(title: "Opponent Disconnected", message: "Your opponent disconnected.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+                Multiplayer.shared.disconnect()
+                self.performSegue(withIdentifier: "exitGameSegue", sender: self)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     deinit {
