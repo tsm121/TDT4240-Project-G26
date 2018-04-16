@@ -15,6 +15,7 @@
 		1B328A3F204D71C500B77F10 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B328A3D204D71C500B77F10 /* Main.storyboard */; };
 		1B328A41204D71C500B77F10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B328A40204D71C500B77F10 /* Assets.xcassets */; };
 		1B328A44204D71C500B77F10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B328A42204D71C500B77F10 /* LaunchScreen.storyboard */; };
+		1B3CDFAD2084E4E700DED876 /* explosion.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 1B3CDFAC2084E4E600DED876 /* explosion.atlas */; };
 		1B3E7C7F204FF66000744D17 /* MapFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3E7C7B204FF66000744D17 /* MapFactory.swift */; };
 		1B3E7C80204FF66000744D17 /* AmmoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3E7C7C204FF66000744D17 /* AmmoFactory.swift */; };
 		1B3E7C81204FF66000744D17 /* ScoreboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3E7C7D204FF66000744D17 /* ScoreboardViewController.swift */; };
@@ -71,6 +72,7 @@
 		1B328A40204D71C500B77F10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B328A43204D71C500B77F10 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B328A45204D71C500B77F10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1B3CDFAC2084E4E600DED876 /* explosion.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = explosion.atlas; sourceTree = "<group>"; };
 		1B3E7C7B204FF66000744D17 /* MapFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapFactory.swift; sourceTree = "<group>"; };
 		1B3E7C7C204FF66000744D17 /* AmmoFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmmoFactory.swift; sourceTree = "<group>"; };
 		1B3E7C7D204FF66000744D17 /* ScoreboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardViewController.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				5BE364FA2053274C009F5AEA /* PhysicsCategory.swift */,
 				5B5D5B6F2050650000018A04 /* UIColor+Extension.swift */,
 				1B328A40204D71C500B77F10 /* Assets.xcassets */,
+				1B3CDFAC2084E4E600DED876 /* explosion.atlas */,
 				1B6E2397204DC46200138EDA /* fonts */,
 				1B328A42204D71C500B77F10 /* LaunchScreen.storyboard */,
 				1B328A45204D71C500B77F10 /* Info.plist */,
@@ -327,6 +330,7 @@
 				1B328A41204D71C500B77F10 /* Assets.xcassets in Resources */,
 				1B328A44204D71C500B77F10 /* LaunchScreen.storyboard in Resources */,
 				1B328A38204D71C500B77F10 /* Actions.sks in Resources */,
+				1B3CDFAD2084E4E700DED876 /* explosion.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
