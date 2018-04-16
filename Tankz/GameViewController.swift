@@ -87,8 +87,24 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     func gameHasEnded(){
-        Multiplayer.shared.disconnect()
-        performSegue(withIdentifier: "exitGameSegue", sender: self)
+        if (myTank.health - myTank.damageTaken <= 0) {
+            let alert = UIAlertController(title: "Defeat", message: "Your tank was destroyed.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+                Multiplayer.shared.disconnect()
+                self.performSegue(withIdentifier: "exitGameSegue", sender: self)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else {
+            let alert = UIAlertController(title: "Victory", message: "Your opponent's tank was destroyed.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+                Multiplayer.shared.disconnect()
+                self.performSegue(withIdentifier: "exitGameSegue", sender: self)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
         // TODO: Move to scoreboard instead
     }
     /**
