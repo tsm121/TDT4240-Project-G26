@@ -15,6 +15,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     //Just for testing, DELETE later
     @IBOutlet weak var oppTurnTemp: UIButton!
     
+    @IBOutlet weak var exitBtn: UIButton!
     @IBOutlet weak var fireBtn: UIButton!
     @IBOutlet weak var disableView: UIView!
     @IBOutlet weak var fuelLabel: UILabel!
@@ -73,6 +74,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         Multiplayer.shared.addEventListener(listener: self.messageListener)
         NSLog("%@", "Event Listener Added")
         
+        self.view.bringSubview(toFront: self.exitBtn)
         //TempBtn, DELETE later
         self.view.bringSubview(toFront: self.oppTurnTemp)
         
