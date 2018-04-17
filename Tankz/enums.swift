@@ -15,9 +15,9 @@ enum TankType {
 
 // Map types.
 enum MapType {
-    case flat
-    case flatty
-    case hills
+    case earth
+    case moon
+    case mars
 }
 
 

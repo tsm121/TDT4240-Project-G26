@@ -34,26 +34,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private var leftButton : SKShapeNode!
     private var rightButton : SKShapeNode!
+    
+    private var terrain : MapType!
 
 
     override func didMove(to view: SKView) {
 
         physicsWorld.contactDelegate = self
+        
+        terrain = .mars
+
 
         // Create game area, full screen.
-        self.createArea()
+        self.createArea(terrain: terrain)
 
         // Generate the world map.
         mapFactory = MapFactory(skSceneWidth: CGFloat(self.size.width))
-        map = mapFactory.makeMap(mapType: .flat)
+        map = mapFactory.makeMap(mapType: terrain)
+        
+        self.addChild(map.wallpaper)
         self.addChild(map.ground)
-
+        
 
         // Generate a tank from the factory.
         tankFactory = TankFactory()
-        tank1 = tankFactory.makeTank(tanktype: .bigTank, tankName: "Player 1", color: UIColor(named: "militaryGreenLight")!, tankdirection: TankDirection.right)
+        tank1 = tankFactory.makeTank(tanktype: .bigTank, tankName: "Player 1", color: UIColor.black, tankdirection: TankDirection.right)
         placeTank(tankBody: tank1.body)
-        tank2 = tankFactory.makeTank(tanktype: .funnyTank, tankName: "Player 2", color: UIColor(named: "militaryGreenDark")!, tankdirection: TankDirection.left)
+        tank2 = tankFactory.makeTank(tanktype: .funnyTank, tankName: "Player 2", color: UIColor.black, tankdirection: TankDirection.left)
         placeTank(tankBody: tank2.body)
 
         currentTank = tank1
@@ -155,10 +162,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
 
-    //Create player area with bounderies, together with physics
-    func createArea() {
+    // Create player area with bounderies, together with physics
+    func createArea(terrain : MapType) {
+        
+        
+        // Map colors for the sky.
+        switch terrain {
+        case .earth:
+            self.backgroundColor = UIColor(named: "skyBlue")!
+        case .mars:
+            self.backgroundColor = UIColor(red: 227/255, green: 240/255, blue: 155/255, alpha: 1)
+        case .moon:
+            self.backgroundColor = UIColor(red: 20/255, green: 79/255, blue: 132/255, alpha: 1)
+        }
+        
         self.scene?.anchorPoint = CGPoint(x: 0, y: 0)
-        self.backgroundColor = UIColor(named: "skyBlue")!
         self.scaleMode = .aspectFill
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         self.physicsBody?.friction = CGFloat(0)
