@@ -40,6 +40,15 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         if message.type == "moveright" {
             self.currentGame.moveTankRight()
         }
+        if message.type == "opponentdisconnected" {
+            let alert = UIAlertController(title: "Opponent Disconnected", message: "Your opponent disconnected.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+                Multiplayer.shared.disconnect()
+                self.performSegue(withIdentifier: "exitGameSegue", sender: self)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     deinit {
@@ -73,10 +82,31 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBAction func oppTurnActionTest(_ sender: Any) {
         if currentGame.currentTank !== currentGame.getMyTank() {
             Multiplayer.shared.handleMessage(message: Message(type: "fire", power: 50, angle: 45))
+            gameHasEnded()
             
         }
     }
-    
+    func gameHasEnded(){
+        if (myTank.health - myTank.damageTaken <= 0) {
+            let alert = UIAlertController(title: "Defeat", message: "Your tank was destroyed.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+                Multiplayer.shared.disconnect()
+                self.performSegue(withIdentifier: "exitGameSegue", sender: self)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else {
+            let alert = UIAlertController(title: "Victory", message: "Your opponent's tank was destroyed.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+                Multiplayer.shared.disconnect()
+                self.performSegue(withIdentifier: "exitGameSegue", sender: self)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        // TODO: Move to scoreboard instead
+    }
     /**
      Fires a projectile with angle and power chosen in the `UIPicker`s
      - Parameters:

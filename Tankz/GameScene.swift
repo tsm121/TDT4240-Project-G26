@@ -200,6 +200,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if (tank1.health - tank1.damageTaken < 0) { // If tank1 exploded
                     tank1.body.run(SKAction.removeFromParent())
                     print("tank1 exploded.")
+                    self.viewController.gameHasEnded()
+                    
                 }
             }
 
@@ -209,6 +211,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if (tank2.health - tank2.damageTaken < 0) { //If tank2 exploded.
                     tank2.body.run(SKAction.removeFromParent())
                     print("tank2 exploded.")
+                    self.viewController.gameHasEnded()
                 }
             }
         }

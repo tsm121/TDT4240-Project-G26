@@ -57,6 +57,12 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         /* Register event listener for when multiplayer fires events. */
         Multiplayer.shared.addEventListener(listener: self.multiplayerListener)
         super.viewDidLoad()
+    
+        /* Custom Back Button */
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title:
+            "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(GameLobbyViewController.back(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
 
         self.setUpScrollView()
         //DemoUsers
@@ -65,6 +71,11 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
 
         // Do any additional setup after loading the view.
         view.accessibilityIdentifier = "gameLobbyView"
+    }
+
+    @objc func back(sender: UIBarButtonItem) {
+        Multiplayer.shared.disconnect();
+        _ = navigationController?.popViewController(animated: true)
     }
 
     func multiplayerListener(message: Message) {
@@ -92,6 +103,28 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         if message.type == "startgame"{
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "startGameSegue", sender: self)
+            }
+        }
+        if message.type == "opponentdisconnected" {
+            if Multiplayer.shared.player.isHost {
+                let alert = UIAlertController(title: "Opponent Disconnected", message: "Your opponent disconnected.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                    NSLog("The \"OK\" alert occured.")
+                    self.readyStatusLabelP2.text = "Not Ready"
+                    Multiplayer.shared.opponent = nil;
+                    Multiplayer.shared.advertiseAsHost();
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+            else {
+                let alert = UIAlertController(title: "Host Disconnected", message: "Your host disconnected.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                    Multiplayer.shared.disconnect();
+                    _ = self.navigationController?.popViewController(animated: true)
+                    NSLog("The \"OK\" alert occured.")
+                }))
+                self.present(alert, animated: true, completion: nil)
+                
             }
         }
     }

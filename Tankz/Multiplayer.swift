@@ -40,6 +40,7 @@ class Multiplayer : NSObject {
     private let peerID = MCPeerID(displayName: UIDevice.current.name)
     private let browser : MCNearbyServiceBrowser
     private let advertiser : MCNearbyServiceAdvertiser
+    private var isDisconnecting = false
     
     /* Game Variables */
     var player: TankzPlayer
@@ -94,6 +95,15 @@ class Multiplayer : NSObject {
         self.advertiser.stopAdvertisingPeer()
     }
     
+    func disconnect() {
+        self.isDisconnecting = true;
+        self.player.isHost = false
+        self.player.isReady = false
+        self.games.removeAll()
+        ceaseAdvertisingAsHost()
+        ceaseLookingForGames()
+        self.session.disconnect()
+    }
     /* Look for games. */
     func lookForGames() {
         self.games = [MCPeerID]()
@@ -238,6 +248,12 @@ extension Multiplayer : MCSessionDelegate {
             if (self.player.isReady){
                 self.messageIsReady()
             }
+        }
+        else if (state == MCSessionState.notConnected && self.isDisconnecting){
+            self.isDisconnecting = false
+        }
+        else if (state == MCSessionState.notConnected && !self.isDisconnecting){
+            notifyAllEventListeners(message: Message(type: "opponentdisconnected"))
         }
     }
     
