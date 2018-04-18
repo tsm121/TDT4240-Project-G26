@@ -175,9 +175,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .moon:
             self.backgroundColor = UIColor(red: 20/255, green: 79/255, blue: 132/255, alpha: 1)
         }
-        
-        self.scene?.anchorPoint = CGPoint(x: 0, y: 0)
-        self.scaleMode = .aspectFill
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         self.physicsBody?.friction = CGFloat(0)
         self.physicsBody?.restitution = CGFloat(0)
@@ -186,9 +183,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsBody!.categoryBitMask = PhysicsCategory.Edge
         self.physicsBody!.collisionBitMask = PhysicsCategory.Tank
         self.physicsBody?.isDynamic = false
-
-        self.width = self.frame.width
-        self.height = self.frame.height
     }
 
     // Called before each frame is rendered

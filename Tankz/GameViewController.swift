@@ -15,6 +15,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     //Just for testing, DELETE later
     @IBOutlet weak var oppTurnTemp: UIButton!
     
+    @IBOutlet weak var controlsView: UIView!
     @IBOutlet weak var exitBtn: UIButton!
     @IBOutlet weak var fireBtn: UIButton!
     @IBOutlet weak var disableView: UIView!
@@ -65,7 +66,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         //self.getSelectedValue()
 
         //Set up SKScene inside SKView
-        sceneView = SKView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height*0.90))
+        sceneView = SKView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - self.controlsView.frame.height))
         sceneView.backgroundColor = UIColor.black
         self.view.addSubview(sceneView)
         
@@ -74,6 +75,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         Multiplayer.shared.addEventListener(listener: self.messageListener)
         NSLog("%@", "Event Listener Added")
         
+        self.view.bringSubview(toFront: self.controlsView)
         self.view.bringSubview(toFront: self.exitBtn)
         //TempBtn, DELETE later
         self.view.bringSubview(toFront: self.oppTurnTemp)
@@ -262,8 +264,20 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         if let view = self.sceneView as SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
-                // Set the scale mode to scale to fit the window
-                scene.scaleMode = .resizeFill
+                // START OF HACKY SHIT TO MAKE SCENE SCALE
+                // Kanskje æ huske ka æ gjorde hvis du spør meg - Clas
+                scene.size = CGSize(width: 1280, height: 1280)
+                scene.scaleMode = .aspectFill
+                print("Camera")
+                print(self.view.frame.height - self.controlsView.frame.height)
+                let camera = SKCameraNode()
+                let viewHeight = self.view.frame.height - self.controlsView.frame.height
+                let sceneViewRelationship = 1280 / self.view.frame.width
+                let cameraAdjust = (viewHeight * sceneViewRelationship) / 2
+                camera.position = CGPoint(x: 640, y: cameraAdjust)
+                scene.camera = camera
+                scene.addChild(camera)
+                // END OF HACKY SHIT TO MAKE SCENE SCALE
                 
                 // Present the scene
                 view.presentScene(scene)

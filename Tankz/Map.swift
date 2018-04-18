@@ -37,12 +37,12 @@ class Map {
     func makeGround(mapType: MapType, width: CGFloat) {
         
         let interval = [0, width*(1/5), width*(2/5), width*(3/5), width*(4/5), width]
-        var points = [CGPoint(x: Int(interval[0]), y: randHeight(height: height)),
-                      CGPoint(x: Int(interval[1]), y: randHeight(height: height)),
-                      CGPoint(x: Int(interval[2]), y: randHeight(height: height)),
-                      CGPoint(x: Int(interval[3]), y: randHeight(height: height)),
-                      CGPoint(x: Int(interval[4]), y: randHeight(height: height)),
-                      CGPoint(x: Int(interval[5]), y: randHeight(height: height))]
+        var points = [CGPoint(x: Int(interval[0]), y: Int(height+5)),
+                      CGPoint(x: Int(interval[1]), y: Int(height-5)),
+                      CGPoint(x: Int(interval[2]), y: Int(height+5)),
+                      CGPoint(x: Int(interval[3]), y: Int(height-5)),
+                      CGPoint(x: Int(interval[4]), y: Int(height+5)),
+                      CGPoint(x: Int(interval[5]), y: Int(height-5))]
         
         
         // Draw a BeizerPath from the points. Making it SMOOTH AF.
