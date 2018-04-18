@@ -21,6 +21,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     public var tank2 : Tank!
     private var map : Map!
     private var liveAmmo : Ammo!
+    private var explosion : Explosion!
     private var height : CGFloat!
     private var width : CGFloat!
 
@@ -68,6 +69,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         self.addChild(tank1.body)
         self.addChild(tank2.body)
+        
+        // Prepare Explosions
+        self.explosion = Explosion();
 
     }
 
@@ -199,6 +203,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if(firstBody.categoryBitMask == PhysicsCategory.Projectile || secondBody.categoryBitMask == PhysicsCategory.Projectile) {
             print("Projectile hit something")
             liveAmmo.projectile.run(SKAction.removeFromParent()) //deletes ammo on hit
+            self.explosion.explode(position: contact.contactPoint, parent: self)
+            
         }
 
         //If projectile hits a tank.
