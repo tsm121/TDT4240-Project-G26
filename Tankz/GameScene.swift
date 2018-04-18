@@ -21,7 +21,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     public var tank2 : Tank!
     private var map : Map!
     private var liveAmmo : Ammo!
-    private var explosion : Explosion!
     private var height : CGFloat!
     private var width : CGFloat!
 
@@ -59,19 +58,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         // Generate a tank from the factory.
         tankFactory = TankFactory()
-        tank1 = tankFactory.makeTank(tanktype: .bigTank, tankName: "Player 1", color: UIColor.black, tankdirection: TankDirection.right)
-        placeTank(tankBody: tank1.body)
-        tank2 = tankFactory.makeTank(tanktype: .funnyTank, tankName: "Player 2", color: UIColor.black, tankdirection: TankDirection.left)
-        placeTank(tankBody: tank2.body)
+        tank1 = tankFactory.makeTank(tankType: .bigTank, forHost: true)
+        placeTank(tankBody: tank1)
+        tank2 = tankFactory.makeTank(tankType: .bigTank, forHost: false)
+        placeTank(tankBody: tank2)
 
         currentTank = tank1
         ammoFactory = AmmoFactory()
 
-        self.addChild(tank1.body)
-        self.addChild(tank2.body)
-        
-        // Prepare Explosions
-        self.explosion = Explosion();
+        self.addChild(tank1)
+        self.addChild(tank2)
 
     }
 
@@ -97,41 +93,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
      Moves users `Tank` to the left with a `SKAction` and set `prevMove` and `lastMove`.
      */
     public func moveTankLeft() {
-        if self.currentTank.hasFuel() {
-            if self.currentTank.body.action(forKey: "moveLeft") == nil {
-                if self.currentTank.fuel > 0 {
-                    self.currentTank.body.run(SKAction.sequence([self.currentTank.moveLeft]), withKey:"moveLeft")
-                    self.currentTank.useFuel()
-                    self.viewController.setFuelLabel()
-                    self.prevMove = self.lastMove
-                    self.lastMove = (self.currentTank.moveLeft, "moveLeft")
-                }
-            }
-        }
+        self.currentTank.moveLeft()
+        self.viewController.setFuelLabel()
     }
 
     /**
      Moves users `Tank` to the right with a `SKAction` and set `prevMove` and `lastMove`.
      */
     public func moveTankRight() {
-        if self.currentTank.hasFuel() {
-            if self.currentTank.body.action(forKey: "moveRight") == nil {
-                if self.currentTank.fuel > 0 {
-                    self.currentTank.body.run(SKAction.sequence([self.currentTank.moveRight]), withKey:"moveRight")
-                    self.currentTank.useFuel()
-                    self.viewController.setFuelLabel()
-                    self.prevMove = self.lastMove
-                    self.lastMove = (self.currentTank.moveRight, "moveRight")
-                }
-            }
-        }
+        self.currentTank.moveRight()
+        self.viewController.setFuelLabel()
     }
 
     func setTankPos(){
-        self.currentTank.body.position = CGPoint(x: 100, y: 500)
+        self.currentTank.position = CGPoint(x: 100, y: 500)
     }
 
-    func placeTank(tankBody: SKShapeNode) {
+    func placeTank(tankBody: SKSpriteNode) {
         if tankFactory.iHaveMadeSoManyTanks == 1 {
             tankBody.position = CGPoint(x: 100 + tankBody.frame.width/2,y: 300 + tankBody.frame.height/2)
         } else if tankFactory.iHaveMadeSoManyTanks == 2 {
@@ -142,12 +120,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func fire(ammoType: AmmoType, power: Float, angle: Float){ //Arguments might not be needed
         let xValue = CGFloat(cos(Double(angle) * Double.pi / 180.0) * Double(power * 10))
         let yValue = CGFloat(sin(Double(angle) * Double.pi / 180.0) * Double(power * 10))
-        if (self.getMyTank().body.name?.isEqual(currentTank.body.name))! {
+        if (self.getMyTank().isOwnerHost() == self.currentTank.isOwnerHost()) {
             self.viewController.disableControls()
         }
         self.liveAmmo = ammoFactory.makeAmmo(ammotype: ammoType)
-        self.liveAmmo.projectile.position = CGPoint(x: currentTank.body.position.x , y: currentTank.body.position.y + 10)
-        self.liveAmmo.projectile.physicsBody?.velocity = CGVector(dx: xValue*CGFloat(currentTank.tankdirection.rawValue), dy: yValue)
+        self.liveAmmo.projectile.position = CGPoint(
+            x: self.currentTank.position.x ,
+            y: self.currentTank.position.y + 10)
+        self.liveAmmo.projectile.physicsBody?.velocity = CGVector(
+            dx: xValue*CGFloat(-1 * currentTank.xScale / abs(currentTank.xScale)),
+            dy: yValue)
         self.addChild(self.liveAmmo.projectile)
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
             self.nextTurn()
@@ -155,12 +137,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func nextTurn() {
-        if (tank1.body.name?.isEqual(currentTank.body.name))! {
-            currentTank = tank2
+        if (self.currentTank.isOwnerHost()) {
+            self.currentTank = tank2
         } else {
-            currentTank = tank1
+            self.currentTank = tank1
         }
-        if (self.getMyTank().body.name?.isEqual(currentTank.body.name))! {
+        if (self.getMyTank().isOwnerHost() == self.currentTank.isOwnerHost()) {
             self.viewController.enableControls()
         }
     }
@@ -195,44 +177,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func didBegin(_ contact: SKPhysicsContact) {
-
+        // Crash Happened
         let firstBody = contact.bodyA
         let secondBody = contact.bodyB
-
-        //If projectile hits something in its contactTestBitMask
+        
+        // Was a projectile Involved?
         if(firstBody.categoryBitMask == PhysicsCategory.Projectile || secondBody.categoryBitMask == PhysicsCategory.Projectile) {
-            print("Projectile hit something")
+            let ammo = firstBody.categoryBitMask == PhysicsCategory.Projectile ? firstBody.node : secondBody.node
+            // Was a tank Involved?
+            if(firstBody.categoryBitMask == PhysicsCategory.Tank && secondBody.categoryBitMask == PhysicsCategory.Tank) {
+                let tank = firstBody.categoryBitMask == PhysicsCategory.Tank ? firstBody.node as! Tank : secondBody.node as! Tank
+                if (tank.isHit(ammo: self.liveAmmo)){
+                    tank.run(SKAction.removeFromParent())
+                    self.viewController.gameHasEnded()
+                }
+            }
             liveAmmo.projectile.run(SKAction.removeFromParent()) //deletes ammo on hit
-            self.explosion.explode(position: contact.contactPoint, parent: self)
+            let explosion = Explosion()
+            explosion.explode(position: contact.contactPoint, parent: self)
             
         }
 
         //If projectile hits a tank.
-        if((firstBody.categoryBitMask == PhysicsCategory.Tank && secondBody.categoryBitMask == PhysicsCategory.Projectile) ||
-            (firstBody.categoryBitMask == PhysicsCategory.Projectile && secondBody.categoryBitMask == PhysicsCategory.Tank)) {
-            print("Projectile hit a tank")
-
-            if(firstBody == tank1.body.physicsBody || secondBody == tank1.body.physicsBody) { // If tank1 was hit.
-                tank1.damageTaken = tank1.damageTaken + liveAmmo.damage
-                print("tank1 took damage, health: ", tank1.health - tank1.damageTaken,"/",tank1.health)
-                if (tank1.health - tank1.damageTaken < 0) { // If tank1 exploded
-                    tank1.body.run(SKAction.removeFromParent())
-                    print("tank1 exploded.")
-                    self.viewController.gameHasEnded()
-                    
-                }
-            }
-
-            if(firstBody == tank2.body.physicsBody || secondBody == tank2.body.physicsBody) { // If tank2 was hit.
-                tank2.damageTaken = tank2.damageTaken + liveAmmo.damage
-                print("tank2 took damage, health: ", tank2.health - tank2.damageTaken,"/",tank2.health)
-                if (tank2.health - tank2.damageTaken < 0) { //If tank2 exploded.
-                    tank2.body.run(SKAction.removeFromParent())
-                    print("tank2 exploded.")
-                    self.viewController.gameHasEnded()
-                }
-            }
-        }
+        
     }
 
     func touchDown(atPoint pos : CGPoint) {

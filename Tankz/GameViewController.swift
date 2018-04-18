@@ -91,7 +91,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     func gameHasEnded(){
-        if (myTank.health - myTank.damageTaken <= 0) {
+        if (myTank.getCurrentHealth() <= 0) {
             let alert = UIAlertController(title: "Defeat", message: "Your tank was destroyed.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
                 NSLog("The \"OK\" alert occured.")
@@ -142,7 +142,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
      Sets the fuel label to users tank fuel status
      */
     public func setFuelLabel(){
-        fuelLabel.text = String(self.myTank.fuel)
+        fuelLabel.text = String(Float(self.myTank.getCurrentFuel()))
     }
     
     /**

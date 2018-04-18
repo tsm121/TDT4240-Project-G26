@@ -37,11 +37,12 @@ class Explosion : SKSpriteNode{
         self.run(
             SKAction.animate(
                 with: self.explosionFrames,
-                timePerFrame: 0.1,
+                timePerFrame: 0.075,
                 resize: false,
                 restore: true)
             , completion: {
                 self.removeFromParent()
+
             }
         );
     }
