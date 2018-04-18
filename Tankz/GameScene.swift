@@ -214,7 +214,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func updateHealthBar(node: SKSpriteNode, health: Double, maxHealth: Double){
-        let barSize = CGSize(width: 100, height: 20)
+        let barSize = CGSize(width: 50, height: 10)
         let fillColor = UIColor(red: 113/255, green: 202/255, blue: 53/255, alpha: 1)
         let borderColor = UIColor(red: 35/255, green: 28/255, blue: 40/255, alpha: 1)
     
