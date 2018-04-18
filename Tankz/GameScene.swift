@@ -37,7 +37,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var rightButton : SKShapeNode!
     
     private var terrain : MapType!
-
+    
+    public var healthBar1 = SKSpriteNode()
+    public var healthBar2 = SKSpriteNode()
 
     override func didMove(to view: SKView) {
 
@@ -72,9 +74,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Prepare Explosions
         self.explosion = Explosion();
-
+        
+        // Add healthbars
+        
+        healthBar1.position = CGPoint(x: tank1.body.position.x, y: tank1.body.position.y + 20)
+        healthBar2.position = CGPoint(x: tank2.body.position.x, y: tank2.body.position.y + 20)
+        
+        self.addChild(healthBar1)
+        self.addChild(healthBar2)
+        
+        updateHealthBar(node: healthBar1, health: tank1.health - tank1.damageTaken, maxHealth: tank1.health)
+        updateHealthBar(node: healthBar2, health: tank2.health - tank2.damageTaken, maxHealth: tank2.health)
     }
-
+    
     //TODO: Tell Multiplayer-class your actions
     /**
      Get called on upon by  `GameViewController`'s `fireAction()` when the user has pressed the `UIButton` for fire.
@@ -197,7 +209,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     // Called before each frame is rendered
     override func update(_ currentTime: TimeInterval) {
-
+        healthBar1.position = CGPoint(x: tank1.body.position.x, y: tank1.body.position.y + 20)
+        healthBar2.position = CGPoint(x: tank2.body.position.x, y: tank2.body.position.y + 20)
+    }
+    
+    func updateHealthBar(node: SKSpriteNode, health: Double, maxHealth: Double){
+        let barSize = CGSize(width: 50, height: 10)
+        let fillColor = UIColor(red: 113/255, green: 202/255, blue: 53/255, alpha: 1)
+        let borderColor = UIColor(red: 35/255, green: 28/255, blue: 40/255, alpha: 1)
+    
+        UIGraphicsBeginImageContextWithOptions(barSize, false, 0)
+        let context = UIGraphicsGetCurrentContext()
+        borderColor.setStroke()
+        let borderRect = CGRect(origin: CGPoint(x: 0, y: 0), size: barSize)
+        context!.stroke(borderRect, width: 1)
+        
+        fillColor.setFill()
+        let barWidth = (barSize.width - 1) * CGFloat(health) / CGFloat(maxHealth)
+        let barRect = CGRect(x: 0.5, y: 0.5, width: barWidth, height: barSize.height - 1)
+        context!.fill(barRect)
+        
+        let spriteImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        node.texture = SKTexture(image: spriteImage!)
+        node.size = barSize
     }
 
     func didBegin(_ contact: SKPhysicsContact) {
@@ -210,7 +246,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             print("Projectile hit something")
             liveAmmo.projectile.run(SKAction.removeFromParent()) //deletes ammo on hit
             self.explosion.explode(position: contact.contactPoint, parent: self)
-            
         }
 
         //If projectile hits a tank.
@@ -220,7 +255,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
             if(firstBody == tank1.body.physicsBody || secondBody == tank1.body.physicsBody) { // If tank1 was hit.
                 tank1.damageTaken = tank1.damageTaken + liveAmmo.damage
-                print("tank1 took damage, health: ", tank1.health - tank1.damageTaken,"/",tank1.health)
+                updateHealthBar(node: healthBar1, health: tank1.health - tank1.damageTaken, maxHealth: tank1.health) // Update healthbar.
+                //print("tank1 took damage, health: ", tank1.health - tank1.damageTaken,"/",tank1.health)
                 if (tank1.health - tank1.damageTaken < 0) { // If tank1 exploded
                     tank1.body.run(SKAction.removeFromParent())
                     print("tank1 exploded.")
@@ -231,7 +267,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
             if(firstBody == tank2.body.physicsBody || secondBody == tank2.body.physicsBody) { // If tank2 was hit.
                 tank2.damageTaken = tank2.damageTaken + liveAmmo.damage
-                print("tank2 took damage, health: ", tank2.health - tank2.damageTaken,"/",tank2.health)
+                updateHealthBar(node: healthBar2, health: tank2.health - tank2.damageTaken, maxHealth: tank2.health)
+                //print("tank2 took damage, health: ", tank2.health - tank2.damageTaken,"/",tank2.health)
                 if (tank2.health - tank2.damageTaken < 0) { //If tank2 exploded.
                     tank2.body.run(SKAction.removeFromParent())
                     print("tank2 exploded.")
