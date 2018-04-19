@@ -237,8 +237,10 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.myTank.rotateCanon(angle: CGFloat(pickerData[row]))
-        Multiplayer.shared.messageAngleCanon(angle: Float(self.myTank.getCurrentAngle()))
+        if pickerView === self.anglePicker {
+            self.myTank.rotateCanon(angle: CGFloat(pickerData[row]))
+            Multiplayer.shared.messageAngleCanon(angle: Float(self.myTank.getCurrentAngle()))
+        }
     }
     
     
@@ -268,6 +270,9 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     /**
      Generates a `SKScene` and adds it to the current `view`
      */
+    @IBAction func exitBtnTouch(_ sender: Any) {
+        Multiplayer.shared.disconnect()
+    }
     private func prepareScene() {
         if let view = self.sceneView as SKView? {
             // Load the SKScene from 'GameScene.sks'
@@ -276,8 +281,6 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 // Kanskje æ huske ka æ gjorde hvis du spør meg - Clas
                 scene.size = CGSize(width: 1280, height: 1280)
                 scene.scaleMode = .aspectFill
-                print("Camera")
-                print(self.view.frame.height - self.controlsView.frame.height)
                 let camera = SKCameraNode()
                 let viewHeight = self.view.frame.height - self.controlsView.frame.height
                 let sceneViewRelationship = 1280 / self.view.frame.width
@@ -304,6 +307,8 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     override func viewDidAppear(_ animated: Bool) {
+    }
+    override func viewWillDisappear(_ animated: Bool) {
     }
     
     

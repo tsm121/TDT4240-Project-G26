@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class Canon: SKShapeNode {
+class Canon : SKShapeNode {
     private let length: CGFloat
     private let width: CGFloat
     private var currentAngle: CGFloat

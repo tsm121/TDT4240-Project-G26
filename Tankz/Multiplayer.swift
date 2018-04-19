@@ -5,6 +5,7 @@ struct TankzPlayer {
     var peerID: MCPeerID
     var isReady: Bool
     var isHost: Bool
+    var tank: Int
 }
 
 /* Message Structure */
@@ -58,6 +59,7 @@ class Multiplayer : NSObject {
     private let browser : MCNearbyServiceBrowser
     private let advertiser : MCNearbyServiceAdvertiser
     private var isDisconnecting = false
+    private var map = 0
     
     /* Game Variables */
     var player: TankzPlayer
@@ -66,7 +68,7 @@ class Multiplayer : NSObject {
     /* Join Game  Variables*/
     var games = [MCPeerID]() // Available Games
     override init () {
-        self.player = TankzPlayer(peerID: self.peerID, isReady: false, isHost: false)
+        self.player = TankzPlayer(peerID: self.peerID, isReady: false, isHost: false, tank: 0)
         self.browser = MCNearbyServiceBrowser(peer: self.peerID, serviceType: self.type)
         self.advertiser = MCNearbyServiceAdvertiser(peer: self.peerID, discoveryInfo: nil, serviceType: self.type)
         super.init()
@@ -143,11 +145,11 @@ class Multiplayer : NSObject {
         self.player.isHost = false;
         self.player.isReady = false;
         self.browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 5)
-        self.opponent = TankzPlayer(peerID: peerID, isReady: false, isHost: true)
+        self.opponent = TankzPlayer(peerID: peerID, isReady: false, isHost: true, tank: 0)
     }
     
     func playerJoinedGame(peerID : MCPeerID){
-        self.opponent = TankzPlayer(peerID: peerID, isReady: false, isHost: false)
+        self.opponent = TankzPlayer(peerID: peerID, isReady: false, isHost: false, tank: 0)
         self.ceaseAdvertisingAsHost()
     }
     
@@ -204,6 +206,11 @@ class Multiplayer : NSObject {
     func messageAngleCanon(angle: Float){
         self.send(message: Message(type: "anglecanon", angle: angle))
     }
+    
+    func messageSelectTank(index: Int){
+        self.player.tank = index
+        self.send(message: Message(type: "selecttank", index: index))
+    }
     /* --- Message Handlers --- */
     func handleMessage(message: Message){
         NSLog("%@", "message \(message.type)")
@@ -225,6 +232,8 @@ class Multiplayer : NSObject {
             NSLog("%@", "moverightmessage \(message)")
         case "anglecanon":
             handleAngleCanon(message: message)
+        case "selecttank":
+            handleSelectTank(message: message)
         default:
             NSLog("%@", "invalidMessage: \(message)")
         }
@@ -244,7 +253,6 @@ class Multiplayer : NSObject {
         self.opponent?.isReady = false
         self.notifyAllEventListeners(message: message)
     }
-    
     func handleFire(message: Message){
         self.notifyAllEventListeners(message: message)
     }
@@ -258,6 +266,10 @@ class Multiplayer : NSObject {
     }
     
     func handleAngleCanon(message: Message){
+        self.notifyAllEventListeners(message: message)
+    }
+    func handleSelectTank(message: Message){
+        self.opponent?.tank = message.index
         self.notifyAllEventListeners(message: message)
     }
     /* TODO: Implement Heartbeat or fix disconnected error

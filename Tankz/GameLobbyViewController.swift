@@ -127,6 +127,15 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
                 
             }
         }
+        if message.type == "selecttank" {
+            if Multiplayer.shared.player.isHost {
+                self.scrollViewP2.setContentOffset(CGPoint(x: scrollViewP2.frame.width * CGFloat(message.index), y: 0), animated: true)
+            }
+            
+            else {
+                self.scrollViewP1.setContentOffset(CGPoint(x: scrollViewP1.frame.width * CGFloat(message.index), y: 0), animated: true)
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -141,69 +150,70 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         self.scrollViewP2.tag = 2
         
         //Set scrollView to correct size
-        self.scrollViewP1.frame = CGRect(x:0, y:0, width:self.view.frame.width/2, height:self.view.frame.height*0.8)
-        self.scrollViewP2.frame = CGRect(x:self.view.frame.width/2, y:0, width:self.view.frame.width/2, height:self.view.frame.height*0.8)
+        /*self.scrollViewP1.frame = CGRect(x:0, y:0, width:self.view.frame.width/2, height:self.view.frame.height*0.8)
+        self.scrollViewP2.frame = CGRect(x:self.view.frame.width/2, y:0, width:self.view.frame.width/2, height:self.view.frame.height*0.8)*/
 
-        let scrollViewWidth:CGFloat = self.scrollViewP1.frame.width
-        let scrollViewHeight:CGFloat = self.scrollViewP1.frame.height
+        var scrollViewWidth:CGFloat = self.scrollViewP1.frameLayoutGuide.layoutFrame.width
+        var scrollViewHeight:CGFloat = self.scrollViewP1.frame.height
         
         //Create images for scrollView
         var imgOne = UIImageView(frame: CGRect(x:0, y:0,width:scrollViewWidth, height:scrollViewHeight))
-        imgOne.image = UIImage(named: "tank1")
+        imgOne.image = UIImage(named: "tank1_p1")
         var imgTwo = UIImageView(frame: CGRect(x:scrollViewWidth, y:0,width:scrollViewWidth, height:scrollViewHeight))
         imgTwo.image = UIImage(named: "tank2")
         var imgThree = UIImageView(frame: CGRect(x:scrollViewWidth*2, y:0,width:scrollViewWidth, height:scrollViewHeight))
-        imgThree.image = UIImage(named: "tank1")
-        var imgFour = UIImageView(frame: CGRect(x:scrollViewWidth*3, y:0,width:scrollViewWidth, height:scrollViewHeight))
-        imgFour.image = UIImage(named: "tank2")
+        imgThree.image = UIImage(named: "tank3_p1")
         
+        self.scrollViewP1.contentSize = CGSize(width:scrollViewWidth * 3, height:scrollViewHeight)
+        self.scrollViewP1.delegate = self
+
         //Insert images to scrollView
         self.scrollViewP1.addSubview(imgOne)
         self.scrollViewP1.addSubview(imgTwo)
         self.scrollViewP1.addSubview(imgThree)
-        self.scrollViewP1.addSubview(imgFour)
+        
+
+    
+        scrollViewWidth = self.scrollViewP2.frameLayoutGuide.layoutFrame.width
+        scrollViewHeight = self.scrollViewP2.frame.height
         
         //Create images for scrollView
-        imgOne = UIImageView(frame: CGRect(x:self.view.frame.width/2, y:0,width:scrollViewWidth, height:scrollViewHeight))
-        imgOne.image = UIImage(named: "tank1")
-        imgTwo = UIImageView(frame: CGRect(x:self.view.frame.width/2+scrollViewWidth, y:0,width:scrollViewWidth, height:scrollViewHeight))
-        imgTwo.image = UIImage(named: "tank2")
-        imgThree = UIImageView(frame: CGRect(x:self.view.frame.width/2+scrollViewWidth*2, y:0,width:scrollViewWidth, height:scrollViewHeight))
-        imgThree.image = UIImage(named: "tank1")
-        imgFour = UIImageView(frame: CGRect(x:self.view.frame.width/2+scrollViewWidth*3, y:0,width:scrollViewWidth, height:scrollViewHeight))
-        imgFour.image = UIImage(named: "tank2")
+        imgOne = UIImageView(frame: CGRect(x:0, y:0,width:scrollViewWidth, height:scrollViewHeight))
+        imgOne.image = UIImage(named: "tank1_p2")
+        imgTwo = UIImageView(frame: CGRect(x:scrollViewWidth, y:0,width:scrollViewWidth, height:scrollViewHeight))
+        imgTwo.image = UIImage(named: "tank2_p2")
+        imgThree = UIImageView(frame: CGRect(x:scrollViewWidth*2, y:0,width:scrollViewWidth, height:scrollViewHeight))
+        imgThree.image = UIImage(named: "tank3_p2")
         
         //Insert images to scrollView
         self.scrollViewP2.addSubview(imgOne)
         self.scrollViewP2.addSubview(imgTwo)
         self.scrollViewP2.addSubview(imgThree)
-        self.scrollViewP2.addSubview(imgFour)
         
         //Set content size for horizontal scrolling and set delegate
-        self.scrollViewP1.contentSize = CGSize(width:self.scrollViewP1.frame.width * 4, height:1.0)
-        self.scrollViewP1.delegate = self
-        
-        self.scrollViewP2.contentSize = CGSize(width:self.scrollViewP2.frame.width * 4, height:1.0)
+        self.scrollViewP2.contentSize = CGSize(width:scrollViewWidth * 3, height:scrollViewHeight)
         self.scrollViewP2.delegate = self
-        
-        //Set height and width of tankTypeLabel and pageControl
-        self.tankTypeP1.frame.size.width = self.view.bounds.width/2
-        self.tankTypeP1.frame.size.height = self.view.bounds.height*0.05
-        self.pageControlP1.frame.size.width = self.view.bounds.width/2
-        self.pageControlP1.frame.size.height = self.view.bounds.height*0.05
-        
-        self.tankTypeP2.frame.size.width = self.view.bounds.width/2
-        self.tankTypeP2.frame.size.height = self.view.bounds.height*0.05
-        self.pageControlP2.frame.size.width = self.view.bounds.width/2
-        self.pageControlP2.frame.size.height = self.view.bounds.height*0.05
         
         //Set start page to 0 and send subview to back
         self.pageControlP1.currentPage = 0
         self.pageControlP2.currentPage = 0
         self.view.sendSubview(toBack: self.scrollViewP1)
         self.view.sendSubview(toBack: self.scrollViewP2)
+        
+        if Multiplayer.shared.player.isHost {
+            self.pageControlP2.isHidden = true
+            self.scrollViewP2.isScrollEnabled = false
+        }
+        else {
+            self.pageControlP1.isHidden = true
+            self.scrollViewP1.isScrollEnabled = false
+        }
     }
-    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y != 0 {
+            scrollView.contentOffset.y = 0
+        }
+    }
     //Listener for page scrolling. Set text based on selection
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView){
         
@@ -223,16 +233,17 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         
         // Change indicator
         pageControl.currentPage = Int(currentPage);
-        
+        print("'herp'")
         // Change the text accordingly to page selection
         if Int(currentPage) == 0{
             tankTypeLabel.text = "TankType 1"
+            Multiplayer.shared.messageSelectTank(index: 0)
         }else if Int(currentPage) == 1{
             tankTypeLabel.text = "TankType 2"
+            Multiplayer.shared.messageSelectTank(index: 1)
         }else if Int(currentPage) == 2{
             tankTypeLabel.text = "TankType 3"
-        }else{
-            tankTypeLabel.text = "TankType 4"
+            Multiplayer.shared.messageSelectTank(index: 2)
         }
     }
 
