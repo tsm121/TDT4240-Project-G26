@@ -272,6 +272,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
      */
     @IBAction func exitBtnTouch(_ sender: Any) {
         Multiplayer.shared.disconnect()
+        self.performSegue(withIdentifier: "exitGameSegue", sender: self)
     }
     private func prepareScene() {
         if let view = self.sceneView as SKView? {

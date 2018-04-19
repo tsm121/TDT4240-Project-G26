@@ -45,7 +45,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         physicsWorld.contactDelegate = self
         
-        terrain = .mars
+        terrain = MapType(rawValue: Int(arc4random_uniform(3))  )
 
 
         // Create game area, full screen.
@@ -65,7 +65,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let clientTank = !Multiplayer.shared.player.isHost ? Multiplayer.shared.player.tank : Multiplayer.shared.opponent?.tank
         tank1 = tankFactory.makeTank(tankType: TankType(rawValue: hostTank!)!, forHost: true)
         placeTank(tankBody: tank1)
-        tank2 = tankFactory.makeTank(tankType: TankType(rawValue: clientTank!)!, forHost: false)
+        tank2 = tankFactory.makeTank(tankType: clientTank != nil ? TankType(rawValue: clientTank!)! : TankType.smallTank, forHost: false)
         placeTank(tankBody: tank2)
 
         currentTank = tank1
@@ -182,7 +182,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let ammo = firstBody.categoryBitMask == PhysicsCategory.Projectile ? firstBody.node as! Ammo : secondBody.node as! Ammo
             ammo.collided(position: contact.contactPoint)
             // Was a tank Involved?
-            if(firstBody.categoryBitMask == PhysicsCategory.Tank && secondBody.categoryBitMask == PhysicsCategory.Tank) {
+            print("ammo collided")
+            if(firstBody.categoryBitMask == PhysicsCategory.Tank || secondBody.categoryBitMask == PhysicsCategory.Tank) {
+                print("tank involved")
                 let tank = firstBody.categoryBitMask == PhysicsCategory.Tank ? firstBody.node as! Tank : secondBody.node as! Tank
                 tank.isHit(ammo: ammo)
                 if (tank.isDead()){

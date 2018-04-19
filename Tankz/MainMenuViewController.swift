@@ -19,6 +19,8 @@ class MainMenuViewController: UIViewController {
         view.accessibilityIdentifier = "mainMenuView"
     }
     
+    @IBAction func unwindToMainMenuViewController(_ sender: UIStoryboardSegue) { }
+    
     func assignbackground(){
         let background = UIImage(named: "MainMenuBackground.png")
         
@@ -53,7 +55,6 @@ class MainMenuViewController: UIViewController {
         super.viewWillDisappear(animated)
         //Show navigation bar when leaving MainMenuViewController
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-
     }
     
     /*
