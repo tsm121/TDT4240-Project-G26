@@ -15,6 +15,8 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     //Just for testing, DELETE later
     @IBOutlet weak var oppTurnTemp: UIButton!
     
+    @IBOutlet weak var controlsView: UIView!
+    @IBOutlet weak var exitBtn: UIButton!
     @IBOutlet weak var fireBtn: UIButton!
     @IBOutlet weak var disableView: UIView!
     @IBOutlet weak var fuelLabel: UILabel!
@@ -24,7 +26,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     var currentGame: GameScene!
     var sceneView: SKView!
     
-    private var pickerData: Array<Int> = Array(0...180)
+    private var pickerData: Array<Int> = Array(0...90)
     weak var timer: Timer?
     
     var myTank: Tank!
@@ -49,6 +51,10 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             }))
             self.present(alert, animated: true, completion: nil)
         }
+        if message.type == "anglecanon" {
+            print("HERP")
+            self.currentGame.currentTank.rotateCanon(angle: CGFloat(message.angle))
+        }
     }
     
     deinit {
@@ -64,7 +70,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         //self.getSelectedValue()
 
         //Set up SKScene inside SKView
-        sceneView = SKView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height*0.90))
+        sceneView = SKView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - self.controlsView.frame.height))
         sceneView.backgroundColor = UIColor.black
         self.view.addSubview(sceneView)
         
@@ -73,6 +79,8 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         Multiplayer.shared.addEventListener(listener: self.messageListener)
         NSLog("%@", "Event Listener Added")
         
+        self.view.bringSubview(toFront: self.controlsView)
+        self.view.bringSubview(toFront: self.exitBtn)
         //TempBtn, DELETE later
         self.view.bringSubview(toFront: self.oppTurnTemp)
         
@@ -82,12 +90,10 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBAction func oppTurnActionTest(_ sender: Any) {
         if currentGame.currentTank !== currentGame.getMyTank() {
             Multiplayer.shared.handleMessage(message: Message(type: "fire", power: 50, angle: 45))
-            gameHasEnded()
-            
         }
     }
     func gameHasEnded(){
-        if (myTank.health - myTank.damageTaken <= 0) {
+        if (myTank.getCurrentHealth() <= 0) {
             let alert = UIAlertController(title: "Defeat", message: "Your tank was destroyed.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
                 NSLog("The \"OK\" alert occured.")
@@ -138,7 +144,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
      Sets the fuel label to users tank fuel status
      */
     public func setFuelLabel(){
-        fuelLabel.text = String(self.myTank.fuel)
+        fuelLabel.text = String(Float(self.myTank.getCurrentFuel()))
     }
     
     /**
@@ -210,8 +216,9 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         self.anglePicker.tag = 1
         self.powerPicker.tag = 2
         
-        self.anglePicker.selectRow(49, inComponent: 0, animated: true)
-        self.powerPicker.selectRow(49, inComponent: 0, animated: true)
+        self.anglePicker.selectRow(45, inComponent: 0, animated: true)
+        self.powerPicker.selectRow(45, inComponent: 0, animated: true)
+    
     }
     
     // Default function for the UIPicker: The number of columns of data
@@ -227,6 +234,13 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     // Default function for the UIPicker: The data to return for the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return String(pickerData[row])
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView === self.anglePicker {
+            self.myTank.rotateCanon(angle: CGFloat(pickerData[row]))
+            Multiplayer.shared.messageAngleCanon(angle: Float(self.myTank.getCurrentAngle()))
+        }
     }
     
     
@@ -256,12 +270,25 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     /**
      Generates a `SKScene` and adds it to the current `view`
      */
+    @IBAction func exitBtnTouch(_ sender: Any) {
+        Multiplayer.shared.disconnect()
+    }
     private func prepareScene() {
         if let view = self.sceneView as SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
-                // Set the scale mode to scale to fit the window
-                scene.scaleMode = .resizeFill
+                // START OF HACKY SHIT TO MAKE SCENE SCALE
+                // Kanskje æ huske ka æ gjorde hvis du spør meg - Clas
+                scene.size = CGSize(width: 1280, height: 1280)
+                scene.scaleMode = .aspectFill
+                let camera = SKCameraNode()
+                let viewHeight = self.view.frame.height - self.controlsView.frame.height
+                let sceneViewRelationship = 1280 / self.view.frame.width
+                let cameraAdjust = (viewHeight * sceneViewRelationship) / 2
+                camera.position = CGPoint(x: 640, y: cameraAdjust)
+                scene.camera = camera
+                scene.addChild(camera)
+                // END OF HACKY SHIT TO MAKE SCENE SCALE
                 
                 // Present the scene
                 view.presentScene(scene)
@@ -280,6 +307,8 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     override func viewDidAppear(_ animated: Bool) {
+    }
+    override func viewWillDisappear(_ animated: Bool) {
     }
     
     

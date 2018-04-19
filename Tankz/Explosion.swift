@@ -31,17 +31,16 @@ class Explosion : SKSpriteNode{
         fatalError("init(coder:) has not been implemented")
     }
     
-    func explode(position: CGPoint, parent: SKNode){
-        self.position = position
-        parent.addChild(self)
+    func explode(){
         self.run(
             SKAction.animate(
                 with: self.explosionFrames,
-                timePerFrame: 0.1,
+                timePerFrame: 0.075,
                 resize: false,
                 restore: true)
             , completion: {
                 self.removeFromParent()
+
             }
         );
     }

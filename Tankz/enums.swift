@@ -7,17 +7,17 @@
 //
 
 // Tank types.
-enum TankType {
-    case smallTank
-    case bigTank
-    case funnyTank
+enum TankType: Int{
+    case smallTank = 0
+    case bigTank = 1
+    case funnyTank = 2
 }
 
 // Map types.
-enum MapType {
-    case earth
-    case moon
-    case mars
+enum MapType: Int {
+    case earth = 0
+    case moon = 1
+    case mars = 2
 }
 
 
@@ -28,7 +28,10 @@ enum AmmoType {
     case funnyBomb
 }
 
-enum TankDirection: Int {
-    case left = -1
-    case right = 1
+// Canon types.
+enum CanonType {
+    case small
+    case big
+    case funny
 }
+

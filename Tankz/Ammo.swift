@@ -8,40 +8,66 @@
 
 import SpriteKit
 
-class Ammo {
-    public let projectile : SKShapeNode
+class Ammo : SKShapeNode {
     public let damage: Double
     public let mass: CGFloat
     public let rad: CGFloat
-    public let name : String
     
     init(ammoType: AmmoType) {
         switch ammoType {
-        case .missile:
-            self.rad = CGFloat(2)
-            self.mass = 1
-            self.damage = 15.0
-            self.name = "Missile"
-        case .clusterBomb:
-            self.rad = CGFloat(3)
-            self.mass = 5
-            self.damage = 10.0
-            self.name = "ClusterBomb"
-        case .funnyBomb:
-            self.rad = CGFloat(2)
-            self.mass = 10.0
-            self.damage = 20.0
-            self.name = "FunnyBomb"
+            case .missile:
+                self.rad = CGFloat(2)
+                self.mass = 1
+                self.damage = 15.0
+                super.init()
+                self.name = "Missile"
+            case .clusterBomb:
+                self.rad = CGFloat(3)
+                self.mass = 5
+                self.damage = 10.0
+                super.init()
+                self.name = "ClusterBomb"
+            case .funnyBomb:
+                self.rad = CGFloat(2)
+                self.mass = 10.0
+                self.damage = 20.0
+                super.init()
+                self.name = "FunnyBomb"
         }
+        self.initAsCircle()
+        self.initPhysicsBody()
         
-        self.projectile = SKShapeNode(circleOfRadius: self.rad)
-        self.projectile.physicsBody = SKPhysicsBody(circleOfRadius: self.rad)
-        self.projectile.fillColor = UIColor.black
-        self.projectile.strokeColor = UIColor.black
-        self.projectile.name = self.name
-        self.projectile.physicsBody?.mass = self.mass
-        self.projectile.physicsBody?.categoryBitMask = PhysicsCategory.Projectile
-        self.projectile.physicsBody?.collisionBitMask = PhysicsCategory.Tank | PhysicsCategory.Ground
-        self.projectile.physicsBody?.contactTestBitMask = PhysicsCategory.Tank | PhysicsCategory.Ground
+        
+        
+       
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    // Game Function
+    
+    public func collided(position: CGPoint){
+        let explosion = Explosion()
+        explosion.position = position
+        self.parent?.addChild(explosion)
+        self.removeFromParent()
+        explosion.explode()
+    }
+    // Helper Functions
+    private func initAsCircle(){
+        let diameter = self.rad * 2
+        self.path = CGPath(ellipseIn: CGRect(origin: CGPoint.zero, size: CGSize(width: diameter, height: diameter)), transform: nil)
+        self.fillColor = UIColor.black
+        self.strokeColor = UIColor.black
+    }
+    
+    private func initPhysicsBody(){
+        self.physicsBody = SKPhysicsBody(circleOfRadius: self.rad)
+        self.physicsBody?.mass = self.mass
+        self.physicsBody?.categoryBitMask = PhysicsCategory.Projectile
+        self.physicsBody?.collisionBitMask = PhysicsCategory.Tank | PhysicsCategory.Ground
+        self.physicsBody?.contactTestBitMask = PhysicsCategory.Tank | PhysicsCategory.Ground
+    }
+    
 }
