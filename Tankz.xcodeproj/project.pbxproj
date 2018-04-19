@@ -42,6 +42,7 @@
 		5BE364FB2053274C009F5AEA /* PhysicsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE364FA2053274C009F5AEA /* PhysicsCategory.swift */; };
 		8B373B22208822D1001A5D79 /* Canon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B373B21208822D1001A5D79 /* Canon.swift */; };
 		8B851A982086243E004F9185 /* Explosion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B851A972086243E004F9185 /* Explosion.swift */; };
+		8BE3215E2088CF4E0035C0BA /* HealthBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE3215D2088CF4E0035C0BA /* HealthBar.swift */; };
 		91AEA831204ED69D00130575 /* ScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AEA830204ED69D00130575 /* ScoreTableViewCell.swift */; };
 		F94366EB204DB88800D224A3 /* Multiplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94366EA204DB88800D224A3 /* Multiplayer.swift */; };
 /* End PBXBuildFile section */
@@ -105,6 +106,7 @@
 		5BE364FA2053274C009F5AEA /* PhysicsCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsCategory.swift; sourceTree = "<group>"; };
 		8B373B21208822D1001A5D79 /* Canon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canon.swift; sourceTree = "<group>"; };
 		8B851A972086243E004F9185 /* Explosion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Explosion.swift; sourceTree = "<group>"; };
+		8BE3215D2088CF4E0035C0BA /* HealthBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthBar.swift; sourceTree = "<group>"; };
 		91AEA830204ED69D00130575 /* ScoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTableViewCell.swift; sourceTree = "<group>"; };
 		F94366EA204DB88800D224A3 /* Multiplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiplayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -179,6 +181,7 @@
 				1B3E7C7E204FF66000744D17 /* TankFactory.swift */,
 				5BC1788220528B4C001D82BB /* Tank.swift */,
 				1B619D61205033FC00C713F5 /* Player.swift */,
+				8BE3215D2088CF4E0035C0BA /* HealthBar.swift */,
 				F94366EA204DB88800D224A3 /* Multiplayer.swift */,
 				5BE364F820532725009F5AEA /* enums.swift */,
 				5BE364FA2053274C009F5AEA /* PhysicsCategory.swift */,
@@ -374,6 +377,7 @@
 				5BB82CCF20533A51004ADD6D /* Map.swift in Sources */,
 				1B328A3C204D71C500B77F10 /* GameViewController.swift in Sources */,
 				F94366EB204DB88800D224A3 /* Multiplayer.swift in Sources */,
+				8BE3215E2088CF4E0035C0BA /* HealthBar.swift in Sources */,
 				1B3E7C81204FF66000744D17 /* ScoreboardViewController.swift in Sources */,
 				1B6E2394204DA91C00138EDA /* JoinGameViewController.swift in Sources */,
 				5BE364F920532725009F5AEA /* enums.swift in Sources */,

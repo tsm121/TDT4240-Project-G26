@@ -112,7 +112,6 @@
                                 </state>
                                 <connections>
                                     <action selector="exitBtnTouch:" destination="gDR-NA-MQg" eventType="touchUpInside" id="XTA-PL-zZZ"/>
-                                    <segue destination="D9A-YS-uel" kind="show" identifier="exitGameSegue" animates="NO" id="NIf-HQ-LTt"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tvs-TU-ozV" userLabel="ControlsView">
@@ -271,9 +270,11 @@
                         <outlet property="fuelLabel" destination="YQd-Dy-lky" id="W2p-TG-eqa"/>
                         <outlet property="oppTurnTemp" destination="Nhj-t4-QQh" id="upn-aw-xJ6"/>
                         <outlet property="powerPicker" destination="YtM-jY-zvW" id="V5g-8h-Npb"/>
+                        <segue destination="pYf-X9-BXT" kind="unwind" identifier="exitGameSegue" unwindAction="unwindToMainMenuViewController:" id="uoQ-ri-xQd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RWW-BA-jxO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="pYf-X9-BXT" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="892.66304347826099" y="2107.2463768115945"/>
         </scene>
@@ -606,11 +607,8 @@
         <namedColor name="groundBrown">
             <color red="0.40400001406669617" green="0.33700001239776611" blue="0.29800000786781311" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="groundBrown">
-            <color red="0.40400001406669617" green="0.33700001239776611" blue="0.29800000786781311" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GtZ-rs-jmh"/>
+        <segue reference="IsV-7P-a5j"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -80,6 +80,7 @@ import SpriteKit
 class Tank : SKSpriteNode {
     /* Childe Nodes */
     private let canon: Canon
+    private let healthBar: HealthBar
     /* Health Variables */
     private let maxHealth: CGFloat
     private var currentHealth: CGFloat
@@ -122,6 +123,7 @@ class Tank : SKSpriteNode {
         self.ownerIsHost = forHost
         
         self.canon = Canon(canonType: CanonType.small)
+        self.healthBar = HealthBar(maxHealth: self.maxHealth)
         /* Performing Super Init */
         super.init(
             texture: texture,
@@ -134,6 +136,10 @@ class Tank : SKSpriteNode {
         /* Position and Add Children */
         self.canon.position = self.position
         self.addChild(self.canon)
+        self.healthBar.position.x = self.position.x
+        self.healthBar.position.y = self.position.y + self.size.height/self.yScale + 50
+        self.addChild(self.healthBar)
+        self.healthBar.updateHealthBar(health: self.currentHealth)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -165,8 +171,8 @@ class Tank : SKSpriteNode {
         let canonOpening = self.canon.getCanonOpening()
 
         ammo.position = CGPoint(
-            x: self.position.x + canonOpening.x*self.xScale*(-1.0),
-            y: self.position.y + canonOpening.y*self.yScale)
+            x: self.position.x + canonOpening.x * self.xScale * (-1.0),
+            y: self.position.y + canonOpening.y * self.yScale)
         self.parent?.addChild(ammo)
         ammo.physicsBody?.velocity = velocityVector
     }
@@ -177,8 +183,11 @@ class Tank : SKSpriteNode {
 
     /* Collision Functions */
     public func isHit(ammo: Ammo){
+        print(self.currentHealth)
         self.currentHealth -= CGFloat(ammo.damage)
+        self.healthBar.updateHealthBar(health: self.currentHealth)
         if self.isDead() { self.removeFromParent() }
+        print(self.currentHealth)
     }
     
     
