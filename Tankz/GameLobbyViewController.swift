@@ -158,11 +158,11 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         
         //Create images for scrollView
         var imgOne = UIImageView(frame: CGRect(x:0, y:0,width:scrollViewWidth, height:scrollViewHeight))
-        imgOne.image = UIImage(named: "tank1_p1")
+        imgOne.image = UIImage(named: "tank2_slider")
         var imgTwo = UIImageView(frame: CGRect(x:scrollViewWidth, y:0,width:scrollViewWidth, height:scrollViewHeight))
-        imgTwo.image = UIImage(named: "tank2")
+        imgTwo.image = UIImage(named: "tank3_slider")
         var imgThree = UIImageView(frame: CGRect(x:scrollViewWidth*2, y:0,width:scrollViewWidth, height:scrollViewHeight))
-        imgThree.image = UIImage(named: "tank3_p1")
+        imgThree.image = UIImage(named: "tank1_slider")
         
         self.scrollViewP1.contentSize = CGSize(width:scrollViewWidth * 3, height:scrollViewHeight)
         self.scrollViewP1.delegate = self
@@ -179,11 +179,11 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         
         //Create images for scrollView
         imgOne = UIImageView(frame: CGRect(x:0, y:0,width:scrollViewWidth, height:scrollViewHeight))
-        imgOne.image = UIImage(named: "tank1_p2")
+        imgOne.image = UIImage(named: "tank2_slider")
         imgTwo = UIImageView(frame: CGRect(x:scrollViewWidth, y:0,width:scrollViewWidth, height:scrollViewHeight))
-        imgTwo.image = UIImage(named: "tank2_p2")
+        imgTwo.image = UIImage(named: "tank3_slider")
         imgThree = UIImageView(frame: CGRect(x:scrollViewWidth*2, y:0,width:scrollViewWidth, height:scrollViewHeight))
-        imgThree.image = UIImage(named: "tank3_p2")
+        imgThree.image = UIImage(named: "tank1_slider")
         
         //Insert images to scrollView
         self.scrollViewP2.addSubview(imgOne)
