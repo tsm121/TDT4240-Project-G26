@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -487,8 +488,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="312-8i-Ww0">
-                                <rect key="frame" x="5" y="80" width="726" height="329"/>
-                                <color key="backgroundColor" name="groundBrown"/>
+                                <rect key="frame" x="5" y="114" width="726" height="300"/>
+                                <color key="backgroundColor" name="mountainGray"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="312-8i-Ww0" secondAttribute="height" multiplier="242:93" id="eEF-Hi-Awl"/>
+                                </constraints>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellReuseIdentifier" rowHeight="75" id="AFX-E0-pc8" customClass="GameTableViewCell" customModule="Tankz" customModuleProvider="target">
@@ -499,58 +503,42 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HostName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RK6-Xy-Ll6">
-                                                    <rect key="frame" x="20" y="16" width="124" height="43"/>
+                                                    <rect key="frame" x="21" y="16" width="124" height="43"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x/x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SoA-t3-wAb">
-                                                    <rect key="frame" x="683.66666666666663" y="21" width="22.333333333333371" height="33"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y0d-5x-pwx">
-                                                    <rect key="frame" x="613.66666666666663" y="21" width="60" height="33"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="y0d-5x-pwx" secondAttribute="bottom" constant="10" id="9hD-Q5-fEa"/>
-                                                <constraint firstItem="RK6-Xy-Ll6" firstAttribute="leading" secondItem="GVD-RK-uSI" secondAttribute="leadingMargin" id="EEx-XQ-db4"/>
+                                                <constraint firstItem="RK6-Xy-Ll6" firstAttribute="leading" secondItem="GVD-RK-uSI" secondAttribute="leadingMargin" constant="1" id="EEx-XQ-db4"/>
                                                 <constraint firstItem="RK6-Xy-Ll6" firstAttribute="top" secondItem="GVD-RK-uSI" secondAttribute="topMargin" constant="5" id="Sdq-tE-PnT"/>
-                                                <constraint firstItem="SoA-t3-wAb" firstAttribute="top" secondItem="GVD-RK-uSI" secondAttribute="topMargin" constant="10" id="T4s-3n-xMA"/>
-                                                <constraint firstItem="SoA-t3-wAb" firstAttribute="leading" secondItem="y0d-5x-pwx" secondAttribute="trailing" constant="10" id="fcf-FC-RXd"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="SoA-t3-wAb" secondAttribute="bottom" constant="10" id="oB2-JM-kMr"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="RK6-Xy-Ll6" secondAttribute="bottom" constant="5" id="qcg-7f-rWE"/>
-                                                <constraint firstItem="SoA-t3-wAb" firstAttribute="trailing" secondItem="GVD-RK-uSI" secondAttribute="trailingMargin" id="sHT-zX-D4P"/>
-                                                <constraint firstItem="y0d-5x-pwx" firstAttribute="top" secondItem="GVD-RK-uSI" secondAttribute="topMargin" constant="10" id="siq-N6-ofD"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="hostNameLabel" destination="RK6-Xy-Ll6" id="tLg-Hu-Pp5"/>
-                                            <outlet property="numPlayersLabel" destination="SoA-t3-wAb" id="uzm-Sk-7h3"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Availiable games" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qa8-2b-AXg">
-                                <rect key="frame" x="260" y="44" width="216" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" red="0.55686274509803924" green="0.96470588235294119" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ag_title" translatesAutoresizingMaskIntoConstraints="NO" id="LUg-Bi-a1V" userLabel="Availiable games">
+                                <rect key="frame" x="180" y="49" width="377" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="QXj-Nb-zoB"/>
+                                    <constraint firstAttribute="width" secondItem="LUg-Bi-a1V" secondAttribute="height" multiplier="377:60" id="RCR-dy-xhz"/>
+                                    <constraint firstAttribute="width" constant="377" id="RkJ-QZ-IoC"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.40392156862745099" green="0.33725490196078434" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="mountainGray"/>
                         <constraints>
-                            <constraint firstItem="qa8-2b-AXg" firstAttribute="centerX" secondItem="dOT-pK-XGW" secondAttribute="centerX" id="Hpu-bF-qwM"/>
-                            <constraint firstItem="312-8i-Ww0" firstAttribute="top" secondItem="qa8-2b-AXg" secondAttribute="bottom" id="Ldc-9p-X49"/>
-                            <constraint firstItem="gcO-SU-lsg" firstAttribute="trailing" secondItem="312-8i-Ww0" secondAttribute="trailing" constant="5" id="Qpy-Jz-JQN"/>
-                            <constraint firstItem="312-8i-Ww0" firstAttribute="bottom" secondItem="gcO-SU-lsg" secondAttribute="bottom" constant="-5" id="bW4-dH-H1g"/>
-                            <constraint firstItem="qa8-2b-AXg" firstAttribute="top" secondItem="gcO-SU-lsg" secondAttribute="top" id="lb9-aZ-aJ7"/>
-                            <constraint firstItem="312-8i-Ww0" firstAttribute="leading" secondItem="gcO-SU-lsg" secondAttribute="leading" constant="5" id="uSy-Z7-98f"/>
+                            <constraint firstItem="gcO-SU-lsg" firstAttribute="trailing" secondItem="312-8i-Ww0" secondAttribute="trailing" constant="5" id="2Ef-RF-Opv"/>
+                            <constraint firstItem="312-8i-Ww0" firstAttribute="leading" secondItem="gcO-SU-lsg" secondAttribute="leading" constant="5" id="HzJ-zL-JFF"/>
+                            <constraint firstItem="312-8i-Ww0" firstAttribute="centerX" secondItem="dOT-pK-XGW" secondAttribute="centerX" id="IF9-B1-BnN"/>
+                            <constraint firstItem="LUg-Bi-a1V" firstAttribute="top" secondItem="gcO-SU-lsg" secondAttribute="top" constant="5" id="dB8-dk-vIh"/>
+                            <constraint firstItem="LUg-Bi-a1V" firstAttribute="centerX" secondItem="dOT-pK-XGW" secondAttribute="centerX" id="eez-HJ-19O"/>
+                            <constraint firstItem="312-8i-Ww0" firstAttribute="top" secondItem="LUg-Bi-a1V" secondAttribute="bottom" constant="5" id="gGK-kM-kKh"/>
+                            <constraint firstItem="gcO-SU-lsg" firstAttribute="bottom" secondItem="312-8i-Ww0" secondAttribute="bottom" id="t5u-CK-0ZX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gcO-SU-lsg"/>
                     </view>
@@ -583,6 +571,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ag_title" width="1003" height="160"/>
         <image name="angleIcon" width="48" height="48"/>
         <image name="cg_btn" width="617" height="183"/>
         <image name="jg_btn" width="617" height="183"/>
@@ -593,8 +582,11 @@
         <namedColor name="groundBrown">
             <color red="0.40400001406669617" green="0.33700001239776611" blue="0.29800000786781311" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="mountainGray">
+            <color red="0.41200000047683716" green="0.43500000238418579" blue="0.43500000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hLT-ep-YoJ"/>
+        <segue reference="GtZ-rs-jmh"/>
     </inferredMetricsTieBreakers>
 </document>
