@@ -65,7 +65,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let clientTank = !Multiplayer.shared.player.isHost ? Multiplayer.shared.player.tank : Multiplayer.shared.opponent?.tank
         tank1 = tankFactory.makeTank(tankType: TankType(rawValue: hostTank!)!, forHost: true)
         placeTank(tankBody: tank1)
-        tank2 = tankFactory.makeTank(tankType: clientTank != nil ? TankType(rawValue: clientTank!)! : TankType.smallTank, forHost: false)
+        tank2 = tankFactory.makeTank(tankType: clientTank != nil ? TankType(rawValue: clientTank!)! : TankType.mediumTank, forHost: false)
         placeTank(tankBody: tank2)
 
         currentTank = tank1

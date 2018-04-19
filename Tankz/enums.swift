@@ -8,9 +8,9 @@
 
 // Tank types.
 enum TankType: Int{
-    case smallTank = 0
-    case bigTank = 1
-    case funnyTank = 2
+    case mediumTank = 0
+    case lightTank = 1
+    case heavyTank = 2
 }
 
 // Map types.
