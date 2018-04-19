@@ -78,6 +78,8 @@ import SpriteKit
 }*/
 
 class Tank : SKSpriteNode {
+    /* Childe Nodes */
+    private let canon: Canon
     /* Health Variables */
     private let maxHealth: CGFloat
     private var currentHealth: CGFloat
@@ -87,9 +89,6 @@ class Tank : SKSpriteNode {
     /* Engine Variables */
     private let movementSpeed: CGFloat // In pixels per fuel
     /* Canon Variables */
-    private let maxAngle: CGFloat
-    private let currentAngle: CGFloat
-    private let minAngle: CGFloat
     private let minPower: CGFloat
     private let currentPower: CGFloat
     private let maxPower: CGFloat
@@ -99,7 +98,16 @@ class Tank : SKSpriteNode {
     
     init (ofType tankType: TankType, forHost: Bool){
         /* Setting Tank only Variables */
-        let texture = SKTexture(imageNamed: "tank1_p1")
+        let texture: SKTexture
+        switch tankType {
+            case .smallTank:
+                texture = SKTexture(imageNamed: forHost ? "tank1_p1" : "tank1_p2")
+            case .bigTank:
+                texture = SKTexture(imageNamed: forHost ? "tank2_p1" : "tank2_p2")
+            case .funnyTank:
+                texture = SKTexture(imageNamed: forHost ? "tank3_p1" : "tank3_p2")
+        }
+        
         self.maxHealth = 50
         self.currentHealth = 50
         self.maxFuel = 10
@@ -107,25 +115,25 @@ class Tank : SKSpriteNode {
         self.movementSpeed = 20
         
         // TODO: Angle and Power need to be set to Real Values
-        self.maxAngle = 180.0
-        self.currentAngle = 180.0
-        self.minAngle = 180.0
         self.minPower = 180.0
         self.currentPower = 180.0
         self.maxPower = 180.0
         
         self.ownerIsHost = forHost
         
+        self.canon = Canon(canonType: CanonType.small)
         /* Performing Super Init */
         super.init(
             texture: texture,
             color: UIColor.white.withAlphaComponent(0.0),
             size: texture.size())
-        
         /* Setting SKSpriteNodeVariables */
-        self.xScale = self.ownerIsHost ? self.xScale * -1 * 0.1 : self.xScale * 0.1
-        self.yScale = self.yScale * 0.1
         self.initPhysicsBody()
+        self.xScale = self.ownerIsHost ? self.xScale * -0.25 : self.xScale * 0.25
+        self.yScale = self.yScale * 0.25
+        /* Position and Add Children */
+        self.canon.position = self.position
+        self.addChild(self.canon)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -147,18 +155,24 @@ class Tank : SKSpriteNode {
     }
 
     func fire(ammoType: AmmoType, power: Float, angle: Float){
-        let xPower = CGFloat(cos(Double(angle) * Double.pi / 180.0) * Double(power * 10))
-        let yPower = CGFloat(sin(Double(angle) * Double.pi / 180.0) * Double(power * 10))
+        let xPower = CGFloat(cos(Double(canon.getCurrentAngle()) * Double.pi / 180.0) * Double(power * 10))
+        let yPower = CGFloat(sin(Double(canon.getCurrentAngle()) * Double.pi / 180.0) * Double(power * 10))
         let xDirection = CGFloat(-1 * self.xScale / abs(self.xScale))
         let velocityVector = CGVector(
             dx: xPower * xDirection,
             dy: yPower)
         let ammo = Ammo(ammoType: ammoType)
+        let canonOpening = self.canon.getCanonOpening()
+
         ammo.position = CGPoint(
-            x: self.position.x ,
-            y: self.position.y + self.size.height/2 + 20)
+            x: self.position.x + canonOpening.x*self.xScale*(-1.0),
+            y: self.position.y + canonOpening.y*self.yScale)
         self.parent?.addChild(ammo)
         ammo.physicsBody?.velocity = velocityVector
+    }
+    
+    func rotateCanon(angle: CGFloat){
+        self.canon.rotate(angle: angle)
     }
 
     /* Collision Functions */
@@ -186,16 +200,8 @@ class Tank : SKSpriteNode {
         return self.currentFuel
     }
     
-    public func getMaxAngle() -> CGFloat {
-        return self.maxAngle
-    }
-    
     public func getCurrentAngle() -> CGFloat {
-        return self.currentAngle
-    }
-    
-    public func getMinAngle() -> CGFloat {
-        return self.minAngle
+        return canon.getCurrentAngle()
     }
     
     public func getMaxPower() -> CGFloat {

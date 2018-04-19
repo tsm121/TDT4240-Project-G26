@@ -63,7 +63,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tankFactory = TankFactory()
         tank1 = tankFactory.makeTank(tankType: .bigTank, forHost: true)
         placeTank(tankBody: tank1)
-        tank2 = tankFactory.makeTank(tankType: .bigTank, forHost: false)
+        tank2 = tankFactory.makeTank(tankType: .funnyTank, forHost: false)
         placeTank(tankBody: tank2)
 
         currentTank = tank1

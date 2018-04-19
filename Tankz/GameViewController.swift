@@ -26,7 +26,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     var currentGame: GameScene!
     var sceneView: SKView!
     
-    private var pickerData: Array<Int> = Array(0...180)
+    private var pickerData: Array<Int> = Array(0...90)
     weak var timer: Timer?
     
     var myTank: Tank!
@@ -50,6 +50,10 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 self.performSegue(withIdentifier: "exitGameSegue", sender: self)
             }))
             self.present(alert, animated: true, completion: nil)
+        }
+        if message.type == "anglecanon" {
+            print("HERP")
+            self.currentGame.currentTank.rotateCanon(angle: CGFloat(message.angle))
         }
     }
     
@@ -86,8 +90,6 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBAction func oppTurnActionTest(_ sender: Any) {
         if currentGame.currentTank !== currentGame.getMyTank() {
             Multiplayer.shared.handleMessage(message: Message(type: "fire", power: 50, angle: 45))
-            gameHasEnded()
-            
         }
     }
     func gameHasEnded(){
@@ -214,8 +216,9 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         self.anglePicker.tag = 1
         self.powerPicker.tag = 2
         
-        self.anglePicker.selectRow(49, inComponent: 0, animated: true)
-        self.powerPicker.selectRow(49, inComponent: 0, animated: true)
+        self.anglePicker.selectRow(45, inComponent: 0, animated: true)
+        self.powerPicker.selectRow(45, inComponent: 0, animated: true)
+    
     }
     
     // Default function for the UIPicker: The number of columns of data
@@ -231,6 +234,11 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     // Default function for the UIPicker: The data to return for the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return String(pickerData[row])
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.myTank.rotateCanon(angle: CGFloat(pickerData[row]))
+        Multiplayer.shared.messageAngleCanon(angle: Float(self.myTank.getCurrentAngle()))
     }
     
     

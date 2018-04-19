@@ -10,17 +10,34 @@ struct TankzPlayer {
 /* Message Structure */
 struct Message : Codable{
     var type: String
+    var index: Int
     var power: Float
     var angle: Float
     
     init(type: String){
         self.type = type
+        self.index = 0
+        self.power = 0.0
+        self.angle = 0.0
+    }
+    
+    init(type: String, angle: Float){
+        self.type = type
+        self.index = 0
+        self.power = 0.0
+        self.angle = angle
+    }
+    
+    init(type: String, index: Int){
+        self.type = type
+        self.index = index
         self.power = 0.0
         self.angle = 0.0
     }
     
     init(type: String, power: Float, angle: Float){
         self.type = type
+        self.index = 0
         self.power = power
         self.angle = angle
     }
@@ -183,6 +200,10 @@ class Multiplayer : NSObject {
     func messageMoveRight(){
         self.send(message: Message(type: "moveright"))
     }
+    
+    func messageAngleCanon(angle: Float){
+        self.send(message: Message(type: "anglecanon", angle: angle))
+    }
     /* --- Message Handlers --- */
     func handleMessage(message: Message){
         NSLog("%@", "message \(message.type)")
@@ -202,6 +223,8 @@ class Multiplayer : NSObject {
         case "moveright":
             handleMoveRight(message: message)
             NSLog("%@", "moverightmessage \(message)")
+        case "anglecanon":
+            handleAngleCanon(message: message)
         default:
             NSLog("%@", "invalidMessage: \(message)")
         }
@@ -231,6 +254,10 @@ class Multiplayer : NSObject {
     }
     
     func handleMoveRight(message: Message){
+        self.notifyAllEventListeners(message: message)
+    }
+    
+    func handleAngleCanon(message: Message){
         self.notifyAllEventListeners(message: message)
     }
     /* TODO: Implement Heartbeat or fix disconnected error
