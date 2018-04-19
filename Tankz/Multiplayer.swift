@@ -116,12 +116,15 @@ class Multiplayer : NSObject {
     
     func disconnect() {
         self.isDisconnecting = true;
+        self.session.disconnect()
         self.player.isHost = false
         self.player.isReady = false
+        self.player.tank = 0
         self.games.removeAll()
+        self.map = 0
         ceaseAdvertisingAsHost()
         ceaseLookingForGames()
-        self.session.disconnect()
+        self.isDisconnecting = false;
     }
     /* Look for games. */
     func lookForGames() {
@@ -153,6 +156,9 @@ class Multiplayer : NSObject {
         self.ceaseAdvertisingAsHost()
     }
     
+    func getCurrentMap() -> Int{
+        return self.map
+    }
     /* Encoder */
     func encodeMessage(message: Message) -> Data{
         let encodedData = try? JSONEncoder().encode(message);
@@ -211,6 +217,11 @@ class Multiplayer : NSObject {
         self.player.tank = index
         self.send(message: Message(type: "selecttank", index: index))
     }
+    
+    func messageSelectMap(index: Int){
+        self.map = index
+        self.send(message: Message(type: "selectmap", index: index))
+    }
     /* --- Message Handlers --- */
     func handleMessage(message: Message){
         NSLog("%@", "message \(message.type)")
@@ -234,6 +245,8 @@ class Multiplayer : NSObject {
             handleAngleCanon(message: message)
         case "selecttank":
             handleSelectTank(message: message)
+        case "selectmap":
+            handleSelectMap(message: message)
         default:
             NSLog("%@", "invalidMessage: \(message)")
         }
@@ -272,6 +285,10 @@ class Multiplayer : NSObject {
         self.opponent?.tank = message.index
         self.notifyAllEventListeners(message: message)
     }
+    func handleSelectMap(message: Message){
+        self.map = message.index
+        self.notifyAllEventListeners(message: message)
+    }
     /* TODO: Implement Heartbeat or fix disconnected error
         /* todo(thurs): Handle leaving a game. */
 
@@ -283,10 +300,12 @@ extension Multiplayer : MCSessionDelegate {
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         NSLog("%@", "peer \(peerID) didChangeState: \(state.rawValue)")
-        if (state == MCSessionState.connected){
+        if (state == MCSessionState.connected && self.player.isHost){
             if (self.player.isReady){
                 self.messageIsReady()
             }
+            self.messageSelectMap(index: self.map)
+            self.messageSelectTank(index: self.player.tank)
         }
         else if (state == MCSessionState.notConnected && self.isDisconnecting){
             self.isDisconnecting = false

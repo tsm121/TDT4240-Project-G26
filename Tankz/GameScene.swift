@@ -45,7 +45,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         physicsWorld.contactDelegate = self
         
-        terrain = MapType(rawValue: Int(arc4random_uniform(3))  )
+        terrain = MapType(rawValue: Multiplayer.shared.getCurrentMap())
 
 
         // Create game area, full screen.

@@ -313,6 +313,9 @@
                                 <state key="normal" title="Change map">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="ChangeMap:" destination="usC-V1-22A" eventType="touchUpInside" id="9nT-4L-Upw"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not Ready" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rEj-aH-NsF">
                                 <rect key="frame" x="362" y="294" width="406" height="30"/>

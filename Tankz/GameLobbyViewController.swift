@@ -52,6 +52,27 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         
     }
     
+    @IBAction func ChangeMap(_ sender: Any) {
+        let alertController = UIAlertController(title: "Choose Map", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        let margin:CGFloat = 10.0
+        let rect = CGRect(x: margin, y: margin, width: alertController.view.bounds.size.width - margin * 4.0, height: 120)
+        
+        let pickEarthAction = UIAlertAction(title: "Earth", style: .default, handler: {(alert: UIAlertAction!) in Multiplayer.shared.messageSelectMap(index: MapType.earth.rawValue)})
+        
+        let pickMoonAction = UIAlertAction(title: "Moon", style: .default, handler: {(alert: UIAlertAction!) in Multiplayer.shared.messageSelectMap(index: MapType.moon.rawValue)})
+        
+        let pickMarsAction = UIAlertAction(title: "Mars", style: .default, handler: {(alert: UIAlertAction!) in Multiplayer.shared.messageSelectMap(index: MapType.mars.rawValue)})
+        
+        alertController.addAction(pickEarthAction)
+        
+        alertController.addAction(pickMoonAction)
+        
+        alertController.addAction(pickMarsAction)
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion:{})
+        }
+    }
     override func viewDidLoad() {
         
         /* Register event listener for when multiplayer fires events. */
