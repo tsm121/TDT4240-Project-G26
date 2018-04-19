@@ -101,11 +101,11 @@ class Tank : SKSpriteNode {
         /* Setting Tank only Variables */
         let texture: SKTexture
         switch tankType {
-            case .smallTank:
+            case .heavyTank:
                 texture = SKTexture(imageNamed: forHost ? "tank1_p1" : "tank1_p2")
-            case .bigTank:
+            case .mediumTank:
                 texture = SKTexture(imageNamed: forHost ? "tank2_p1" : "tank2_p2")
-            case .funnyTank:
+            case .lightTank:
                 texture = SKTexture(imageNamed: forHost ? "tank3_p1" : "tank3_p2")
         }
         
