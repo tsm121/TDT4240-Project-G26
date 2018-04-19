@@ -171,8 +171,8 @@ class Tank : SKSpriteNode {
         let canonOpening = self.canon.getCanonOpening()
 
         ammo.position = CGPoint(
-            x: self.position.x + canonOpening.x*self.xScale*(-1.0),
-            y: self.position.y + canonOpening.y*self.yScale)
+            x: self.position.x + canonOpening.x * self.xScale * (-1.0),
+            y: self.position.y + canonOpening.y * self.yScale)
         self.parent?.addChild(ammo)
         ammo.physicsBody?.velocity = velocityVector
     }

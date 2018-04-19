@@ -173,7 +173,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
      `Int`: Chosen power value
      */
     private func getPowerValue() -> Int {
-        return self.anglePicker.selectedRow(inComponent: 0)
+        return self.powerPicker.selectedRow(inComponent: 0)
     }
     
     /**
@@ -182,7 +182,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
      `Int`: Chosen power angle
      */
     private func getAngleValue() -> Int {
-        return self.powerPicker.selectedRow(inComponent: 0)
+        return self.anglePicker.selectedRow(inComponent: 0)
     }
     
 
