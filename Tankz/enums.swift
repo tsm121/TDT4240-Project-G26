@@ -28,7 +28,10 @@ enum AmmoType {
     case funnyBomb
 }
 
-enum TankDirection: Int {
-    case left = -1
-    case right = 1
+// Canon types.
+enum CanonType {
+    case small
+    case big
+    case funny
 }
+

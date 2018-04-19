@@ -23,6 +23,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var liveAmmo : Ammo!
     private var height : CGFloat!
     private var width : CGFloat!
+    
+    private var myTurn: Bool?
+    private var myTank: Tank?
 
     private var chosenAmmo : AmmoType = .missile
     public var currentTank : Tank!
@@ -118,19 +121,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func fire(ammoType: AmmoType, power: Float, angle: Float){ //Arguments might not be needed
-        let xValue = CGFloat(cos(Double(angle) * Double.pi / 180.0) * Double(power * 10))
-        let yValue = CGFloat(sin(Double(angle) * Double.pi / 180.0) * Double(power * 10))
         if (self.getMyTank().isOwnerHost() == self.currentTank.isOwnerHost()) {
             self.viewController.disableControls()
         }
-        self.liveAmmo = ammoFactory.makeAmmo(ammotype: ammoType)
-        self.liveAmmo.projectile.position = CGPoint(
-            x: self.currentTank.position.x ,
-            y: self.currentTank.position.y + 10)
-        self.liveAmmo.projectile.physicsBody?.velocity = CGVector(
-            dx: xValue*CGFloat(-1 * currentTank.xScale / abs(currentTank.xScale)),
-            dy: yValue)
-        self.addChild(self.liveAmmo.projectile)
+        currentTank.fire(ammoType: ammoType, power: power, angle: angle)
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
             self.nextTurn()
         }
@@ -183,19 +177,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Was a projectile Involved?
         if(firstBody.categoryBitMask == PhysicsCategory.Projectile || secondBody.categoryBitMask == PhysicsCategory.Projectile) {
-            let ammo = firstBody.categoryBitMask == PhysicsCategory.Projectile ? firstBody.node : secondBody.node
+            let ammo = firstBody.categoryBitMask == PhysicsCategory.Projectile ? firstBody.node as! Ammo : secondBody.node as! Ammo
+            ammo.collided(position: contact.contactPoint)
             // Was a tank Involved?
             if(firstBody.categoryBitMask == PhysicsCategory.Tank && secondBody.categoryBitMask == PhysicsCategory.Tank) {
                 let tank = firstBody.categoryBitMask == PhysicsCategory.Tank ? firstBody.node as! Tank : secondBody.node as! Tank
-                if (tank.isHit(ammo: self.liveAmmo)){
-                    tank.run(SKAction.removeFromParent())
+                tank.isHit(ammo: ammo)
+                if (tank.isDead()){
                     self.viewController.gameHasEnded()
                 }
             }
-            liveAmmo.projectile.run(SKAction.removeFromParent()) //deletes ammo on hit
-            let explosion = Explosion()
-            explosion.explode(position: contact.contactPoint, parent: self)
-            
         }
 
         //If projectile hits a tank.

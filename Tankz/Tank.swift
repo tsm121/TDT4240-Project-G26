@@ -97,7 +97,7 @@ class Tank : SKSpriteNode {
     private let ownerIsHost: Bool
     
     
-    init (ofType: TankType, forHost: Bool){
+    init (ofType tankType: TankType, forHost: Bool){
         /* Setting Tank only Variables */
         let texture = SKTexture(imageNamed: "tank1_p1")
         self.maxHealth = 50
@@ -125,7 +125,7 @@ class Tank : SKSpriteNode {
         /* Setting SKSpriteNodeVariables */
         self.xScale = self.ownerIsHost ? self.xScale * -1 * 0.1 : self.xScale * 0.1
         self.yScale = self.yScale * 0.1
-        self.initSKPhysicsBody()
+        self.initPhysicsBody()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -133,19 +133,41 @@ class Tank : SKSpriteNode {
     }
     /* Game Functions */
     public func moveLeft(){
-        self.currentFuel -= 1
-        self.run(SKAction.moveTo(x: self.position.x - self.movementSpeed, duration: 0.5))
+        if currentFuel > 0 {
+            self.currentFuel -= 1
+            self.run(SKAction.moveTo(x: self.position.x - self.movementSpeed, duration: 0.5))
+        }
     }
     
     public func moveRight(){
-        self.currentFuel -= 1
-        self.run(SKAction.moveTo(x: self.position.x + self.movementSpeed, duration: 0.5))
+        if currentFuel > 0 {
+            self.currentFuel -= 1
+            self.run(SKAction.moveTo(x: self.position.x + self.movementSpeed, duration: 0.5))
+        }
+    }
+
+    func fire(ammoType: AmmoType, power: Float, angle: Float){
+        let xPower = CGFloat(cos(Double(angle) * Double.pi / 180.0) * Double(power * 10))
+        let yPower = CGFloat(sin(Double(angle) * Double.pi / 180.0) * Double(power * 10))
+        let xDirection = CGFloat(-1 * self.xScale / abs(self.xScale))
+        let velocityVector = CGVector(
+            dx: xPower * xDirection,
+            dy: yPower)
+        let ammo = Ammo(ammoType: ammoType)
+        ammo.position = CGPoint(
+            x: self.position.x ,
+            y: self.position.y + self.size.height/2 + 20)
+        self.parent?.addChild(ammo)
+        ammo.physicsBody?.velocity = velocityVector
+    }
+
+    /* Collision Functions */
+    public func isHit(ammo: Ammo){
+        self.currentHealth -= CGFloat(ammo.damage)
+        if self.isDead() { self.removeFromParent() }
     }
     
-    public func isHit(ammo: Ammo) -> Bool{
-        self.currentHealth -= CGFloat(ammo.damage)
-        return self.currentHealth <= 0 ? true : false
-    }
+    
     
     /* Get Functions */
     public func getMaxHealth() -> CGFloat {
@@ -193,8 +215,16 @@ class Tank : SKSpriteNode {
         return self.ownerIsHost
     }
     
+    public func isDead() -> Bool{
+        return self.currentHealth <= 0
+    }
+    
+    public func isAlive() -> Bool{
+        return self.currentHealth > 0
+    }
+    
     /* Helper Functions */
-    private func initSKPhysicsBody() {
+    private func initPhysicsBody() {
         self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
         self.physicsBody?.mass = 20
         self.physicsBody?.affectedByGravity = true
