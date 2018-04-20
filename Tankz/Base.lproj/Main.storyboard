@@ -104,14 +104,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tvs-TU-ozV" userLabel="ControlsView">
                                 <rect key="frame" x="0.0" y="374" width="736" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOo-YO-QJk">
-                                        <rect key="frame" x="120" y="0.0" width="60" height="40"/>
-                                        <color key="backgroundColor" red="0.85098039219999999" green="0.32549019610000002" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOo-YO-QJk">
+                                        <rect key="frame" x="120" y="0.0" width="40" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="1mZ-sQ-n5S"/>
+                                            <constraint firstAttribute="width" constant="40" id="1mZ-sQ-n5S"/>
                                             <constraint firstAttribute="height" constant="40" id="hOQ-G8-CHJ"/>
                                         </constraints>
-                                        <state key="normal" title="FIRE!!">
+                                        <state key="normal" title="FIRE!!" image="fire_btn">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -140,7 +139,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.85098039219999999" green="0.32549019610000002" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" name="militaryRed"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="BqA-Zc-l8t"/>
                                             <constraint firstAttribute="width" constant="40" id="kMF-nS-D9Z"/>
@@ -167,7 +166,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.85098039219999999" green="0.32549019610000002" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" name="militaryRed"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="2xF-Ro-0Dt"/>
                                             <constraint firstAttribute="height" constant="40" id="a5A-9J-eZb"/>
@@ -181,7 +180,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.85098039219999999" green="0.32549019610000002" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" name="militaryRed"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="77D-4U-Yjl"/>
                                             <constraint firstAttribute="height" constant="40" id="QMo-Aa-R1p"/>
@@ -577,6 +576,7 @@
         <image name="btn_1" width="359" height="122"/>
         <image name="btn_2" width="359" height="122"/>
         <image name="cg_btn" width="617" height="183"/>
+        <image name="fire_btn" width="256" height="256"/>
         <image name="jg_btn" width="617" height="183"/>
         <image name="leftArrow" width="48" height="48"/>
         <image name="logo" width="605" height="189"/>
@@ -587,6 +587,9 @@
         </namedColor>
         <namedColor name="militaryGreenLight">
             <color red="0.30199998617172241" green="0.47099998593330383" blue="0.3059999942779541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="militaryRed">
+            <color red="0.85100001096725464" green="0.0" blue="0.31000000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="militaryRed">
             <color red="0.85100001096725464" green="0.0" blue="0.31000000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
