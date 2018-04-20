@@ -236,10 +236,12 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         if Multiplayer.shared.player.isHost {
             self.pageControlP2.isHidden = true
             self.scrollViewP2.isScrollEnabled = false
+            self.scrollViewP2.alpha = 0.7
         }
         else {
             self.pageControlP1.isHidden = true
             self.scrollViewP1.isScrollEnabled = false
+            self.scrollViewP1.alpha = 0.7
         }
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -263,7 +265,6 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         
         // Change indicator
         pageControl.currentPage = Int(currentPage);
-        print("'herp'")
     }
 
     override func viewWillDisappear(_ animated: Bool) {
