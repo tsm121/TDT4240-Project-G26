@@ -12,12 +12,10 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var readyStatusLabelP2: UILabel!
     @IBOutlet weak var pageControlP2: UIPageControl!
-    @IBOutlet weak var tankTypeP2: UILabel!
     @IBOutlet weak var scrollViewP2: UIScrollView!
     
     @IBOutlet weak var readyStatusLabelP1: UILabel!
     @IBOutlet weak var pageControlP1: UIPageControl!
-    @IBOutlet weak var tankTypeP1: UILabel!
     @IBOutlet weak var scrollViewP1: UIScrollView!
     
     @IBOutlet weak var changeMapBtn: UIButton!
@@ -32,9 +30,11 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         if Multiplayer.shared.player.isReady{
             if (!Multiplayer.shared.player.isHost) {
                 self.readyStatusLabelP2.text = "Not Ready"
+                self.readyStatusLabelP2.backgroundColor = UIColor(named: "militaryRed")
             }
             else {
                 self.readyStatusLabelP1.text = "Not Ready"
+                self.readyStatusLabelP1.backgroundColor = UIColor(named: "militaryRed")
             }
             readyButton.setTitle("Ready", for: .normal)
             Multiplayer.shared.messageNotReady()
@@ -42,9 +42,11 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         else {
             if (!Multiplayer.shared.player.isHost) {
                 self.readyStatusLabelP2.text = "Ready"
+                self.readyStatusLabelP2.backgroundColor = UIColor(named:"militaryGreenLight" )
             }
             else {
                 self.readyStatusLabelP1.text = "Ready"
+                self.readyStatusLabelP1.backgroundColor = UIColor(named:"militaryGreenLight" )
             }
             readyButton.setTitle("Not Ready", for: .normal)
             Multiplayer.shared.messageIsReady()
@@ -84,9 +86,11 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
             DispatchQueue.main.async {
                 if (Multiplayer.shared.player.isHost) {
                     self.readyStatusLabelP2.text = "Ready"
+                    self.readyStatusLabelP2.backgroundColor = UIColor(named:"militaryGreenLight" )
                 }
                 else {
                     self.readyStatusLabelP1.text = "Ready"
+                    self.readyStatusLabelP1.backgroundColor = UIColor(named:"militaryGreenLight" )
                 }
             }
         }
@@ -94,9 +98,11 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
             DispatchQueue.main.async {
                 if (Multiplayer.shared.player.isHost) {
                     self.readyStatusLabelP2.text = "Not Ready"
+                    self.readyStatusLabelP2.backgroundColor = UIColor(named: "militaryRed")
                 }
                 else {
                     self.readyStatusLabelP1.text = "Not Ready"
+                    self.readyStatusLabelP1.backgroundColor = UIColor(named: "militaryRed")
                 }
             }
         }
@@ -217,13 +223,10 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     //Listener for page scrolling. Set text based on selection
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView){
         
-        var tankTypeLabel: UILabel
         var pageControl: UIPageControl
         if scrollView.tag == 1 {
-            tankTypeLabel = self.tankTypeP1
             pageControl = self.pageControlP1
         } else {
-            tankTypeLabel = self.tankTypeP2
             pageControl = self.pageControlP2
         }
         
@@ -234,17 +237,6 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         // Change indicator
         pageControl.currentPage = Int(currentPage);
         print("'herp'")
-        // Change the text accordingly to page selection
-        if Int(currentPage) == 0{
-            tankTypeLabel.text = "TankType 1"
-            Multiplayer.shared.messageSelectTank(index: 0)
-        }else if Int(currentPage) == 1{
-            tankTypeLabel.text = "TankType 2"
-            Multiplayer.shared.messageSelectTank(index: 1)
-        }else if Int(currentPage) == 2{
-            tankTypeLabel.text = "TankType 3"
-            Multiplayer.shared.messageSelectTank(index: 2)
-        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
