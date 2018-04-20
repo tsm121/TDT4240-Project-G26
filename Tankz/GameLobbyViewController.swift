@@ -6,6 +6,18 @@
 //  Copyright © 2018 TDT4240-Group26. All rights reserved.
 //
 
+//Extension used to transition UILabels for statuses
+extension UIView {
+    func fadeTransition(_ duration:CFTimeInterval) {
+        let animation = CATransition()
+        animation.timingFunction = CAMediaTimingFunction(name:
+            kCAMediaTimingFunctionEaseInEaseOut)
+        animation.type = kCATransitionFade
+        animation.duration = duration
+        layer.add(animation, forKey: kCATransitionFade)
+    }
+}
+
 import UIKit
 
 class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
@@ -24,15 +36,28 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     private var lobbyUsers: [Player] = []
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        self.styleBtn(button: self.readyButton)
+        self.styleBtn(button: self.changeMapBtn)
     }
+    
+    func styleBtn(button: UIButton){
+        button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        button.layer.shadowOffset = CGSize(width: 0, height: 2)
+        button.layer.shadowOpacity = 1.0
+        button.layer.shadowRadius = 3.0
+        button.layer.masksToBounds = false
+    }
+    
     @IBAction func isReady(_ sender: Any) {
         if Multiplayer.shared.player.isReady{
             if (!Multiplayer.shared.player.isHost) {
+                self.readyStatusLabelP2.fadeTransition(0.4)
                 self.readyStatusLabelP2.text = "Not Ready"
                 self.readyStatusLabelP2.backgroundColor = UIColor(named: "militaryRed")
+                
             }
             else {
+                self.readyStatusLabelP1.fadeTransition(0.4)
                 self.readyStatusLabelP1.text = "Not Ready"
                 self.readyStatusLabelP1.backgroundColor = UIColor(named: "militaryRed")
             }
@@ -41,10 +66,12 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         }
         else {
             if (!Multiplayer.shared.player.isHost) {
+                self.readyStatusLabelP2.fadeTransition(0.4)
                 self.readyStatusLabelP2.text = "Ready"
                 self.readyStatusLabelP2.backgroundColor = UIColor(named:"militaryGreenLight" )
             }
             else {
+                self.readyStatusLabelP1.fadeTransition(0.4)
                 self.readyStatusLabelP1.text = "Ready"
                 self.readyStatusLabelP1.backgroundColor = UIColor(named:"militaryGreenLight" )
             }
@@ -85,10 +112,12 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         if message.type == "isready"{
             DispatchQueue.main.async {
                 if (Multiplayer.shared.player.isHost) {
+                    self.readyStatusLabelP2.fadeTransition(0.4)
                     self.readyStatusLabelP2.text = "Ready"
                     self.readyStatusLabelP2.backgroundColor = UIColor(named:"militaryGreenLight" )
                 }
                 else {
+                    self.readyStatusLabelP1.fadeTransition(0.4)
                     self.readyStatusLabelP1.text = "Ready"
                     self.readyStatusLabelP1.backgroundColor = UIColor(named:"militaryGreenLight" )
                 }
@@ -97,10 +126,12 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         if message.type == "notready"{
             DispatchQueue.main.async {
                 if (Multiplayer.shared.player.isHost) {
+                    self.readyStatusLabelP2.fadeTransition(0.4)
                     self.readyStatusLabelP2.text = "Not Ready"
                     self.readyStatusLabelP2.backgroundColor = UIColor(named: "militaryRed")
                 }
                 else {
+                    self.readyStatusLabelP1.fadeTransition(0.4)
                     self.readyStatusLabelP1.text = "Not Ready"
                     self.readyStatusLabelP1.backgroundColor = UIColor(named: "militaryRed")
                 }
@@ -142,10 +173,6 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
                 self.scrollViewP1.setContentOffset(CGPoint(x: scrollViewP1.frame.width * CGFloat(message.index), y: 0), animated: true)
             }
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-
     }
     
     //Setup for a given scrollView

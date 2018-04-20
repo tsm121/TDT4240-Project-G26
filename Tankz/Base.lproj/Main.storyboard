@@ -63,6 +63,11 @@
                         <viewLayoutGuide key="safeArea" id="J2c-Ja-6wO"/>
                     </view>
                     <navigationItem key="navigationItem" id="q9R-br-efc"/>
+                    <connections>
+                        <outlet property="createGameBtn" destination="5qO-G5-PTd" id="sZF-5a-3pC"/>
+                        <outlet property="joinGameBtn" destination="yzI-ia-3cc" id="tqD-zd-sw2"/>
+                        <outlet property="logo" destination="rL8-vm-2SS" id="xDb-uL-wGv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6T1-I9-ajx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
