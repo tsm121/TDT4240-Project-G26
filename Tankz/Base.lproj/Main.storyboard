@@ -50,14 +50,27 @@
                                     <segue destination="lRx-7X-hLK" kind="show" id="6Wv-sF-fWg"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Yr-Fg-rlS" userLabel="How To">
+                                <rect key="frame" x="681" y="359" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="YiL-na-udS"/>
+                                    <constraint firstAttribute="height" constant="40" id="riu-Nt-qO8"/>
+                                </constraints>
+                                <state key="normal" image="howto_btn"/>
+                                <connections>
+                                    <action selector="showTutorialAlert:" destination="MSC-9b-YLM" eventType="touchUpInside" id="r77-x0-oTX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="5qO-G5-PTd" firstAttribute="top" secondItem="rL8-vm-2SS" secondAttribute="bottom" constant="40" id="3js-DK-cZA"/>
                             <constraint firstItem="yzI-ia-3cc" firstAttribute="top" secondItem="5qO-G5-PTd" secondAttribute="bottom" id="9Ko-hb-Boe"/>
+                            <constraint firstAttribute="trailing" secondItem="5Yr-Fg-rlS" secondAttribute="trailing" constant="15" id="Hos-4y-TKt"/>
                             <constraint firstItem="rL8-vm-2SS" firstAttribute="centerX" secondItem="CWc-av-hXC" secondAttribute="centerX" id="NsR-6K-1qN"/>
                             <constraint firstItem="5qO-G5-PTd" firstAttribute="centerX" secondItem="CWc-av-hXC" secondAttribute="centerX" id="ZG7-Cy-fCg"/>
                             <constraint firstItem="yzI-ia-3cc" firstAttribute="centerX" secondItem="CWc-av-hXC" secondAttribute="centerX" id="jGh-N0-kn2"/>
+                            <constraint firstAttribute="bottom" secondItem="5Yr-Fg-rlS" secondAttribute="bottom" constant="15" id="krw-Vg-7R3"/>
                             <constraint firstItem="rL8-vm-2SS" firstAttribute="top" secondItem="J2c-Ja-6wO" secondAttribute="top" id="xVN-Ja-EXO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="J2c-Ja-6wO"/>
@@ -600,6 +613,7 @@
         <image name="btn_bg" width="256" height="256"/>
         <image name="cg_btn" width="617" height="183"/>
         <image name="fire_btn" width="256" height="256"/>
+        <image name="howto_btn" width="256" height="256"/>
         <image name="jg_btn" width="617" height="183"/>
         <image name="leftArrow" width="48" height="48"/>
         <image name="logo" width="605" height="189"/>
