@@ -317,7 +317,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVE-H5-h1S">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waiting for player" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVE-H5-h1S">
                                 <rect key="frame" x="418" y="354" width="318" height="30"/>
                                 <color key="backgroundColor" name="militaryGreenLight"/>
                                 <constraints>
@@ -412,6 +412,8 @@
                         <viewLayoutGuide key="safeArea" id="tqF-kW-cHj"/>
                     </view>
                     <connections>
+                        <outlet property="NameLabelP1" destination="ams-4P-z4U" id="OJs-sZ-dRP"/>
+                        <outlet property="NameLabelP2" destination="tVE-H5-h1S" id="YqT-5B-16H"/>
                         <outlet property="changeMapBtn" destination="CRB-b6-v4W" id="TES-aE-16B"/>
                         <outlet property="pageControlP1" destination="wge-d1-hGQ" id="vZI-L7-KUW"/>
                         <outlet property="pageControlP2" destination="0C0-ZZ-uQ1" id="MKZ-QW-IpS"/>

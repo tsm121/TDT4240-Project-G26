@@ -22,10 +22,12 @@ import UIKit
 
 class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     
+    @IBOutlet weak var NameLabelP2: UILabel!
     @IBOutlet weak var readyStatusLabelP2: UILabel!
     @IBOutlet weak var pageControlP2: UIPageControl!
     @IBOutlet weak var scrollViewP2: UIScrollView!
     
+    @IBOutlet weak var NameLabelP1: UILabel!
     @IBOutlet weak var readyStatusLabelP1: UILabel!
     @IBOutlet weak var pageControlP1: UIPageControl!
     @IBOutlet weak var scrollViewP1: UIScrollView!
@@ -38,6 +40,33 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         self.styleBtn(button: self.readyButton)
         self.styleBtn(button: self.changeMapBtn)
+        
+        self.playerDisplayName(host: true)
+        
+        if !Multiplayer.shared.player.isHost {
+            self.playerDisplayName(host: false)
+        }
+    }
+    
+    func playerDisplayName(host: Bool, clear: Bool=false) {
+        
+        DispatchQueue.main.async{
+        
+            var name = "Waiting for player"
+            
+            if clear {
+                self.NameLabelP2.text = "Waiting for player"
+                return
+            }
+            
+            if host{
+                name = Multiplayer.shared.player.isHost ? Multiplayer.shared.player.peerID.displayName : (Multiplayer.shared.opponent?.peerID.displayName)!
+                self.NameLabelP1.text = "Player 1: \(name)"
+            } else {
+                name = Multiplayer.shared.player.isHost ? Multiplayer.shared.opponent!.peerID.displayName : Multiplayer.shared.player.peerID.displayName
+                self.NameLabelP2.text = "Player 2: \(name)"
+            }
+        }
     }
     
     func styleBtn(button: UIButton){
@@ -108,6 +137,11 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     }
 
     func multiplayerListener(message: Message) {
+        
+        if message.type == "playerJoined"{
+            self.playerDisplayName(host: false)
+        }
+        
         // NOTE: It's possibel DispatchQueue needs to wrap everything
         if message.type == "isready"{
             DispatchQueue.main.async {
@@ -144,6 +178,7 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         }
         if message.type == "opponentdisconnected" {
             if Multiplayer.shared.player.isHost {
+                self.playerDisplayName(host: true, clear: true)
                 let alert = UIAlertController(title: "Opponent Disconnected", message: "Your opponent disconnected.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
                     NSLog("The \"OK\" alert occured.")
