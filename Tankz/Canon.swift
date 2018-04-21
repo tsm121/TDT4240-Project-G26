@@ -16,15 +16,15 @@ class Canon : SKShapeNode {
     init(canonType: CanonType){
         switch canonType{
             case .small:
-                self.length = 150
+                self.length = 175
                 self.width = 25
                 self.currentAngle = 45
             case .big:
-                self.length = 150
+                self.length = 175
                 self.width = 25
                 self.currentAngle = 45
             case .funny:
-                self.length = 150
+                self.length = 175
                 self.width = 25
                 self.currentAngle = 45
         }
@@ -49,7 +49,8 @@ class Canon : SKShapeNode {
     }
     
     func getCanonOpening() -> CGPoint{
-        let radAngle = self.currentAngle * CGFloat(Double.pi) / 180
+        let parentDirection = CGFloat(-1 * (self.parent?.xScale)! / abs((self.parent?.xScale)!))
+        let radAngle = parentDirection * (self.parent?.zRotation)!  + self.currentAngle * CGFloat(Double.pi) / 180
         let xValue = self.position.x + (self.length - (self.width / 2)) * cos(radAngle)
         let yValue = self.position.y + (self.length - (self.width / 2)) * sin(radAngle)
         return CGPoint(x: xValue, y: yValue)
