@@ -144,7 +144,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
      Sets the fuel label to users tank fuel status
      */
     public func setFuelLabel(){
-        fuelLabel.text = String(Float(self.myTank.getCurrentFuel()))
+        fuelLabel.text = String(Int(self.myTank.getCurrentFuel()))
     }
     
     /**

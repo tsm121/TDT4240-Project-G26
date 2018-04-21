@@ -131,6 +131,10 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vwh-ki-2wj">
                                         <rect key="frame" x="40" y="0.0" width="40" height="40"/>
                                         <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_bg" translatesAutoresizingMaskIntoConstraints="NO" id="B25-00-GsP">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQd-Dy-lky">
                                                 <rect key="frame" x="0.0" y="10" width="40" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -139,7 +143,6 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" name="militaryRed"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="BqA-Zc-l8t"/>
                                             <constraint firstAttribute="width" constant="40" id="kMF-nS-D9Z"/>
@@ -159,35 +162,47 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tL-bD-Wit">
-                                        <rect key="frame" x="496" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="406" y="0.0" width="40" height="40"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="powerIcon" translatesAutoresizingMaskIntoConstraints="NO" id="kaM-Ef-Dfj">
-                                                <rect key="frame" x="3" y="3" width="35" height="35"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_bg" translatesAutoresizingMaskIntoConstraints="NO" id="URr-cy-Ffm">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="powerIcon" translatesAutoresizingMaskIntoConstraints="NO" id="kaM-Ef-Dfj">
+                                                <rect key="frame" x="5" y="5" width="30" height="30"/>
+                                            </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" name="militaryRed"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="2xF-Ro-0Dt"/>
+                                            <constraint firstAttribute="bottom" secondItem="kaM-Ef-Dfj" secondAttribute="bottom" constant="5" id="6hu-wx-jPA"/>
+                                            <constraint firstAttribute="trailing" secondItem="kaM-Ef-Dfj" secondAttribute="trailing" constant="5" id="LSS-FI-AXR"/>
                                             <constraint firstAttribute="height" constant="40" id="a5A-9J-eZb"/>
+                                            <constraint firstItem="kaM-Ef-Dfj" firstAttribute="leading" secondItem="5tL-bD-Wit" secondAttribute="leading" constant="5" id="dhl-Pt-7dx"/>
+                                            <constraint firstItem="kaM-Ef-Dfj" firstAttribute="top" secondItem="5tL-bD-Wit" secondAttribute="top" constant="5" id="ysr-5M-usj"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scK-1R-G7c">
-                                        <rect key="frame" x="616" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="596" y="0.0" width="40" height="40"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="angleIcon" translatesAutoresizingMaskIntoConstraints="NO" id="4T0-cQ-uOf">
-                                                <rect key="frame" x="3" y="3" width="35" height="35"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_bg" translatesAutoresizingMaskIntoConstraints="NO" id="30n-3G-9sM">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="angleIcon" translatesAutoresizingMaskIntoConstraints="NO" id="4T0-cQ-uOf">
+                                                <rect key="frame" x="5" y="5" width="30" height="30"/>
+                                            </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" name="militaryRed"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="77D-4U-Yjl"/>
+                                            <constraint firstItem="4T0-cQ-uOf" firstAttribute="top" secondItem="scK-1R-G7c" secondAttribute="top" constant="5" id="DRd-R1-le6"/>
+                                            <constraint firstAttribute="trailing" secondItem="4T0-cQ-uOf" secondAttribute="trailing" constant="5" id="Is6-By-Xfo"/>
                                             <constraint firstAttribute="height" constant="40" id="QMo-Aa-R1p"/>
+                                            <constraint firstItem="4T0-cQ-uOf" firstAttribute="leading" secondItem="scK-1R-G7c" secondAttribute="leading" constant="5" id="acD-jh-ZgM"/>
+                                            <constraint firstAttribute="bottom" secondItem="4T0-cQ-uOf" secondAttribute="bottom" constant="5" id="wLL-zP-wzV"/>
                                         </constraints>
                                     </view>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YtM-jY-zvW">
-                                        <rect key="frame" x="536" y="0.0" width="80" height="40"/>
+                                        <rect key="frame" x="466" y="0.0" width="80" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="how-Wf-aXd"/>
                                             <constraint firstAttribute="width" constant="80" id="w1i-B9-Ftt"/>
@@ -205,13 +220,13 @@
                                         </constraints>
                                     </pickerView>
                                 </subviews>
-                                <color key="backgroundColor" name="groundBrown"/>
+                                <color key="backgroundColor" name="mountainGray"/>
                                 <constraints>
                                     <constraint firstItem="Zne-Vx-fPw" firstAttribute="leading" secondItem="Vwh-ki-2wj" secondAttribute="trailing" id="Esq-kG-QUh"/>
-                                    <constraint firstItem="scK-1R-G7c" firstAttribute="trailing" secondItem="YdM-M8-ncG" secondAttribute="leading" id="Wzm-3K-7tW"/>
-                                    <constraint firstItem="5tL-bD-Wit" firstAttribute="trailing" secondItem="YtM-jY-zvW" secondAttribute="leading" id="YNs-wJ-Dzc"/>
+                                    <constraint firstItem="scK-1R-G7c" firstAttribute="trailing" secondItem="YdM-M8-ncG" secondAttribute="leading" constant="-20" id="Wzm-3K-7tW"/>
+                                    <constraint firstItem="5tL-bD-Wit" firstAttribute="trailing" secondItem="YtM-jY-zvW" secondAttribute="leading" constant="-20" id="YNs-wJ-Dzc"/>
                                     <constraint firstItem="Vwh-ki-2wj" firstAttribute="leading" secondItem="05T-dN-URJ" secondAttribute="trailing" id="cg4-rC-O6J"/>
-                                    <constraint firstItem="YtM-jY-zvW" firstAttribute="trailing" secondItem="scK-1R-G7c" secondAttribute="leading" id="dZy-Kr-g8t"/>
+                                    <constraint firstItem="YtM-jY-zvW" firstAttribute="trailing" secondItem="scK-1R-G7c" secondAttribute="leading" constant="-50" id="dZy-Kr-g8t"/>
                                     <constraint firstItem="GOo-YO-QJk" firstAttribute="leading" secondItem="Zne-Vx-fPw" secondAttribute="trailing" id="goy-Gf-K8T"/>
                                 </constraints>
                             </view>
@@ -575,6 +590,7 @@
         <image name="angleIcon" width="48" height="48"/>
         <image name="btn_1" width="359" height="122"/>
         <image name="btn_2" width="359" height="122"/>
+        <image name="btn_bg" width="256" height="256"/>
         <image name="cg_btn" width="617" height="183"/>
         <image name="fire_btn" width="256" height="256"/>
         <image name="jg_btn" width="617" height="183"/>
@@ -591,8 +607,8 @@
         <namedColor name="militaryRed">
             <color red="0.85100001096725464" green="0.0" blue="0.31000000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="militaryRed">
-            <color red="0.85100001096725464" green="0.0" blue="0.31000000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="mountainGray">
+            <color red="0.41200000047683716" green="0.43500000238418579" blue="0.43500000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="mountainGray">
             <color red="0.41200000047683716" green="0.43500000238418579" blue="0.43500000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
