@@ -76,7 +76,6 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let peerID = data[indexPath.row]
         cell.hostNameLabel.text = peerID.displayName
-        cell.numPlayersLabel.text = "x/2"
         if indexPath.row % 2 == 0 {
             cell.contentView.backgroundColor = UIColor(named: "militaryGreenDark")
         }else {

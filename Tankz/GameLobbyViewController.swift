@@ -6,18 +6,28 @@
 //  Copyright © 2018 TDT4240-Group26. All rights reserved.
 //
 
+//Extension used to transition UILabels for statuses
+extension UIView {
+    func fadeTransition(_ duration:CFTimeInterval) {
+        let animation = CATransition()
+        animation.timingFunction = CAMediaTimingFunction(name:
+            kCAMediaTimingFunctionEaseInEaseOut)
+        animation.type = kCATransitionFade
+        animation.duration = duration
+        layer.add(animation, forKey: kCATransitionFade)
+    }
+}
+
 import UIKit
 
 class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var readyStatusLabelP2: UILabel!
     @IBOutlet weak var pageControlP2: UIPageControl!
-    @IBOutlet weak var tankTypeP2: UILabel!
     @IBOutlet weak var scrollViewP2: UIScrollView!
     
     @IBOutlet weak var readyStatusLabelP1: UILabel!
     @IBOutlet weak var pageControlP1: UIPageControl!
-    @IBOutlet weak var tankTypeP1: UILabel!
     @IBOutlet weak var scrollViewP1: UIScrollView!
     
     @IBOutlet weak var changeMapBtn: UIButton!
@@ -26,25 +36,44 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     private var lobbyUsers: [Player] = []
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        self.styleBtn(button: self.readyButton)
+        self.styleBtn(button: self.changeMapBtn)
     }
+    
+    func styleBtn(button: UIButton){
+        button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        button.layer.shadowOffset = CGSize(width: 0, height: 2)
+        button.layer.shadowOpacity = 1.0
+        button.layer.shadowRadius = 3.0
+        button.layer.masksToBounds = false
+    }
+    
     @IBAction func isReady(_ sender: Any) {
         if Multiplayer.shared.player.isReady{
             if (!Multiplayer.shared.player.isHost) {
+                self.readyStatusLabelP2.fadeTransition(0.4)
                 self.readyStatusLabelP2.text = "Not Ready"
+                self.readyStatusLabelP2.backgroundColor = UIColor(named: "militaryRed")
+                
             }
             else {
+                self.readyStatusLabelP1.fadeTransition(0.4)
                 self.readyStatusLabelP1.text = "Not Ready"
+                self.readyStatusLabelP1.backgroundColor = UIColor(named: "militaryRed")
             }
             readyButton.setTitle("Ready", for: .normal)
             Multiplayer.shared.messageNotReady()
         }
         else {
             if (!Multiplayer.shared.player.isHost) {
+                self.readyStatusLabelP2.fadeTransition(0.4)
                 self.readyStatusLabelP2.text = "Ready"
+                self.readyStatusLabelP2.backgroundColor = UIColor(named:"militaryGreenLight" )
             }
             else {
+                self.readyStatusLabelP1.fadeTransition(0.4)
                 self.readyStatusLabelP1.text = "Ready"
+                self.readyStatusLabelP1.backgroundColor = UIColor(named:"militaryGreenLight" )
             }
             readyButton.setTitle("Not Ready", for: .normal)
             Multiplayer.shared.messageIsReady()
@@ -83,20 +112,28 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         if message.type == "isready"{
             DispatchQueue.main.async {
                 if (Multiplayer.shared.player.isHost) {
+                    self.readyStatusLabelP2.fadeTransition(0.4)
                     self.readyStatusLabelP2.text = "Ready"
+                    self.readyStatusLabelP2.backgroundColor = UIColor(named:"militaryGreenLight" )
                 }
                 else {
+                    self.readyStatusLabelP1.fadeTransition(0.4)
                     self.readyStatusLabelP1.text = "Ready"
+                    self.readyStatusLabelP1.backgroundColor = UIColor(named:"militaryGreenLight" )
                 }
             }
         }
         if message.type == "notready"{
             DispatchQueue.main.async {
                 if (Multiplayer.shared.player.isHost) {
+                    self.readyStatusLabelP2.fadeTransition(0.4)
                     self.readyStatusLabelP2.text = "Not Ready"
+                    self.readyStatusLabelP2.backgroundColor = UIColor(named: "militaryRed")
                 }
                 else {
+                    self.readyStatusLabelP1.fadeTransition(0.4)
                     self.readyStatusLabelP1.text = "Not Ready"
+                    self.readyStatusLabelP1.backgroundColor = UIColor(named: "militaryRed")
                 }
             }
         }
@@ -136,10 +173,6 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
                 self.scrollViewP1.setContentOffset(CGPoint(x: scrollViewP1.frame.width * CGFloat(message.index), y: 0), animated: true)
             }
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-
     }
     
     //Setup for a given scrollView
@@ -203,10 +236,12 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         if Multiplayer.shared.player.isHost {
             self.pageControlP2.isHidden = true
             self.scrollViewP2.isScrollEnabled = false
+            self.scrollViewP2.alpha = 0.7
         }
         else {
             self.pageControlP1.isHidden = true
             self.scrollViewP1.isScrollEnabled = false
+            self.scrollViewP1.alpha = 0.7
         }
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -217,13 +252,10 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
     //Listener for page scrolling. Set text based on selection
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView){
         
-        var tankTypeLabel: UILabel
         var pageControl: UIPageControl
         if scrollView.tag == 1 {
-            tankTypeLabel = self.tankTypeP1
             pageControl = self.pageControlP1
         } else {
-            tankTypeLabel = self.tankTypeP2
             pageControl = self.pageControlP2
         }
         
@@ -233,18 +265,6 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         
         // Change indicator
         pageControl.currentPage = Int(currentPage);
-        print("'herp'")
-        // Change the text accordingly to page selection
-        if Int(currentPage) == 0{
-            tankTypeLabel.text = "TankType 1"
-            Multiplayer.shared.messageSelectTank(index: 0)
-        }else if Int(currentPage) == 1{
-            tankTypeLabel.text = "TankType 2"
-            Multiplayer.shared.messageSelectTank(index: 1)
-        }else if Int(currentPage) == 2{
-            tankTypeLabel.text = "TankType 3"
-            Multiplayer.shared.messageSelectTank(index: 2)
-        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
