@@ -179,6 +179,7 @@ class Tank : SKSpriteNode {
         }
     }
 
+
     public func fire(ammoType: AmmoType, power: Float, angle: Float){
         let ammo = Ammo(ammoType: ammoType)
         let xDirection = CGFloat(-1 * self.xScale / abs(self.xScale))

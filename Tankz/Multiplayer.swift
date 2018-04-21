@@ -217,7 +217,7 @@ class Multiplayer : NSObject {
         self.player.tank = index
         self.send(message: Message(type: "selecttank", index: index))
     }
-    
+ 
     func messageSelectMap(index: Int){
         self.map = index
         self.send(message: Message(type: "selectmap", index: index))
@@ -300,7 +300,9 @@ extension Multiplayer : MCSessionDelegate {
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         NSLog("%@", "peer \(peerID) didChangeState: \(state.rawValue)")
-        if (state == MCSessionState.connected && self.player.isHost){
+
+        if (state == MCSessionState.connected && self.player.isHost){           
+            self.notifyAllEventListeners(message: Message(type: "playerJoined"))
             if (self.player.isReady){
                 self.messageIsReady()
             }

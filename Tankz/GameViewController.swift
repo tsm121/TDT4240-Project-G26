@@ -31,6 +31,10 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     var myTank: Tank!
     
+    override func prefersHomeIndicatorAutoHidden() -> Bool {
+        return true
+    }
+    
     func messageListener(message: Message) {
         NSLog("%@", "messageListener \(message.type)")
         if message.type == "fire"{
@@ -143,7 +147,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
      Sets the fuel label to users tank fuel status
      */
     public func setFuelLabel(){
-        fuelLabel.text = String(Float(self.myTank.getCurrentFuel()))
+        fuelLabel.text = String(Int(self.myTank.getCurrentFuel()))
     }
     
     /**
