@@ -18,7 +18,6 @@
 		1B3CDFAD2084E4E700DED876 /* explosion.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 1B3CDFAC2084E4E600DED876 /* explosion.atlas */; };
 		1B3E7C7F204FF66000744D17 /* MapFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3E7C7B204FF66000744D17 /* MapFactory.swift */; };
 		1B3E7C80204FF66000744D17 /* AmmoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3E7C7C204FF66000744D17 /* AmmoFactory.swift */; };
-		1B3E7C81204FF66000744D17 /* ScoreboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3E7C7D204FF66000744D17 /* ScoreboardViewController.swift */; };
 		1B3E7C82204FF66000744D17 /* TankFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3E7C7E204FF66000744D17 /* TankFactory.swift */; };
 		1B619D62205033FC00C713F5 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B619D61205033FC00C713F5 /* Player.swift */; };
 		1B6E2390204DA52200138EDA /* GameLobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E238F204DA52200138EDA /* GameLobbyViewController.swift */; };
@@ -43,7 +42,6 @@
 		8B373B22208822D1001A5D79 /* Canon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B373B21208822D1001A5D79 /* Canon.swift */; };
 		8B851A982086243E004F9185 /* Explosion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B851A972086243E004F9185 /* Explosion.swift */; };
 		8BE3215E2088CF4E0035C0BA /* HealthBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE3215D2088CF4E0035C0BA /* HealthBar.swift */; };
-		91AEA831204ED69D00130575 /* ScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AEA830204ED69D00130575 /* ScoreTableViewCell.swift */; };
 		F94366EB204DB88800D224A3 /* Multiplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94366EA204DB88800D224A3 /* Multiplayer.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,7 +76,6 @@
 		1B3CDFAC2084E4E600DED876 /* explosion.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = explosion.atlas; sourceTree = "<group>"; };
 		1B3E7C7B204FF66000744D17 /* MapFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapFactory.swift; sourceTree = "<group>"; };
 		1B3E7C7C204FF66000744D17 /* AmmoFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmmoFactory.swift; sourceTree = "<group>"; };
-		1B3E7C7D204FF66000744D17 /* ScoreboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardViewController.swift; sourceTree = "<group>"; };
 		1B3E7C7E204FF66000744D17 /* TankFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TankFactory.swift; sourceTree = "<group>"; };
 		1B619D61205033FC00C713F5 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		1B6E238F204DA52200138EDA /* GameLobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLobbyViewController.swift; sourceTree = "<group>"; };
@@ -107,7 +104,6 @@
 		8B373B21208822D1001A5D79 /* Canon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canon.swift; sourceTree = "<group>"; };
 		8B851A972086243E004F9185 /* Explosion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Explosion.swift; sourceTree = "<group>"; };
 		8BE3215D2088CF4E0035C0BA /* HealthBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthBar.swift; sourceTree = "<group>"; };
-		91AEA830204ED69D00130575 /* ScoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTableViewCell.swift; sourceTree = "<group>"; };
 		F94366EA204DB88800D224A3 /* Multiplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiplayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,8 +164,6 @@
 				1B328A33204D71C500B77F10 /* AppDelegate.swift */,
 				1B6E2391204DA55D00138EDA /* MainMenuViewController.swift */,
 				1B6E2393204DA91C00138EDA /* JoinGameViewController.swift */,
-				1B3E7C7D204FF66000744D17 /* ScoreboardViewController.swift */,
-				91AEA830204ED69D00130575 /* ScoreTableViewCell.swift */,
 				1BD8A5AC204EA7CD00104DEC /* GameTableViewCell.swift */,
 				1B6E238F204DA52200138EDA /* GameLobbyViewController.swift */,
 				1BD8A5AE204ED62A00104DEC /* LobbyTableViewCell.swift */,
@@ -368,7 +362,6 @@
 				1BD8A5AD204EA7CD00104DEC /* GameTableViewCell.swift in Sources */,
 				1B3E7C80204FF66000744D17 /* AmmoFactory.swift in Sources */,
 				1B328A3A204D71C500B77F10 /* GameScene.swift in Sources */,
-				91AEA831204ED69D00130575 /* ScoreTableViewCell.swift in Sources */,
 				1B6E2392204DA55D00138EDA /* MainMenuViewController.swift in Sources */,
 				1B6E2390204DA52200138EDA /* GameLobbyViewController.swift in Sources */,
 				5BE364F720531D8D009F5AEA /* Ammo.swift in Sources */,
@@ -378,7 +371,6 @@
 				1B328A3C204D71C500B77F10 /* GameViewController.swift in Sources */,
 				F94366EB204DB88800D224A3 /* Multiplayer.swift in Sources */,
 				8BE3215E2088CF4E0035C0BA /* HealthBar.swift in Sources */,
-				1B3E7C81204FF66000744D17 /* ScoreboardViewController.swift in Sources */,
 				1B6E2394204DA91C00138EDA /* JoinGameViewController.swift in Sources */,
 				5BE364F920532725009F5AEA /* enums.swift in Sources */,
 				1BD8A5AF204ED62A00104DEC /* LobbyTableViewCell.swift in Sources */,
