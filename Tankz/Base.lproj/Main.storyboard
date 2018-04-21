@@ -105,7 +105,7 @@
                                 <rect key="frame" x="0.0" y="374" width="736" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOo-YO-QJk">
-                                        <rect key="frame" x="120" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="140" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="1mZ-sQ-n5S"/>
                                             <constraint firstAttribute="height" constant="40" id="hOQ-G8-CHJ"/>
@@ -227,7 +227,7 @@
                                     <constraint firstItem="5tL-bD-Wit" firstAttribute="trailing" secondItem="YtM-jY-zvW" secondAttribute="leading" constant="-20" id="YNs-wJ-Dzc"/>
                                     <constraint firstItem="Vwh-ki-2wj" firstAttribute="leading" secondItem="05T-dN-URJ" secondAttribute="trailing" id="cg4-rC-O6J"/>
                                     <constraint firstItem="YtM-jY-zvW" firstAttribute="trailing" secondItem="scK-1R-G7c" secondAttribute="leading" constant="-50" id="dZy-Kr-g8t"/>
-                                    <constraint firstItem="GOo-YO-QJk" firstAttribute="leading" secondItem="Zne-Vx-fPw" secondAttribute="trailing" id="goy-Gf-K8T"/>
+                                    <constraint firstItem="GOo-YO-QJk" firstAttribute="leading" secondItem="Zne-Vx-fPw" secondAttribute="trailing" constant="20" id="goy-Gf-K8T"/>
                                 </constraints>
                             </view>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fe2-ET-Ecf">
@@ -606,9 +606,6 @@
         </namedColor>
         <namedColor name="militaryRed">
             <color red="0.85100001096725464" green="0.0" blue="0.31000000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="mountainGray">
-            <color red="0.41200000047683716" green="0.43500000238418579" blue="0.43500000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="mountainGray">
             <color red="0.41200000047683716" green="0.43500000238418579" blue="0.43500000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
