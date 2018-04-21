@@ -48,6 +48,11 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    override func preferredScreenEdgesDeferringSystemGestures() -> UIRectEdge {
+        return .bottom
+    }
+
+    
     func playerDisplayName(host: Bool, clear: Bool=false) {
         
         DispatchQueue.main.async{
@@ -223,14 +228,19 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
 
         var scrollViewWidth:CGFloat = self.scrollViewP1.frameLayoutGuide.layoutFrame.width
         var scrollViewHeight:CGFloat = self.scrollViewP1.frame.height
-        
+                
         //Create images for scrollView
         var imgOne = UIImageView(frame: CGRect(x:0, y:0,width:scrollViewWidth, height:scrollViewHeight))
         imgOne.image = UIImage(named: "tank2_slider")
+        imgOne.contentMode = UIViewContentMode.scaleAspectFill
+
         var imgTwo = UIImageView(frame: CGRect(x:scrollViewWidth, y:0,width:scrollViewWidth, height:scrollViewHeight))
         imgTwo.image = UIImage(named: "tank3_slider")
+        imgTwo.contentMode = UIViewContentMode.scaleAspectFill
+
         var imgThree = UIImageView(frame: CGRect(x:scrollViewWidth*2, y:0,width:scrollViewWidth, height:scrollViewHeight))
         imgThree.image = UIImage(named: "tank1_slider")
+        imgThree.contentMode = UIViewContentMode.scaleAspectFill
         
         self.scrollViewP1.contentSize = CGSize(width:scrollViewWidth * 3, height:scrollViewHeight)
         self.scrollViewP1.delegate = self
@@ -248,10 +258,16 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         //Create images for scrollView
         imgOne = UIImageView(frame: CGRect(x:0, y:0,width:scrollViewWidth, height:scrollViewHeight))
         imgOne.image = UIImage(named: "tank2_slider")
+        imgOne.contentMode = UIViewContentMode.scaleAspectFill
+
         imgTwo = UIImageView(frame: CGRect(x:scrollViewWidth, y:0,width:scrollViewWidth, height:scrollViewHeight))
         imgTwo.image = UIImage(named: "tank3_slider")
+        imgTwo.contentMode = UIViewContentMode.scaleAspectFill
+
         imgThree = UIImageView(frame: CGRect(x:scrollViewWidth*2, y:0,width:scrollViewWidth, height:scrollViewHeight))
         imgThree.image = UIImage(named: "tank1_slider")
+        imgThree.contentMode = UIViewContentMode.scaleAspectFill
+
         
         //Insert images to scrollView
         self.scrollViewP2.addSubview(imgOne)

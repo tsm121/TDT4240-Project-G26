@@ -31,6 +31,10 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     var myTank: Tank!
     
+    override func prefersHomeIndicatorAutoHidden() -> Bool {
+        return true
+    }
+    
     func messageListener(message: Message) {
         NSLog("%@", "messageListener \(message.type)")
         if message.type == "fire"{
