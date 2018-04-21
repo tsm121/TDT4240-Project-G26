@@ -115,6 +115,27 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         
     }
     
+    @IBAction func ChangeMap(_ sender: Any) {
+        let alertController = UIAlertController(title: "Choose Map", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        let margin:CGFloat = 10.0
+        let rect = CGRect(x: margin, y: margin, width: alertController.view.bounds.size.width - margin * 4.0, height: 120)
+        
+        let pickEarthAction = UIAlertAction(title: "Earth", style: .default, handler: {(alert: UIAlertAction!) in Multiplayer.shared.messageSelectMap(index: MapType.earth.rawValue)})
+        
+        let pickMoonAction = UIAlertAction(title: "Moon", style: .default, handler: {(alert: UIAlertAction!) in Multiplayer.shared.messageSelectMap(index: MapType.moon.rawValue)})
+        
+        let pickMarsAction = UIAlertAction(title: "Mars", style: .default, handler: {(alert: UIAlertAction!) in Multiplayer.shared.messageSelectMap(index: MapType.mars.rawValue)})
+        
+        alertController.addAction(pickEarthAction)
+        
+        alertController.addAction(pickMoonAction)
+        
+        alertController.addAction(pickMarsAction)
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion:{})
+        }
+    }
     override func viewDidLoad() {
         
         /* Register event listener for when multiplayer fires events. */
@@ -183,6 +204,12 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         }
         if message.type == "opponentdisconnected" {
             if Multiplayer.shared.player.isHost {
+                DispatchQueue.main.async {
+                    self.scrollViewP2.setContentOffset(
+                        CGPoint(x: self.scrollViewP2.frame.width * CGFloat(0), y: 0),
+                        animated: true)
+                }
+
                 self.playerDisplayName(host: true, clear: true)
                 let alert = UIAlertController(title: "Opponent Disconnected", message: "Your opponent disconnected.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
@@ -206,11 +233,18 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         }
         if message.type == "selecttank" {
             if Multiplayer.shared.player.isHost {
-                self.scrollViewP2.setContentOffset(CGPoint(x: scrollViewP2.frame.width * CGFloat(message.index), y: 0), animated: true)
+                DispatchQueue.main.async {
+                    self.scrollViewP2.setContentOffset(
+                        CGPoint(x: self.scrollViewP2.frame.width * CGFloat(message.index), y: 0),
+                        animated: true)
+                }
             }
-            
             else {
-                self.scrollViewP1.setContentOffset(CGPoint(x: scrollViewP1.frame.width * CGFloat(message.index), y: 0), animated: true)
+                DispatchQueue.main.async {
+                    self.scrollViewP1.setContentOffset(
+                        CGPoint(x: self.scrollViewP1.frame.width * CGFloat(message.index), y: 0),
+                        animated: true)
+                }
             }
         }
     }
@@ -225,8 +259,7 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         //Set scrollView to correct size
         /*self.scrollViewP1.frame = CGRect(x:0, y:0, width:self.view.frame.width/2, height:self.view.frame.height*0.8)
         self.scrollViewP2.frame = CGRect(x:self.view.frame.width/2, y:0, width:self.view.frame.width/2, height:self.view.frame.height*0.8)*/
-
-        var scrollViewWidth:CGFloat = self.scrollViewP1.frameLayoutGuide.layoutFrame.width
+        var scrollViewWidth:CGFloat = self.scrollViewP1.frame.width
         var scrollViewHeight:CGFloat = self.scrollViewP1.frame.height
                 
         //Create images for scrollView
@@ -252,7 +285,7 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         
 
     
-        scrollViewWidth = self.scrollViewP2.frameLayoutGuide.layoutFrame.width
+        scrollViewWidth = self.scrollViewP2.frame.width
         scrollViewHeight = self.scrollViewP2.frame.height
         
         //Create images for scrollView
@@ -316,6 +349,8 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         
         // Change indicator
         pageControl.currentPage = Int(currentPage);
+        
+        Multiplayer.shared.messageSelectTank(index: Int(pageControl.currentPage))
     }
 
     override func viewWillDisappear(_ animated: Bool) {

@@ -10,21 +10,23 @@ import SpriteKit
 
 class Map {
     
-    let height : CGFloat
+    let height : [CGFloat]
     var ground : SKShapeNode
     let backgroundHeight : CGFloat
     var wallpaper : SKShapeNode
     
     init(mapType: MapType, width: CGFloat) {
-        self.height = 20
         
         switch mapType {
         case .earth:
             self.backgroundHeight = 200
+            self.height = [10,10,60,60,10,10]
         case .mars:
             self.backgroundHeight = 250
+            self.height = [30,30,10,10,30,30]
         case .moon:
             self.backgroundHeight = 300
+            self.height = [20,20,10,10,20,20]
         }
         
         self.ground = SKShapeNode()
@@ -36,13 +38,13 @@ class Map {
     
     func makeGround(mapType: MapType, width: CGFloat) {
         
-        let interval = [0, width*(1/5), width*(2/5), width*(3/5), width*(4/5), width]
-        var points = [CGPoint(x: Int(interval[0]), y: Int(height+5)),
-                      CGPoint(x: Int(interval[1]), y: Int(height-5)),
-                      CGPoint(x: Int(interval[2]), y: Int(height+5)),
-                      CGPoint(x: Int(interval[3]), y: Int(height-5)),
-                      CGPoint(x: Int(interval[4]), y: Int(height+5)),
-                      CGPoint(x: Int(interval[5]), y: Int(height-5))]
+        let interval = [-5, width*(1/5), width*(2/5), width*(3/5), width*(4/5), width+5]
+        var points = [CGPoint(x: Int(interval[0]), y: Int(height[0]*5+5)),
+                      CGPoint(x: Int(interval[1]), y: Int(height[1]*5-5)),
+                      CGPoint(x: Int(interval[2]), y: Int(height[2]*5+5)),
+                      CGPoint(x: Int(interval[3]), y: Int(height[3]*5-5)),
+                      CGPoint(x: Int(interval[4]), y: Int(height[4]*5+5)),
+                      CGPoint(x: Int(interval[5]), y: Int(height[5]*5-5))]
         
         
         // Draw a BeizerPath from the points. Making it SMOOTH AF.
@@ -51,13 +53,13 @@ class Map {
         // Add straight lines at border to make closed beizer path.
         let beizer = UIBezierPath(cgPath: spline.path!)
         beizer.move(to: points.first!)
-        beizer.addLine(to: CGPoint(x: 0, y: 0))
-        beizer.addLine(to: CGPoint(x: width, y: 0))
+        beizer.addLine(to: CGPoint(x: -5, y: -5))
+        beizer.addLine(to: CGPoint(x: width+5, y: -5))
         beizer.addLine(to: points.last!)
         
         // Convert the path to a SKShapeNode and set colors and stuff.
         self.ground = SKShapeNode(path: beizer.cgPath)
-        self.ground.lineWidth = 1
+        self.ground.lineWidth = 5
         
         // Map colors for the ground.
         switch mapType {
