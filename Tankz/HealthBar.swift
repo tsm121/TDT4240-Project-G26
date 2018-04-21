@@ -24,7 +24,17 @@ class HealthBar: SKSpriteNode {
     }
     
     func updateHealthBar(health: CGFloat){
-        let fillColor = UIColor(red: 113/255, green: 202/255, blue: 53/255, alpha: 1)
+        
+        let fillColor : UIColor!
+        
+        if health/self.maxHealth < 0.4 {
+            fillColor = UIColor.red
+        } else if health/self.maxHealth < 0.6 {
+            fillColor = UIColor.orange
+        } else {
+            fillColor = UIColor(red: 113/255, green: 202/255, blue: 53/255, alpha: 1)
+        }
+        
         let borderColor = UIColor(red: 35/255, green: 28/255, blue: 40/255, alpha: 1)
         
         UIGraphicsBeginImageContextWithOptions(self.size, false, 0)

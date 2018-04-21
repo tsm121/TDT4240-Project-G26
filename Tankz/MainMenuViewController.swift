@@ -26,7 +26,6 @@ class MainMenuViewController: UIViewController {
     
     @IBAction func unwindToMainMenuViewController(_ sender: UIStoryboardSegue) { }
     
-
     @IBAction func showTutorialAlert(_ sender: Any) {
         
         let alertController = UIAlertController(title: "TANKZ Tutorial", message:
@@ -39,7 +38,11 @@ class MainMenuViewController: UIViewController {
         
         self.present(alertController, animated: true, completion: nil)
     }
-    
+       
+    override func prefersHomeIndicatorAutoHidden() -> Bool {
+        return true
+    }
+  
     
     func styleBtn(button: UIButton){
         button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor

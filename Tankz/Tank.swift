@@ -161,8 +161,8 @@ class Tank : SKSpriteNode {
     }
 
     func fire(ammoType: AmmoType, power: Float, angle: Float){
-        let xPower = CGFloat(cos(Double(canon.getCurrentAngle()) * Double.pi / 180.0) * Double(power * 10))
-        let yPower = CGFloat(sin(Double(canon.getCurrentAngle()) * Double.pi / 180.0) * Double(power * 10))
+        let xPower = CGFloat(cos(Double(canon.getCurrentAngle()) * Double.pi / 180.0) * Double(power * 15))
+        let yPower = CGFloat(sin(Double(canon.getCurrentAngle()) * Double.pi / 180.0) * Double(power * 15))
         let xDirection = CGFloat(-1 * self.xScale / abs(self.xScale))
         let velocityVector = CGVector(
             dx: xPower * xDirection,
