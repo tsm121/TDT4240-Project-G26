@@ -34,45 +34,29 @@ class TankzUITests: XCTestCase {
         XCTAssertTrue(app.isDisplayingMainMenu)
     }
     
+    func testGameLobbyView() {
+        
+        // app.otherElements["mainMenuView"].children(matching: .button).matching(identifier: "Button").element(boundBy: 0).tap()
+        
+    }
+    
     func testJoinGameView() {
-        app/*@START_MENU_TOKEN@*/.buttons["Join game"]/*[[".otherElements[\"mainMenuView\"].buttons[\"Join game\"]",".buttons[\"Join game\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        XCTAssertTrue(app.isDisplayingJoinGame)
-    }
-    
-    func testLobbyView() {
-        app/*@START_MENU_TOKEN@*/.buttons["Create game"]/*[[".otherElements[\"mainMenuView\"].buttons[\"Create game\"]",".buttons[\"Create game\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        XCTAssertTrue(app.isDisplayingGameLobby)
-        // Add test for joining lobby from host-list.
-
-    }
-    
-    func testScoreboardView() {
-        app.buttons["Scoreboard"].tap()
-        XCTAssertTrue(app.isDisplayingScoreboard)
-    }
-    
-    func testGameView() {
-        app/*@START_MENU_TOKEN@*/.buttons["Create game"]/*[[".otherElements[\"mainMenuView\"].buttons[\"Create game\"]",".buttons[\"Create game\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app.buttons["Go to gameScene"].tap()
-        XCTAssertTrue(app.isDisplayingGame)
-    }
-    
-    func testFullUI() {
-        app/*@START_MENU_TOKEN@*/.buttons["Create game"]/*[[".otherElements[\"mainMenuView\"].buttons[\"Create game\"]",".buttons[\"Create game\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app.navigationBars["Tankz.GameLobbyView"].buttons["Back"].tap()
-        XCTAssertTrue(app.isDisplayingMainMenu)
-        app/*@START_MENU_TOKEN@*/.buttons["Join game"]/*[[".otherElements[\"mainMenuView\"].buttons[\"Join game\"]",".buttons[\"Join game\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.otherElements["mainMenuView"].children(matching: .button).matching(identifier: "Button").element(boundBy: 1).tap()
         XCTAssertTrue(app.isDisplayingJoinGame)
         app.navigationBars["Tankz.JoinGameView"].buttons["Back"].tap()
         XCTAssertTrue(app.isDisplayingMainMenu)
-        app.buttons["Scoreboard"].tap()
-        XCTAssertTrue(app.isDisplayingScoreboard)
-        app.navigationBars["Tankz.ScoreboardView"].buttons["Back"].tap()
-        app/*@START_MENU_TOKEN@*/.buttons["Create game"]/*[[".otherElements[\"mainMenuView\"].buttons[\"Create game\"]",".buttons[\"Create game\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app.buttons["Go to gameScene"].tap()
+    }
+    
+    
+    func testGameView() {
+        app.otherElements["mainMenuView"].children(matching: .button).matching(identifier: "Button").element(boundBy: 0).tap()
+        XCTAssertTrue(app.isDisplayingGameLobby)
+        app/*@START_MENU_TOKEN@*/.buttons["Go to gameScene"]/*[[".otherElements[\"gameLobbyView\"].buttons[\"Go to gameScene\"]",".buttons[\"Go to gameScene\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         XCTAssertTrue(app.isDisplayingGame)
-        app.buttons["Exit game"].tap()
+        app/*@START_MENU_TOKEN@*/.buttons["Exit game"]/*[[".otherElements[\"gameView\"].buttons[\"Exit game\"]",".buttons[\"Exit game\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         XCTAssertTrue(app.isDisplayingMainMenu)
+
+        
     }
     
 }
