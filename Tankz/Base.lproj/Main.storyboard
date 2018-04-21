@@ -162,7 +162,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tL-bD-Wit">
-                                        <rect key="frame" x="406" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="356" y="0.0" width="40" height="40"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_bg" translatesAutoresizingMaskIntoConstraints="NO" id="URr-cy-Ffm">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -182,7 +182,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scK-1R-G7c">
-                                        <rect key="frame" x="596" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="546" y="0.0" width="40" height="40"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_bg" translatesAutoresizingMaskIntoConstraints="NO" id="30n-3G-9sM">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -202,14 +202,14 @@
                                         </constraints>
                                     </view>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YtM-jY-zvW">
-                                        <rect key="frame" x="466" y="0.0" width="80" height="40"/>
+                                        <rect key="frame" x="416" y="0.0" width="80" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="how-Wf-aXd"/>
                                             <constraint firstAttribute="width" constant="80" id="w1i-B9-Ftt"/>
                                         </constraints>
                                     </pickerView>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YdM-M8-ncG">
-                                        <rect key="frame" x="656" y="0.0" width="80" height="40"/>
+                                        <rect key="frame" x="606" y="0.0" width="80" height="40"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <accessibilityTraits key="traits" playsSound="YES"/>
@@ -238,7 +238,7 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="tvs-TU-ozV" firstAttribute="trailing" secondItem="FBt-ba-Ixl" secondAttribute="trailing" id="5ff-z1-OEa"/>
-                            <constraint firstItem="YdM-M8-ncG" firstAttribute="trailing" secondItem="6OC-S8-y71" secondAttribute="trailing" id="96e-BJ-HGM"/>
+                            <constraint firstItem="YdM-M8-ncG" firstAttribute="trailing" secondItem="6OC-S8-y71" secondAttribute="trailing" constant="-50" id="96e-BJ-HGM"/>
                             <constraint firstItem="Fe2-ET-Ecf" firstAttribute="top" secondItem="6OC-S8-y71" secondAttribute="bottom" constant="-40" id="Cq1-jN-1bk"/>
                             <constraint firstItem="GOo-YO-QJk" firstAttribute="bottom" secondItem="6OC-S8-y71" secondAttribute="bottom" id="ISm-Lc-fQI"/>
                             <constraint firstAttribute="trailing" secondItem="Fe2-ET-Ecf" secondAttribute="trailing" id="Mk6-QW-Z2a"/>
