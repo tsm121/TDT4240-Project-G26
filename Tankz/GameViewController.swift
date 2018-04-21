@@ -52,7 +52,6 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             self.present(alert, animated: true, completion: nil)
         }
         if message.type == "anglecanon" {
-            print("HERP")
             self.currentGame.currentTank.rotateCanon(angle: CGFloat(message.angle))
         }
     }
@@ -73,7 +72,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         sceneView = SKView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - self.controlsView.frame.height))
         sceneView.backgroundColor = UIColor.black
         self.view.addSubview(sceneView)
-        
+
         /* Attach multiplayerListener */
         NSLog("%@", "Adding Event Listener")
         Multiplayer.shared.addEventListener(listener: self.messageListener)
@@ -191,8 +190,6 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         let timer = Timer(timeInterval: 0.1, repeats: true) { [unowned self] timer in
             let row1 = self.anglePicker.selectedRow(inComponent: 0)
             let row2 = self.powerPicker.selectedRow(inComponent: 0)
-            print("anglePicker: \(row1), \(self.anglePicker.tag)")
-            print("powerPicker: \(row2), \(self.powerPicker.tag)")
         }
         
         // You need to add the timer to UITrackingRunLoopMode so it fires while scrolling the picker
@@ -282,13 +279,16 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 // Kanskje æ huske ka æ gjorde hvis du spør meg - Clas
                 scene.size = CGSize(width: 1280, height: 1280)
                 scene.scaleMode = .aspectFill
+                scene.anchorPoint = (CGPoint(x: 0, y: 0))
                 let camera = SKCameraNode()
                 let viewHeight = self.view.frame.height - self.controlsView.frame.height
-                let sceneViewRelationship = 1280 / self.view.frame.width
+                let sceneViewRelationship = 1280 / view.frame.width
                 let cameraAdjust = (viewHeight * sceneViewRelationship) / 2
-                camera.position = CGPoint(x: 640, y: cameraAdjust)
+                camera.position.x = CGFloat(640)
+                camera.position.y = cameraAdjust
                 scene.camera = camera
                 scene.addChild(camera)
+                
                 // END OF HACKY SHIT TO MAKE SCENE SCALE
                 
                 // Present the scene

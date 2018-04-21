@@ -16,15 +16,15 @@ class Canon : SKShapeNode {
     init(canonType: CanonType){
         switch canonType{
             case .small:
-                self.length = 175
+                self.length = 200
                 self.width = 25
                 self.currentAngle = 45
             case .big:
-                self.length = 175
+                self.length = 200
                 self.width = 25
                 self.currentAngle = 45
             case .funny:
-                self.length = 175
+                self.length = 200
                 self.width = 25
                 self.currentAngle = 45
         }
@@ -39,8 +39,8 @@ class Canon : SKShapeNode {
     func rotate(angle: CGFloat){
         let currentRadAngle = self.currentAngle * CGFloat(Double.pi) / 180
         let radAngle = angle * CGFloat(Double.pi) / 180
-        self.run(SKAction.rotate(byAngle: currentRadAngle - radAngle, duration: 0.5))
         self.currentAngle = angle
+        self.run(SKAction.rotate(byAngle: currentRadAngle - radAngle, duration: 0.5))
     }
     
     /* Get Functions */

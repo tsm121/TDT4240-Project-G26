@@ -95,6 +95,8 @@ class Tank : SKSpriteNode {
     private let maxPower: CGFloat
     /* Owner Variables */
     private let ownerIsHost: Bool
+    /* Position */
+    private var currentPosition: CGFloat?
     
     
     init (ofType tankType: TankType, forHost: Bool){
@@ -111,8 +113,8 @@ class Tank : SKSpriteNode {
         
         self.maxHealth = 50
         self.currentHealth = 50
-        self.maxFuel = 10
-        self.currentFuel = 10
+        self.maxFuel = 20
+        self.currentFuel = 20
         self.movementSpeed = 20
         
         // TODO: Angle and Power need to be set to Real Values
@@ -147,28 +149,45 @@ class Tank : SKSpriteNode {
     }
     /* Game Functions */
     public func moveLeft(){
-        if currentFuel > 0 {
-            self.currentFuel -= 1
-            self.run(SKAction.moveTo(x: self.position.x - self.movementSpeed, duration: 0.5))
+        if let currentPosition = self.currentPosition {}
+        else { self.currentPosition = self.position.x }
+        if (self.currentPosition! - self.frame.width/2 - self.movementSpeed - 20 > 0) {
+            let currentPos = self.currentPosition == nil ? self.position.x : self.currentPosition
+            let movSpeed = self.movementSpeed
+            
+            if currentFuel > 0 {
+                self.currentFuel -= 1
+                self.currentPosition! = currentPos! - movSpeed
+                self.run(SKAction.moveTo(x: self.currentPosition!, duration: 0.1*Double(abs(self.position.x-self.currentPosition!))))
+            }
         }
     }
     
     public func moveRight(){
-        if currentFuel > 0 {
-            self.currentFuel -= 1
-            self.run(SKAction.moveTo(x: self.position.x + self.movementSpeed, duration: 0.5))
+        if let currentPosition = self.currentPosition {}
+        else { self.currentPosition = self.position.x }
+        if (self.currentPosition! + self.frame.width/2 + self.movementSpeed + 20 < (self.parent?.frame.width)! ){
+            let currentPos = self.currentPosition == nil ? self.position.x : self.currentPosition
+        
+            let movSpeed = self.movementSpeed
+        
+            if currentFuel > 0 {
+                self.currentFuel -= 1
+                self.currentPosition? = currentPos! + movSpeed
+                self.run(SKAction.moveTo(x: currentPos! + movSpeed, duration: 0.5))
+            }
         }
     }
 
-    func fire(ammoType: AmmoType, power: Float, angle: Float){
+    public func fire(ammoType: AmmoType, power: Float, angle: Float){
         let ammo = Ammo(ammoType: ammoType)
         let xDirection = CGFloat(-1 * self.xScale / abs(self.xScale))
         let canonOpening = self.canon.getCanonOpening()
-        let canonRotation = canon.zRotation
+        let canonRotation = self.canon.getCurrentAngle() * CGFloat(Double.pi) / 180
         let tankRotation = self.zRotation * xDirection
-        
-        let xPower = CGFloat(cos(canonRotation + tankRotation) * CGFloat(power * 10))
-        let yPower = CGFloat(sin(canonRotation + tankRotation) * CGFloat(power * 10))
+        print(canonRotation,"tank",tankRotation)
+        let xPower = CGFloat(cos(canonRotation+tankRotation) * CGFloat(power * 15 + 150))
+        let yPower = CGFloat(sin(canonRotation+tankRotation) * CGFloat(power * 15 + 150))
         let velocityVector = CGVector(
             dx: xPower * xDirection,
             dy: yPower)
@@ -180,7 +199,7 @@ class Tank : SKSpriteNode {
         ammo.physicsBody?.velocity = velocityVector
     }
     
-    func rotateCanon(angle: CGFloat){
+    public func rotateCanon(angle: CGFloat){
         self.canon.rotate(angle: angle)
     }
 
@@ -246,7 +265,7 @@ class Tank : SKSpriteNode {
         self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
         self.physicsBody?.mass = 20
         self.physicsBody?.affectedByGravity = true
-        self.physicsBody?.friction = 1.0
+        self.physicsBody?.friction = 5.0
         self.physicsBody?.restitution = 0.0
         self.physicsBody?.linearDamping = 1.0
         self.physicsBody?.angularDamping = 1.0
