@@ -20,6 +20,11 @@ class JoinGameViewController: UIViewController, UITableViewDataSource, UITableVi
     public var data: [MCPeerID] = []
     private var reloadGamesList: Timer? = nil
     
+    override func preferredScreenEdgesDeferringSystemGestures() -> UIRectEdge {
+        return .bottom
+    }
+
+    
     override func viewWillAppear(_ animated: Bool) {
         self.data.removeAll()
         self.tableView.reloadData()

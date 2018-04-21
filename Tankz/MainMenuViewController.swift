@@ -26,6 +26,11 @@ class MainMenuViewController: UIViewController {
     
     @IBAction func unwindToMainMenuViewController(_ sender: UIStoryboardSegue) { }
     
+    
+    override func prefersHomeIndicatorAutoHidden() -> Bool {
+        return true
+    }
+    
     func styleBtn(button: UIButton){
         button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
         button.layer.shadowOffset = CGSize(width: 5, height: 5)
