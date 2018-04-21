@@ -10,9 +10,14 @@ import UIKit
 
 class MainMenuViewController: UIViewController {
 
+    @IBOutlet weak var createGameBtn: UIButton!
+    @IBOutlet weak var joinGameBtn: UIButton!
+    @IBOutlet weak var logo: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.assignbackground()
+
 
 
         // Do any additional setup after loading the view.
@@ -20,6 +25,22 @@ class MainMenuViewController: UIViewController {
     }
     
     @IBAction func unwindToMainMenuViewController(_ sender: UIStoryboardSegue) { }
+    
+    func styleBtn(button: UIButton){
+        button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        button.layer.shadowOffset = CGSize(width: 5, height: 5)
+        button.layer.shadowOpacity = 1.0
+        button.layer.shadowRadius = 5.0
+        button.layer.masksToBounds = false
+    }
+    
+    func styleImg(image: UIImageView){
+        image.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        image.layer.shadowOffset = CGSize(width: 5, height: 5)
+        image.layer.shadowOpacity = 1.0
+        image.layer.shadowRadius = 5.0
+        image.layer.masksToBounds = false
+    }
     
     func assignbackground(){
         let background = UIImage(named: "MainMenuBackground.png")
@@ -48,6 +69,10 @@ class MainMenuViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         //Remove subviews from stack
         self.navigationController?.popToRootViewController(animated: false)
+        //Style buttons with shadow
+        self.styleBtn(button: self.createGameBtn)
+        self.styleBtn(button: self.joinGameBtn)
+        self.styleImg(image: self.logo)
 
     }
 
