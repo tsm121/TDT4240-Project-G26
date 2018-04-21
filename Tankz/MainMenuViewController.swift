@@ -26,6 +26,21 @@ class MainMenuViewController: UIViewController {
     
     @IBAction func unwindToMainMenuViewController(_ sender: UIStoryboardSegue) { }
     
+
+    @IBAction func showTutorialAlert(_ sender: Any) {
+        
+        let alertController = UIAlertController(title: "TANKZ Tutorial", message:
+            "Meet your nemesis, or a complete stranger, in a one-to-one battle against survival in this turned based game. Your goal in this game is to destroy the opponent tank to obliteration. \n \nChoose between three units, medium, light and heavy tank. Each with different capabilities. Aim your cannon, move strategically, choose your firepower and fire at will! \n \nGood luck comrade, may the best soldier win!"
+            , preferredStyle: UIAlertControllerStyle.alert)
+        let action = UIAlertAction(title: "I'm ready for battle! ☠️", style: UIAlertActionStyle.default,handler: nil)
+        alertController.addAction(action)
+        alertController.view.tintColor = UIColor(named: "militaryRed")
+        alertController.preferredAction = action
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    
     func styleBtn(button: UIButton){
         button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
         button.layer.shadowOffset = CGSize(width: 5, height: 5)
