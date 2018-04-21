@@ -26,7 +26,8 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     var currentGame: GameScene!
     var sceneView: SKView!
     
-    private var pickerData: Array<Int> = Array(0...90)
+    private var angleData: Array<Int> = Array(0...90)
+    private var powerData: Array<Int> = Array(0...100)
     weak var timer: Timer?
     
     var myTank: Tank!
@@ -229,17 +230,26 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     // Default function for the UIPicker: The number of rows of data
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return self.pickerData.count
+        if pickerView.tag == 1 {
+            return self.angleData.count
+        } else {
+            return self.powerData.count
+        }
     }
     
     // Default function for the UIPicker: The data to return for the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return String(pickerData[row])
+        
+        if pickerView.tag == 1 {
+            return String(angleData[row])
+        } else {
+            return String(powerData[row])
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView === self.anglePicker {
-            self.myTank.rotateCanon(angle: CGFloat(pickerData[row]))
+            self.myTank.rotateCanon(angle: CGFloat(angleData[row]))
             Multiplayer.shared.messageAngleCanon(angle: Float(self.myTank.getCurrentAngle()))
         }
     }
