@@ -122,11 +122,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    func fire(ammoType: AmmoType, power: Float, angle: Float){ //Arguments might not be needed
+    func fire(power: Float, angle: Float){ //Arguments might not be needed
         if (self.getMyTank().isOwnerHost() == self.currentTank.isOwnerHost()) {
             self.viewController.disableControls()
         }
-        currentTank.fire(ammoType: ammoType, power: power, angle: angle)
+        currentTank.fire(power: power, angle: angle)
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
             self.nextTurn()
         }

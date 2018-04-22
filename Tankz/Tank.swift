@@ -8,74 +8,6 @@
 
 import SpriteKit
 
-/*class Tank {
-    public let body: SKSpriteNode
-    public var health: Double
-    public var damageTaken: Double
-    public let mass: CGFloat
-    public let size: CGSize
-    public var fuel: Int
-    public let moveRight: SKAction
-    public let moveLeft: SKAction
-    public let tankdirection: TankDirection
-    
-    init(tankType: TankType, tankName: String, color: UIColor, tankdirection: TankDirection) {
-        switch tankType {
-        case .smallTank:
-            self.size = CGSize(width: 10, height: 5)
-            self.mass = 10.0
-            self.health = 100.0
-            self.damageTaken = 0.0
-            self.fuel = 20
-            self.moveRight = SKAction.moveBy(x: 20, y: 5, duration: 0.5)
-            self.moveLeft = SKAction.moveBy(x: -20, y: 5, duration: 0.5)
-        case .bigTank:
-            self.size = CGSize(width: 20, height: 10)
-            self.mass = 20.0
-            self.health = 200.0
-            self.damageTaken = 0.0
-            self.fuel = 10
-            self.moveRight = SKAction.moveBy(x: 10, y: 5, duration: 0.5)
-            self.moveLeft = SKAction.moveBy(x: -10, y: 5, duration: 0.5)
-        case .funnyTank:
-            self.size = CGSize(width: 15, height: 15)
-            self.mass = 15.0
-            self.health = 284.0
-            self.damageTaken = 196.0
-            self.fuel = 15
-            self.moveRight = SKAction.moveBy(x: 20, y: 5, duration: 0.1)
-            self.moveLeft = SKAction.moveBy(x: -20, y: 5, duration: 0.1)
-        }
-        self.tankdirection = tankdirection
-        
-        self.body = SKSpriteNode(imageNamed: "tank1_p1")
-        self.body.size.height = self.body.size.height * 0.10
-        self.body.size.width = self.body.size.width * 0.10
-        self.body.physicsBody = SKPhysicsBody(rectangleOf: self.body.size)
-        self.body.name = tankName
-        self.body.physicsBody?.mass = self.mass
-        self.body.physicsBody?.affectedByGravity = true
-        self.body.physicsBody?.friction = 1.0
-        self.body.physicsBody?.restitution = 0.0
-        self.body.physicsBody?.linearDamping = 1.0
-        self.body.physicsBody?.angularDamping = 1.0
-        self.body.physicsBody!.categoryBitMask = PhysicsCategory.Tank
-        self.body.physicsBody!.collisionBitMask = PhysicsCategory.Edge | PhysicsCategory.Projectile | PhysicsCategory.Tank | PhysicsCategory.Ground
-        self.body.physicsBody!.contactTestBitMask = PhysicsCategory.Projectile
-        self.body.physicsBody?.usesPreciseCollisionDetection = true
-    }
-    
-    
-    public func useFuel() {
-        self.fuel -= 1
-    }
-    
-    public func hasFuel() -> Bool {
-        if self.fuel >= 1 {
-            return true
-        } else {return false}
-    }
-}*/
 
 class Tank : SKSpriteNode {
     /* Childe Nodes */
@@ -89,14 +21,12 @@ class Tank : SKSpriteNode {
     private var currentFuel: CGFloat
     /* Engine Variables */
     private let movementSpeed: CGFloat // In pixels per fuel
-    /* Canon Variables */
-    private let minPower: CGFloat
-    private let currentPower: CGFloat
-    private let maxPower: CGFloat
     /* Owner Variables */
     private let ownerIsHost: Bool
     /* Position */
     private var currentPosition: CGFloat?
+    /* Ammo type */
+    private var ammoType: AmmoType!
     
     
     init (ofType tankType: TankType, forHost: Bool){
@@ -105,27 +35,45 @@ class Tank : SKSpriteNode {
         switch tankType {
             case .heavyTank:
                 texture = SKTexture(imageNamed: forHost ? "tank1_p1" : "tank1_p2")
+                self.maxHealth = 200
+                self.currentHealth = 200
+                self.maxFuel = 10
+                self.currentFuel = 10
+                self.movementSpeed = 20
+                
+                self.ammoType = .rocket
+                self.canon = Canon(canonType: CanonType.heavy)
+            
             case .mediumTank:
                 texture = SKTexture(imageNamed: forHost ? "tank2_p1" : "tank2_p2")
+                self.maxHealth = 150
+                self.currentHealth = 150
+                self.maxFuel = 15
+                self.currentFuel = 15
+                self.movementSpeed = 20
+                
+                self.ammoType = .mortar
+                self.canon = Canon(canonType: CanonType.medium)
+            
             case .lightTank:
                 texture = SKTexture(imageNamed: forHost ? "tank3_p1" : "tank3_p2")
+                self.maxHealth = 100
+                self.currentHealth = 100
+                self.maxFuel = 20
+                self.currentFuel = 20
+                self.movementSpeed = 20
+                
+                self.ammoType = .missile
+                self.canon = Canon(canonType: CanonType.light)
         }
         
-        self.maxHealth = 50
-        self.currentHealth = 50
-        self.maxFuel = 20
-        self.currentFuel = 20
-        self.movementSpeed = 20
         
-        // TODO: Angle and Power need to be set to Real Values
-        self.minPower = 180.0
-        self.currentPower = 180.0
-        self.maxPower = 180.0
         
         self.ownerIsHost = forHost
         
-        self.canon = Canon(canonType: CanonType.small)
+        
         self.healthBar = HealthBar(maxHealth: self.maxHealth)
+        
         /* Performing Super Init */
         super.init(
             texture: texture,
@@ -180,8 +128,8 @@ class Tank : SKSpriteNode {
     }
 
 
-    public func fire(ammoType: AmmoType, power: Float, angle: Float){
-        let ammo = Ammo(ammoType: ammoType)
+    public func fire(power: Float, angle: Float){
+        let ammo = Ammo(ammoType: self.ammoType)
         let xDirection = CGFloat(-1 * self.xScale / abs(self.xScale))
         let canonOpening = self.canon.getCanonOpening()
         let canonRotation = self.canon.getCurrentAngle() * CGFloat(Double.pi) / 180
@@ -236,16 +184,8 @@ class Tank : SKSpriteNode {
         return canon.getCurrentAngle()
     }
     
-    public func getMaxPower() -> CGFloat {
-        return self.maxPower
-    }
-    
-    public func getCurrentPower() -> CGFloat {
-        return self.currentPower
-    }
-    
-    public func getMinPower() -> CGFloat {
-        return self.minPower
+    public func getAmmoType() -> AmmoType {
+        return self.ammoType
     }
     
     /* Is Functions */

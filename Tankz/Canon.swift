@@ -15,17 +15,17 @@ class Canon : SKShapeNode {
     
     init(canonType: CanonType){
         switch canonType{
-            case .small:
-                self.length = 200
-                self.width = 25
+            case .light:
+                self.length = 120
+                self.width = 15
                 self.currentAngle = 45
-            case .big:
-                self.length = 200
-                self.width = 25
+            case .medium:
+                self.length = 150
+                self.width = 50
                 self.currentAngle = 45
-            case .funny:
+            case .heavy:
                 self.length = 200
-                self.width = 25
+                self.width = 15
                 self.currentAngle = 45
         }
         super.init()
