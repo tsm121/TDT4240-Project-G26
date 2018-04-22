@@ -41,7 +41,7 @@ class Tank : SKSpriteNode {
                 self.currentFuel = 10
                 self.movementSpeed = 20
                 
-                self.ammoType = .rocket
+                self.ammoType = .mortar
                 self.canon = Canon(canonType: CanonType.heavy)
             
             case .mediumTank:
@@ -52,7 +52,7 @@ class Tank : SKSpriteNode {
                 self.currentFuel = 15
                 self.movementSpeed = 20
                 
-                self.ammoType = .mortar
+                self.ammoType = .rocket
                 self.canon = Canon(canonType: CanonType.medium)
             
             case .lightTank:
