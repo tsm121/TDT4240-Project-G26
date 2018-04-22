@@ -94,16 +94,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nhj-t4-QQh">
-                                <rect key="frame" x="669" y="62" width="99" height="30"/>
-                                <color key="backgroundColor" red="0.85098039219999999" green="0.32549019610000002" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="OpponentTurn">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="oppTurnActionTest:" destination="gDR-NA-MQg" eventType="touchUpInside" id="w1p-fe-hhk"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aeq-q2-daS">
                                 <rect key="frame" x="700" y="32" width="68" height="30"/>
                                 <color key="backgroundColor" red="0.85166084769999995" green="0.32525485749999999" blue="0.30790483950000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -260,7 +250,6 @@
                             <constraint firstItem="5tL-bD-Wit" firstAttribute="bottom" secondItem="6OC-S8-y71" secondAttribute="bottom" id="PL5-Vp-b2T"/>
                             <constraint firstItem="YdM-M8-ncG" firstAttribute="bottom" secondItem="6OC-S8-y71" secondAttribute="bottom" id="RdK-H4-HVL"/>
                             <constraint firstItem="Zne-Vx-fPw" firstAttribute="bottom" secondItem="6OC-S8-y71" secondAttribute="bottom" id="UBo-fQ-MgU"/>
-                            <constraint firstItem="Nhj-t4-QQh" firstAttribute="top" secondItem="aeq-q2-daS" secondAttribute="bottom" id="VVb-Dd-P9f"/>
                             <constraint firstItem="Fe2-ET-Ecf" firstAttribute="bottom" secondItem="FBt-ba-Ixl" secondAttribute="bottom" id="VXP-bi-rz6"/>
                             <constraint firstItem="scK-1R-G7c" firstAttribute="bottom" secondItem="6OC-S8-y71" secondAttribute="bottom" id="XcG-NF-uth"/>
                             <constraint firstItem="aeq-q2-daS" firstAttribute="top" secondItem="6OC-S8-y71" secondAttribute="top" id="YVQ-ry-AcR"/>
@@ -271,7 +260,6 @@
                             <constraint firstItem="tvs-TU-ozV" firstAttribute="bottom" secondItem="FBt-ba-Ixl" secondAttribute="bottom" id="rKb-df-1qH"/>
                             <constraint firstItem="05T-dN-URJ" firstAttribute="leading" secondItem="6OC-S8-y71" secondAttribute="leading" id="roS-Kz-K5M"/>
                             <constraint firstItem="YtM-jY-zvW" firstAttribute="bottom" secondItem="6OC-S8-y71" secondAttribute="bottom" id="squ-Sx-GX9"/>
-                            <constraint firstItem="Nhj-t4-QQh" firstAttribute="trailing" secondItem="6OC-S8-y71" secondAttribute="trailing" id="zvH-5J-JiT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6OC-S8-y71"/>
                     </view>
@@ -282,7 +270,6 @@
                         <outlet property="exitBtn" destination="aeq-q2-daS" id="YuK-iz-NVM"/>
                         <outlet property="fireBtn" destination="GOo-YO-QJk" id="5bG-uX-sdp"/>
                         <outlet property="fuelLabel" destination="YQd-Dy-lky" id="W2p-TG-eqa"/>
-                        <outlet property="oppTurnTemp" destination="Nhj-t4-QQh" id="upn-aw-xJ6"/>
                         <outlet property="powerPicker" destination="YtM-jY-zvW" id="V5g-8h-Npb"/>
                         <segue destination="pYf-X9-BXT" kind="unwind" identifier="exitGameSegue" unwindAction="unwindToMainMenuViewController:" id="uoQ-ri-xQd"/>
                     </connections>
@@ -353,7 +340,9 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uB1-aD-1dO">
                                 <rect key="frame" x="307" y="44" width="123" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Go to gameScene"/>
+                                <state key="normal" title="Go to gameScene">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <segue destination="gDR-NA-MQg" kind="show" identifier="startGameSegue" id="pys-mf-noy"/>
                                 </connections>
