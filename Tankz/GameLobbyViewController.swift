@@ -115,7 +115,7 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
         
     }
     
-    @IBAction func ChangeMap(_ sender: Any) {
+    @IBAction func changeMap(_ sender: Any) {
         let alertController = UIAlertController(title: "Choose Map", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         
         let margin:CGFloat = 10.0
@@ -136,6 +136,7 @@ class GameLobbyViewController: UIViewController, UIScrollViewDelegate {
             self.present(alertController, animated: true, completion:{})
         }
     }
+    
     override func viewDidLoad() {
         
         /* Register event listener for when multiplayer fires events. */
