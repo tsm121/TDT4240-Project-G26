@@ -39,7 +39,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     func messageListener(message: Message) {
         NSLog("%@", "messageListener \(message.type)")
         if message.type == "fire"{
-            self.currentGame.fire(ammoType: .missile, power: message.power, angle: message.angle)
+            self.currentGame.fire(power: message.power, angle: message.angle)
         }
         if message.type == "moveleft" {
             self.currentGame.moveTankLeft();
@@ -127,7 +127,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         let power = Float(self.getPowerValue())
         let angle = Float(self.getAngleValue())
         Multiplayer.shared.messageFire(power: power, angle: angle);
-        self.currentGame.fire(ammoType: .missile, power: power, angle: angle)
+        self.currentGame.fire(power: power, angle: angle)
     }
     
     /**

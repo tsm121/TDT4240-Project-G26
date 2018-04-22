@@ -24,14 +24,14 @@ enum MapType: Int {
 // Ammo types.
 enum AmmoType {
     case missile
-    case clusterBomb
-    case funnyBomb
+    case mortar
+    case rocket
 }
 
 // Canon types.
 enum CanonType {
-    case small
-    case big
-    case funny
+    case light
+    case medium
+    case heavy
 }
 

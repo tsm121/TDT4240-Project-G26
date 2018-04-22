@@ -15,24 +15,27 @@ class Ammo : SKShapeNode {
     
     init(ammoType: AmmoType) {
         switch ammoType {
+            /* Missile for light tank */
             case .missile:
                 self.rad = CGFloat(2)
                 self.mass = 1
-                self.damage = 15.0
-                super.init()
-                self.name = "Missile"
-            case .clusterBomb:
-                self.rad = CGFloat(3)
-                self.mass = 5
-                self.damage = 10.0
-                super.init()
-                self.name = "ClusterBomb"
-            case .funnyBomb:
-                self.rad = CGFloat(2)
-                self.mass = 10.0
                 self.damage = 20.0
                 super.init()
-                self.name = "FunnyBomb"
+                self.name = "Missile"
+            /* Mortar for medium tank */
+            case .mortar:
+                self.rad = CGFloat(5)
+                self.mass = 2
+                self.damage = 15
+                super.init()
+                self.name = "Mortar"
+            /* Rocket for heavy tank */
+            case .rocket:
+                self.rad = CGFloat(3)
+                self.mass = 3
+                self.damage = 25
+                super.init()
+                self.name = "HeavyRocket"
         }
         self.initAsCircle()
         self.initPhysicsBody()
