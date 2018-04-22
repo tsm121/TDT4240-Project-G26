@@ -13,7 +13,7 @@ import GameplayKit
 class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource  {
     
     //Just for testing, DELETE later
-    @IBOutlet weak var oppTurnTemp: UIButton!
+    //@IBOutlet weak var oppTurnTemp: UIButton!
     
     @IBOutlet weak var controlsView: UIView!
     @IBOutlet weak var exitBtn: UIButton!
@@ -86,7 +86,7 @@ class GameViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         self.view.bringSubview(toFront: self.controlsView)
         self.view.bringSubview(toFront: self.exitBtn)
         //TempBtn, DELETE later
-        self.view.bringSubview(toFront: self.oppTurnTemp)
+        //self.view.bringSubview(toFront: self.oppTurnTemp)
         
     }
     
