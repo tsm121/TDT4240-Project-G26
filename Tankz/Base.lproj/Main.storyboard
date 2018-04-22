@@ -360,6 +360,9 @@
                                 <state key="normal" title="Change map" backgroundImage="btn_2">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="changeMap:" destination="usC-V1-22A" eventType="touchUpInside" id="vml-08-eCj"/>
+                                </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="J01-cN-Heb">
                                 <rect key="frame" x="406.33333333333326" y="32" width="405.66666666666674" height="262"/>
