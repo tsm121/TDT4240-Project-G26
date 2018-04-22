@@ -26,8 +26,7 @@ class Explosion : SKSpriteNode{
         // Super init
         let texture = SKTexture(imageNamed: "boom1")
         super.init(texture: texture, color: UIColor.clear, size: texture.size())
-        self.scale(to: CGSize(width: 50, height: 50))
-        
+        self.scale(to: CGSize(width: 100, height: 100))
     }
     
     required init?(coder aDecoder: NSCoder) {

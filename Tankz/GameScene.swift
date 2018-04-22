@@ -43,6 +43,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
 
         physicsWorld.contactDelegate = self
+
         
         terrain = MapType(rawValue: Multiplayer.shared.getCurrentMap())
 
@@ -159,10 +160,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         switch terrain {
         case .earth:
             self.backgroundColor = UIColor(named: "skyBlue")!
+            self.physicsWorld.gravity = CGVector(dx: 0.0, dy: -9.8)
         case .mars:
             self.backgroundColor = UIColor(red: 227/255, green: 240/255, blue: 155/255, alpha: 1)
+            self.physicsWorld.gravity = CGVector(dx: 0.0, dy: -7.0)
         case .moon:
             self.backgroundColor = UIColor(red: 20/255, green: 79/255, blue: 132/255, alpha: 1)
+            self.physicsWorld.gravity = CGVector(dx: 0.0, dy: -3.0)
         }
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         self.physicsBody?.friction = CGFloat(0)
