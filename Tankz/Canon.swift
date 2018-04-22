@@ -20,12 +20,12 @@ class Canon : SKShapeNode {
                 self.width = 15
                 self.currentAngle = 45
             case .medium:
-                self.length = 150
-                self.width = 50
-                self.currentAngle = 45
-            case .heavy:
                 self.length = 200
                 self.width = 15
+                self.currentAngle = 45
+            case .heavy:
+                self.length = 220
+                self.width = 25
                 self.currentAngle = 45
         }
         super.init()
