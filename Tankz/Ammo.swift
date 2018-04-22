@@ -40,16 +40,16 @@ class Ammo : SKShapeNode {
         self.initAsCircle()
         self.initPhysicsBody()
         
-        
-        
-       
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    // Game Function
-    
+
+    /**
+     Runs explosion animation on collision.
+     - parameter position: Where in the Game Scene the animation should be run.
+     */
     public func collided(position: CGPoint){
         let explosion = Explosion()
         explosion.position = position
@@ -57,6 +57,7 @@ class Ammo : SKShapeNode {
         self.removeFromParent()
         explosion.explode()
     }
+    
     // Helper Functions
     private func initAsCircle(){
         let diameter = self.rad * 2

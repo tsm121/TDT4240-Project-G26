@@ -16,7 +16,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private var tankFactory : TankFactory!
     private var mapFactory : MapFactory!
-    private var ammoFactory : AmmoFactory!
     public var tank1 : Tank!
     public var tank2 : Tank!
     private var map : Map!
@@ -47,7 +46,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         terrain = MapType(rawValue: Multiplayer.shared.getCurrentMap())
 
-
         // Create game area, full screen.
         self.createArea(terrain: terrain)
 
@@ -69,14 +67,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         placeTank(tankBody: tank2)
 
         currentTank = tank1
-        ammoFactory = AmmoFactory()
 
         self.addChild(tank1)
         self.addChild(tank2)
 
     }
 
-    //TODO: Tell Multiplayer-class your actions
     /**
      Get called on upon by  `GameViewController`'s `fireAction()` when the user has pressed the `UIButton` for fire.
      Disable user controls and resets the last moves done.
@@ -84,8 +80,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     /**
      Getter for users tank.
-     - returns:
-    `Tank`: Users tank
+     - returns: `Tank`: Users tank
      */
     public func getMyTank() -> Tank{
         if (Multiplayer.shared.player.isHost){
@@ -109,11 +104,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.currentTank.moveRight()
         self.viewController.setFuelLabel()
     }
-
+    
     func setTankPos(){
         self.currentTank.position = CGPoint(x: 100, y: 500)
     }
-
+    
+    /**
+     Places `Tank`s in correct positions.
+     - parameter tankBody: `Tank`: The tank to be placed.
+     */
     func placeTank(tankBody: SKSpriteNode) {
         if tankFactory.iHaveMadeSoManyTanks == 1 {
             tankBody.position = CGPoint(x: 100 + tankBody.frame.width/2,y: 300 + tankBody.frame.height/2)
@@ -121,8 +120,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             tankBody.position = CGPoint(x: self.frame.width - 100 - tankBody.frame.width/2,y: 300 + tankBody.frame.height/2)
         }
     }
-
-    func fire(power: Float, angle: Float){ //Arguments might not be needed
+    
+    /**
+     Fires the `currentTank`s ammo with `angle`.
+     - parameter power: Power of the ammo projectile.
+     - paramter angle: Exit angle of the projectile.
+     */
+    func fire(power: Float, angle: Float){
         if (self.getMyTank().isOwnerHost() == self.currentTank.isOwnerHost()) {
             self.viewController.disableControls()
         }
@@ -144,9 +148,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
 
-    // Create player area with bounderies, together with physics
+    //
+    /**
+     Create player area with bounderies, together with physics.
+     - parameter terrain: `MapType`: Map visuals.
+     */
     func createArea(terrain : MapType) {
-        
         
         // Map colors for the sky.
         switch terrain {
@@ -192,9 +199,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
-
-        //If projectile hits a tank.
-        
     }
 
     func touchDown(atPoint pos : CGPoint) {

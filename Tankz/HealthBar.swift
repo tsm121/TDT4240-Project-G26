@@ -9,6 +9,11 @@
 import SpriteKit
 
 
+/*
+ Health bar class.
+ Updates visible health bar over tank in the Game Scene.
+ */
+
 class HealthBar: SKSpriteNode {
     
     public let maxHealth: CGFloat
@@ -23,10 +28,12 @@ class HealthBar: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /**
+     Updates the health bar based on actual health.
+     - parameter health: Actual health.
+     */
     func updateHealthBar(health: CGFloat){
-        
         let fillColor : UIColor!
-        
         if health/self.maxHealth < 0.4 {
             fillColor = UIColor.red
         } else if health/self.maxHealth < 0.6 {
@@ -36,7 +43,6 @@ class HealthBar: SKSpriteNode {
         }
         
         let borderColor = UIColor(red: 35/255, green: 28/255, blue: 40/255, alpha: 1)
-        
         UIGraphicsBeginImageContextWithOptions(self.size, false, 0)
         let context = UIGraphicsGetCurrentContext()
         borderColor.setStroke()

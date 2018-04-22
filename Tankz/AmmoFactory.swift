@@ -8,6 +8,11 @@
 
 import SpriteKit
 
+/*
+ Ammo Factory.
+ Redundant.
+ */
+
 
 class AmmoFactory {
     

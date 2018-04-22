@@ -40,7 +40,6 @@ class Tank : SKSpriteNode {
                 self.maxFuel = 10
                 self.currentFuel = 10
                 self.movementSpeed = 20
-                
                 self.ammoType = .mortar
                 self.canon = Canon(canonType: CanonType.heavy)
             
@@ -51,7 +50,6 @@ class Tank : SKSpriteNode {
                 self.maxFuel = 15
                 self.currentFuel = 15
                 self.movementSpeed = 20
-                
                 self.ammoType = .rocket
                 self.canon = Canon(canonType: CanonType.medium)
             
@@ -62,16 +60,11 @@ class Tank : SKSpriteNode {
                 self.maxFuel = 20
                 self.currentFuel = 20
                 self.movementSpeed = 20
-                
                 self.ammoType = .missile
                 self.canon = Canon(canonType: CanonType.light)
         }
         
-        
-        
         self.ownerIsHost = forHost
-        
-        
         self.healthBar = HealthBar(maxHealth: self.maxHealth)
         
         /* Performing Super Init */
@@ -95,7 +88,11 @@ class Tank : SKSpriteNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
     /* Game Functions */
+    
+    // Moves tank to the left.
     public func moveLeft(){
         if let currentPosition = self.currentPosition {}
         else { self.currentPosition = self.position.x }
@@ -111,6 +108,7 @@ class Tank : SKSpriteNode {
         }
     }
     
+    // Moves tank to the right.
     public func moveRight(){
         if let currentPosition = self.currentPosition {}
         else { self.currentPosition = self.position.x }
@@ -127,7 +125,11 @@ class Tank : SKSpriteNode {
         }
     }
 
-
+    /**
+     Fires the tanks ammo type as a projectile.
+     - parameter power: How fast the projectile should be fired
+     - parameter angle: Exit angle of projectile.
+     */
     public func fire(power: Float, angle: Float){
         let ammo = Ammo(ammoType: self.ammoType)
         let xDirection = CGFloat(-1 * self.xScale / abs(self.xScale))
@@ -148,11 +150,19 @@ class Tank : SKSpriteNode {
         ammo.physicsBody?.velocity = velocityVector
     }
     
+    /**
+     Rotates canon.
+     - parameter angle: Wanted rotational angle of canon.
+     */
     public func rotateCanon(angle: CGFloat){
         self.canon.rotate(angle: angle)
     }
 
-    /* Collision Functions */
+    
+    /**
+     Collision by projectile and tank.
+     - parameter ammo: The Ammo object the tank is hit by.
+     */
     public func isHit(ammo: Ammo){
         print(self.currentHealth)
         self.currentHealth -= CGFloat(ammo.damage)
