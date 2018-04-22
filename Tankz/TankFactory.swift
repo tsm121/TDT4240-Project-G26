@@ -9,22 +9,23 @@
 import SpriteKit
 
 /*
-    The factory can make different kinds of tanks. SmallTank, BigTank and FunnyTank.
-    The different tanks is written as different classes inside the TankFactory.
-    The tank is "generated" in .makeTank, where the tankType is specified from an enum in GameScene.
+    The tank factory class.
+    Redundant.
  */
+
 class TankFactory {
     
-    /**
-    Makes the specified tank.
-     
-     - parameter tanktype: From enum in GameScene (.smallTank, .bigTank, .funnyTank).
-     - returns: SKShapenode, the generated tank.
-    */
     public let name = "TankFactory Inc."
     
     var iHaveMadeSoManyTanks = 0
     
+    
+    /**
+     Runs explosion animation on collision.
+     - parameter tankType: Type of tank.
+     - parameter forHost: If tank is host or not.
+     - returns: Tank object.
+     */
     public func makeTank(tankType: TankType, forHost: Bool) -> Tank {
         iHaveMadeSoManyTanks += 1
         return Tank(ofType: tankType, forHost: forHost);

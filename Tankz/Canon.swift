@@ -8,6 +8,11 @@
 
 import SpriteKit
 
+/*
+ Canon class.
+ Every tank as a unique canon with different shapes.
+*/
+
 class Canon : SKShapeNode {
     private let length: CGFloat
     private let width: CGFloat
@@ -36,6 +41,10 @@ class Canon : SKShapeNode {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /**
+     Rotates canon.
+     - parameter angle: Rotate canon by angle.
+     */
     func rotate(angle: CGFloat){
         let currentRadAngle = self.currentAngle * CGFloat(Double.pi) / 180
         let radAngle = angle * CGFloat(Double.pi) / 180

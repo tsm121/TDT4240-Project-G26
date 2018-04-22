@@ -7,11 +7,14 @@
 //
 import SpriteKit
 
+/*
+Explosion class.
+ Explosion animation on projectile hit.
+*/
 class Explosion : SKSpriteNode{
     let explosionFrames : [SKTexture]
     
     init(){
-        
         // Create Explosion Frames
         let explosionAnimatedAtlas = SKTextureAtlas(named: "explosion.atlas")
         var explosionFrames: [SKTexture] = []
@@ -31,6 +34,9 @@ class Explosion : SKSpriteNode{
         fatalError("init(coder:) has not been implemented")
     }
     
+    /**
+     Runs the explosion animation.
+     */
     func explode(){
         self.run(
             SKAction.animate(
@@ -45,9 +51,4 @@ class Explosion : SKSpriteNode{
         );
     }
 }
-/*class AmmoExplosion {
- init() {
- 
- explosion.position = liveAmmoPosition
 
- }*/

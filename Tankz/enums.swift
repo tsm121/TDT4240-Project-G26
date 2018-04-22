@@ -6,6 +6,7 @@
 //  Copyright © 2018 TDT4240-Group26. All rights reserved.
 //
 
+
 // Tank types.
 enum TankType: Int{
     case mediumTank = 0

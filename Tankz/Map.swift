@@ -36,8 +36,12 @@ class Map {
         makeWallpaper(mapType: mapType, width: width)
     }
     
+    /**
+     Makes the ground of the map. This is where the tanks interact physically.
+     - parameter mapType: Different maps based on map type.
+     - parameter mapType: Maps width.
+     */
     func makeGround(mapType: MapType, width: CGFloat) {
-        
         let interval = [-5, width*(1/5), width*(2/5), width*(3/5), width*(4/5), width+5]
         var points = [CGPoint(x: Int(interval[0]), y: Int(height[0]*5+5)),
                       CGPoint(x: Int(interval[1]), y: Int(height[1]*5-5)),
@@ -45,7 +49,6 @@ class Map {
                       CGPoint(x: Int(interval[3]), y: Int(height[3]*5-5)),
                       CGPoint(x: Int(interval[4]), y: Int(height[4]*5+5)),
                       CGPoint(x: Int(interval[5]), y: Int(height[5]*5-5))]
-        
         
         // Draw a BeizerPath from the points. Making it SMOOTH AF.
         let spline = SKShapeNode(splinePoints: &points, count: points.count)
@@ -89,6 +92,11 @@ class Map {
         
     }
     
+    /**
+     Makes the maps backround. Same as ground, but without physics.
+     - parameter mapType: Different maps based on map type.
+     - parameter width: Maps width.
+     */
     func makeWallpaper(mapType: MapType, width: CGFloat) {
         
         let interval = [0, width*(1/5), width*(2/5), width*(3/5), width*(4/5), width]
@@ -131,10 +139,8 @@ class Map {
         }
     }
     
-    
-    
         
-    
+    /* Helper functions. */
     func randHeight(height: CGFloat) -> Int{
         return Int(arc4random_uniform(UInt32(height))) + Int(50)
     }

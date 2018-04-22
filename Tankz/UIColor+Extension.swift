@@ -9,6 +9,10 @@
 import Foundation
 import SpriteKit
 
+/*
+ Extension of the UIColor class.
+ */
+
 extension UIColor {
     static func == (l: UIColor, r: UIColor) -> Bool {
         var r1: CGFloat = 0

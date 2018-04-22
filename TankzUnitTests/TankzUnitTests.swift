@@ -68,6 +68,16 @@ class TankzUnitTests: XCTestCase {
         XCTAssertLessThan(med.frame.height, heavy.frame.height)
     }
     
+    func testAmmoTypes() {
+        light = tankFactory.makeTank(tankType: .lightTank, forHost: true)
+        med = tankFactory.makeTank(tankType: .mediumTank, forHost: true)
+        heavy = tankFactory.makeTank(tankType: .heavyTank, forHost: true)
+        
+        XCTAssertEqual(light.getAmmoType(), .missile)
+        XCTAssertEqual(med.getAmmoType(), .rocket)
+        XCTAssertEqual(heavy.getAmmoType(), .mortar)
+    }
+    
     func testMapGround() {
         map = mapFactory.makeMap(mapType: .earth)
         XCTAssertTrue((map.ground.name?.isEqual("EarthGround"))!)
@@ -81,6 +91,7 @@ class TankzUnitTests: XCTestCase {
         map = mapFactory.makeMap(mapType: .earth)
         XCTAssertTrue(map.ground.fillColor == UIColor(named: "groundBrown")!)
     }
+    
     
     func testPerformanceExample() {
         // This is an example of a performance test case.

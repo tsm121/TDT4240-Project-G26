@@ -8,6 +8,11 @@
 
 import SpriteKit
 
+/*
+ Map Factory.
+ Redundant.
+ */
+
 class MapFactory {
     
     let width : CGFloat
@@ -16,6 +21,11 @@ class MapFactory {
         self.width = skSceneWidth
     }
     
+    /**
+     Runs explosion animation on collision.
+     - parameter mapType: Visuals of map.
+     - returns: Map object.
+     */
     func makeMap(mapType: MapType) -> Map {
         return Map(mapType: mapType, width: self.width)
     }
